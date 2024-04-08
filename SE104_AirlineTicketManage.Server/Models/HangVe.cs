@@ -10,5 +10,6 @@ namespace SE104_AirlineTicketManage.Server.Models
         public string TenHV { get; set; }
 
         public double TiLe_Gia { get; set; }
+        public ICollection<ChuyenBayHangVe> ChuyenBayHangVes { get; set; }
     }
 }

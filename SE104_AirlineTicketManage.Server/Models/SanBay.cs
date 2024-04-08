@@ -13,5 +13,7 @@ namespace SE104_AirlineTicketManage.Server.Models
         public int TGDungMax { get; set; }
 
         public string ViTri { get; set; }
+
+        public ICollection<SanBayTrungGian> SanBayTrungGians { get; set; }
     }
 }
