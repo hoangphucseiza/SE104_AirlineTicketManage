@@ -62,6 +62,16 @@ namespace SE104_AirlineTicketManage.Server.Data
 
             modelBuilder.Entity<QuyDinhChung>()
                 .HasNoKey();
+
+            //modelBuilder.Entity<ChuyenBay>()
+            //.HasOne(cb => cb.SanBay_Di)
+            // .WithOne()
+            // .HasForeignKey<ChuyenBay>(cb => cb.MaSB_Di);
+
+            //modelBuilder.Entity<ChuyenBay>()
+            //    .HasOne(cb => cb.SanBay_Den)
+            //    .WithOne()
+            //    .HasForeignKey<ChuyenBay>(cb => cb.MaSB_Den);
         }
 
     }

@@ -5,10 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SE104_AirlineTicketManage.Server.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ChuyenBays",
+                columns: table => new
+                {
+                    MaCB = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    NgayGio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ThoiGianBay = table.Column<int>(type: "int", nullable: false),
+                    GiaVe = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MaSB_Di = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaSB_Den = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChuyenBays", x => x.MaCB);
+                });
+
             migrationBuilder.CreateTable(
                 name: "HangVes",
                 columns: table => new
@@ -63,61 +79,6 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChuyenBays",
-                columns: table => new
-                {
-                    MaCB = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    NgayGio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ThoiGianBay = table.Column<int>(type: "int", nullable: false),
-                    GiaVe = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MaSanBayDi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SanBay_DiMaSB = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MaSanBayDen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SanBay_DenMaSB = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChuyenBays", x => x.MaCB);
-                    table.ForeignKey(
-                        name: "FK_ChuyenBays_SanBays_SanBay_DenMaSB",
-                        column: x => x.SanBay_DenMaSB,
-                        principalTable: "SanBays",
-                        principalColumn: "MaSB",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ChuyenBays_SanBays_SanBay_DiMaSB",
-                        column: x => x.SanBay_DiMaSB,
-                        principalTable: "SanBays",
-                        principalColumn: "MaSB",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SoSanBayDungs",
-                columns: table => new
-                {
-                    MaSanBayDi = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MaSanBayDen = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SanBay_DiMaSB = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    SanBay_DenMaSB = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    SoSBDung_Max = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SoSanBayDungs", x => new { x.MaSanBayDi, x.MaSanBayDen });
-                    table.ForeignKey(
-                        name: "FK_SoSanBayDungs_SanBays_SanBay_DenMaSB",
-                        column: x => x.SanBay_DenMaSB,
-                        principalTable: "SanBays",
-                        principalColumn: "MaSB");
-                    table.ForeignKey(
-                        name: "FK_SoSanBayDungs_SanBays_SanBay_DiMaSB",
-                        column: x => x.SanBay_DiMaSB,
-                        principalTable: "SanBays",
-                        principalColumn: "MaSB");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ChuyenBayHangVes",
                 columns: table => new
                 {
@@ -139,32 +100,6 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                         column: x => x.MaHV,
                         principalTable: "HangVes",
                         principalColumn: "MaHV",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SanBayTrungGians",
-                columns: table => new
-                {
-                    MaCB = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MaSB = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TGDung = table.Column<int>(type: "int", nullable: false),
-                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SanBayTrungGians", x => new { x.MaCB, x.MaSB });
-                    table.ForeignKey(
-                        name: "FK_SanBayTrungGians_ChuyenBays_MaCB",
-                        column: x => x.MaCB,
-                        principalTable: "ChuyenBays",
-                        principalColumn: "MaCB",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SanBayTrungGians_SanBays_MaSB",
-                        column: x => x.MaSB,
-                        principalTable: "SanBays",
-                        principalColumn: "MaSB",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -201,20 +136,61 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                         principalColumn: "MaKH");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SanBayTrungGians",
+                columns: table => new
+                {
+                    MaCB = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaSB = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TGDung = table.Column<int>(type: "int", nullable: false),
+                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SanBayTrungGians", x => new { x.MaCB, x.MaSB });
+                    table.ForeignKey(
+                        name: "FK_SanBayTrungGians_ChuyenBays_MaCB",
+                        column: x => x.MaCB,
+                        principalTable: "ChuyenBays",
+                        principalColumn: "MaCB",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SanBayTrungGians_SanBays_MaSB",
+                        column: x => x.MaSB,
+                        principalTable: "SanBays",
+                        principalColumn: "MaSB",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SoSanBayDungs",
+                columns: table => new
+                {
+                    MaSanBayDi = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaSanBayDen = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    SanBay_DiMaSB = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SanBay_DenMaSB = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SoSBDung_Max = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SoSanBayDungs", x => new { x.MaSanBayDi, x.MaSanBayDen });
+                    table.ForeignKey(
+                        name: "FK_SoSanBayDungs_SanBays_SanBay_DenMaSB",
+                        column: x => x.SanBay_DenMaSB,
+                        principalTable: "SanBays",
+                        principalColumn: "MaSB");
+                    table.ForeignKey(
+                        name: "FK_SoSanBayDungs_SanBays_SanBay_DiMaSB",
+                        column: x => x.SanBay_DiMaSB,
+                        principalTable: "SanBays",
+                        principalColumn: "MaSB");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ChuyenBayHangVes_MaCB",
                 table: "ChuyenBayHangVes",
                 column: "MaCB");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ChuyenBays_SanBay_DenMaSB",
-                table: "ChuyenBays",
-                column: "SanBay_DenMaSB");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ChuyenBays_SanBay_DiMaSB",
-                table: "ChuyenBays",
-                column: "SanBay_DiMaSB");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SanBayTrungGians_MaSB",
@@ -265,6 +241,9 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                 name: "VeMayBays");
 
             migrationBuilder.DropTable(
+                name: "SanBays");
+
+            migrationBuilder.DropTable(
                 name: "ChuyenBays");
 
             migrationBuilder.DropTable(
@@ -272,9 +251,6 @@ namespace SE104_AirlineTicketManage.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "KhachHangs");
-
-            migrationBuilder.DropTable(
-                name: "SanBays");
         }
     }
 }

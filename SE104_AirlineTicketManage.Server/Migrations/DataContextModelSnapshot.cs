@@ -30,33 +30,21 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.Property<decimal>("GiaVe")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("MaSanBayDen")
+                    b.Property<string>("MaSB_Den")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaSanBayDi")
+                    b.Property<string>("MaSB_Di")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NgayGio")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("SanBay_DenMaSB")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SanBay_DiMaSB")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("ThoiGianBay")
                         .HasColumnType("int");
 
                     b.HasKey("MaCB");
-
-                    b.HasIndex("SanBay_DenMaSB");
-
-                    b.HasIndex("SanBay_DiMaSB");
 
                     b.ToTable("ChuyenBays");
                 });
@@ -237,25 +225,6 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.HasIndex("KhachHangMaKH");
 
                     b.ToTable("VeMayBays");
-                });
-
-            modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.ChuyenBay", b =>
-                {
-                    b.HasOne("SE104_AirlineTicketManage.Server.Models.SanBay", "SanBay_Den")
-                        .WithMany()
-                        .HasForeignKey("SanBay_DenMaSB")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SE104_AirlineTicketManage.Server.Models.SanBay", "SanBay_Di")
-                        .WithMany()
-                        .HasForeignKey("SanBay_DiMaSB")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SanBay_Den");
-
-                    b.Navigation("SanBay_Di");
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.ChuyenBayHangVe", b =>

@@ -9,9 +9,11 @@ namespace SE104_AirlineTicketManage.Server.Models
 
         public ChuyenBay ChuyenBay { get; set; }
 
+
         public KhachHang KhachHang { get; set; }
 
         public HangVe HangVe { get; set; }
+
         public decimal GiaTien { get; set; }
 
         public DateTime NgayDat { get; set; }
