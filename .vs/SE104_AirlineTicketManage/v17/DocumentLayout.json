@@ -1,12 +1,287 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408170318_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SE104_AirlineTicketManage.Server\\Migrations\\20240408170318_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\vemaybay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\vemaybay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\sosanbaydung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\sosanbaydung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\sanbaytrunggian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\sanbaytrunggian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\sanbay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\sanbay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\quydinhchung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\quydinhchung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\khachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\khachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\hangve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\hangve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\chuyenbayhangve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\chuyenbayhangve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\models\\chuyenbay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\models\\chuyenbay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408165706_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SE104_AirlineTicketManage.Server\\Migrations\\20240408165706_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408163801_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SE104_AirlineTicketManage.Server\\Migrations\\20240408163801_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code froject\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\se104_airlineticketmanage.server.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\se104_airlineticketmanage.server.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
+        {
+          "DockedHeight": 58,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20240408170318_Initial.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408170318_Initial.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Migrations\\20240408170318_Initial.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408170318_Initial.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Migrations\\20240408170318_Initial.cs",
+              "ViewState": "AQIAAK4AAAAAAAAAAAAAAD0AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T17:03:18.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SanBay.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\SanBay.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\SanBay.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\SanBay.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\SanBay.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:25:07.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HangVe.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\HangVe.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\HangVe.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\HangVe.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\HangVe.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:18:28.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "KhachHang.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\KhachHang.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\KhachHang.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\KhachHang.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\KhachHang.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:23:59.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "QuyDinhChung.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\QuyDinhChung.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\QuyDinhChung.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\QuyDinhChung.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\QuyDinhChung.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:21:21.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SanBayTrungGian.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\SanBayTrungGian.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\SanBayTrungGian.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\SanBayTrungGian.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\SanBayTrungGian.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:31:53.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ChuyenBayHangVe.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\ChuyenBayHangVe.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\ChuyenBayHangVe.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\ChuyenBayHangVe.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\ChuyenBayHangVe.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:37:20.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SoSanBayDung.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\SoSanBayDung.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\SoSanBayDung.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\SoSanBayDung.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\SoSanBayDung.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:35:26.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VeMayBay.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\VeMayBay.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\VeMayBay.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\VeMayBay.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\VeMayBay.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:22:32.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ChuyenBay.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\ChuyenBay.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Models\\ChuyenBay.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Models\\ChuyenBay.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Models\\ChuyenBay.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T15:59:20.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Data\\DataContext.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Data\\DataContext.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Data\\DataContext.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Data\\DataContext.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAcwEkAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T16:55:08.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20240408165706_Initial.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408165706_Initial.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Migrations\\20240408165706_Initial.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408165706_Initial.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Migrations\\20240408165706_Initial.cs",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAQwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T16:57:06.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Program.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Program.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Program.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T15:48:19.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "20240408163801_InitialCreate.cs",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408163801_InitialCreate.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Migrations\\20240408163801_InitialCreate.cs",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240408163801_InitialCreate.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Migrations\\20240408163801_InitialCreate.cs",
+              "ViewState": "AQIAADsAAAAAAAAAAAAuwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T16:38:01.362Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\appsettings.json",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\appsettings.json",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\appsettings.json",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAB2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-04T16:47:40.626Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SE104_AirlineTicketManage.Server.http",
+              "DocumentMoniker": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.http",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.http",
+              "ToolTip": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.http",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-04-08T15:48:13.869Z"
+            }
+          ]
+        },
         {
           "DockedHeight": 58,
           "SelectedChildIndex": -1,

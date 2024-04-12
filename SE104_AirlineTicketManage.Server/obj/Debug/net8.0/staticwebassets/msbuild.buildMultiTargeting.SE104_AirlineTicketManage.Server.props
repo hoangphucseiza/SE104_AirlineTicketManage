@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SE104_AirlineTicketManage.Server.props" />
+</Project>

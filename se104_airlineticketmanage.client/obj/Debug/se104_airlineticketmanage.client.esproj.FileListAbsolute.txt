@@ -1,0 +1,1 @@
+D:\CODE FROJECT\SE104_AirlineTicketManage\se104_airlineticketmanage.client\obj\Debug\se104_airlineticketmanage.client.esproj.CoreCompileInputs.cache
