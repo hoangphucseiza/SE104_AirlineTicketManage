@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { useLocation } from "react-router-dom";
-import "../styles/header.css";
 import Logo from "../images/logo_ver.png";
 import RoutesName from "../utils/Route_Name";
 
@@ -46,7 +45,7 @@ function Header({ setShowSideBar }) {
         </div>
         <div className="header-info-user">
           <img
-            src="https://i.pinimg.com/736x/83/1e/8d/831e8d93300da1fe5ff6295ca53ee97d.jpg"
+            src="https://i.pinimg.com/564x/3b/2b/6e/3b2b6ec605e46983f941f5b0484a0e2c.jpg"
             alt="user-avt"
           />
           <div>

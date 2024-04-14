@@ -1,15 +1,37 @@
+/* --------- SIDE BAR -------- */
+@import url("./side_bar.css");
+
+/* --------- HEADER -------- */
+@import url("./header.css");
+
+/* --------- FOOTER  -------- */
+@import url("./footer.css");
+
+/* --------- TABLE -----------*/
+@import url("./table.css");
+
+/* --------- FLIGHT BOARD -----------*/
+@import url("./flight_board.css");
+
+/* --------- HOME -----------*/
+@import url("./home.css");
+
+
+
 :root {
   --primary-color: #1779C4;
   --primary-color-80: rgba(23, 121, 196, 0.8);
   --primary-color-15: rgba(23, 121, 196, 0.15);
-  --bg-color: #EAEAEA;
+  --bg-color: #F8F9FB;
   --text-color-bold: #09121E;
   --text-color-medium:#4E4E4E;
   --text-color-light:#727171;
   --text-color-lighter:#CFD5E2;
-  --border-color: #cfcfcf;
-  --success-color: rgb(118, 168, 20);
-  --bg-success-color: #76a81433;
+  --border-color: #e4e7ec;
+  --success-color: #036B26;
+  --bg-success-color: #E7F6EC;
+  --danger-color: #D42620;
+  --bg-danger-color: #FBEAE9;
 
 }
 
@@ -39,7 +61,7 @@ body {
 
 .main_container {
   min-height: 100vh;
-  background-color: var(--bg-color);
+ 
   display: flex;
   flex-direction: column;
   transition: margin-left 0.3s ease-in-out; 
@@ -49,8 +71,3 @@ body {
 
 
 
-/* --------- SIDE BAR -------- */
-@import url("./side_bar.css");
-
-/* --------- HOME -----------*/
-@import url("./home.css");

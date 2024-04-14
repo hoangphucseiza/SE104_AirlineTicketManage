@@ -45,7 +45,7 @@ const RoutesName={
         path:'/customers',
         name:'Chăm sóc khách hàng',
         sub_paths:{
-           'info':'Thông tin khách hàng '
+           'view':'Thông tin khách hàng '
         }
     }
 }
