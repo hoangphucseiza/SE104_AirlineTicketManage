@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../images/logo_hoz.png";
-import "../styles/side_bar.css";
+
 function SideBar({ showSideBar }) {
   const [active, setActive] = useState(0);
 

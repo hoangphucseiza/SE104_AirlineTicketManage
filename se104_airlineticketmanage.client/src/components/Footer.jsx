@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/footer.css";
 import Logo from "../images/logo_ver.png";
 import Regulations from "../utils/Regulations";
 

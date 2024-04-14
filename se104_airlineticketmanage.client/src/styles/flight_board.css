@@ -1,0 +1,17 @@
+.flight_board {
+  display: flex;
+  text-align: center;
+  gap:24px
+}
+
+.flight_board p {
+  color: var(--text-color-light);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.flight_board span {
+  color: var(--primary-color);
+  font-style: 13px;
+  font-weight: 500;
+}

@@ -1,10 +1,12 @@
 const NotFound = () => {
   return (
     <h2
-      className="position-absolute text-secondary"
+      className="text-secondary"
       style={{
-        top: "50%",
-        left: "50%",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       404 | Not Found.
