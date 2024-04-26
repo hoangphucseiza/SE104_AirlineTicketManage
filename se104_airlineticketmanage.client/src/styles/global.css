@@ -24,14 +24,15 @@
   --primary-color-15: rgba(23, 121, 196, 0.15);
   --bg-color: #F8F9FB;
   --text-color-bold: #09121E;
-  --text-color-medium:#4E4E4E;
-  --text-color-light:#727171;
-  --text-color-lighter:#CFD5E2;
+  --text-color-medium: #4E4E4E;
+  --text-color-light: #727171;
+  --text-color-lighter: #CFD5E2;
   --border-color: #e4e7ec;
   --success-color: #036B26;
   --bg-success-color: #E7F6EC;
   --danger-color: #D42620;
   --bg-danger-color: #FBEAE9;
+  --bg-yellow-color: #FFDC7B;
 
 }
 
@@ -61,13 +62,42 @@ body {
 
 .main_container {
   min-height: 100vh;
- 
+
   display: flex;
   flex-direction: column;
-  transition: margin-left 0.3s ease-in-out; 
-
+  transition: margin-left 0.3s ease-in-out;
 }
-
-
+.line {
+  border-bottom: 1px solid black;
+}
+.container-bar {
+  width: 45%
+}
+.add-schedule-btn {
+  background: #113f62;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+.add-schedule-btn:hover {
+  background-color: #3777afa8;
+  color:var(--primary-color);
+}
+.input-container {
+  position: relative;
+}
+.box-add {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.action-airport-button{
+  padding: 10px;
+  height: match-parent;
+  width: 150px;
+}
 
 

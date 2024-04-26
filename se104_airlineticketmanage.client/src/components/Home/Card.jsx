@@ -6,6 +6,7 @@ import FormatMonet from "../../utils/FormatMoney";
 
 const Card = ({ value }) => {
   return (
+    
     <div className="home-cards-item">
       <div className="home-cards-item-header">
         <p
