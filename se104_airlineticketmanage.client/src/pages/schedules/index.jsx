@@ -50,7 +50,12 @@ const Schedules = () => {
       landing_date: new Date("12/4/2024 12:00"),
       tgBay: "20 phut",
       giaVeCB: "700 000 VND",
-      hangVe: "PT"
+      hangVe: {
+        typePT: "PT",
+        slPT: 250,
+        typeTG: "TG",
+        slTG: 100
+      }
     },
     {
       maCB: "CB002",
@@ -66,7 +71,12 @@ const Schedules = () => {
       landing_date: new Date("12/4/2024 12:00"),
       tgBay: "20 phut",
       giaVeCB: "700 000 VND",
-      hangVe: "PT"
+      hangVe: {
+        typePT: "PT",
+        slPT: 250,
+        typeTG: "TG",
+        slTG: 100
+      }
     }
   ];
 
@@ -91,14 +101,14 @@ const Schedules = () => {
 
         <div className="home-flights mt-5">
           <div className="home-flights-wrapper">
-            <SchedulesTable listSchedule = {listScheduleData} />
+            <SchedulesTable listSchedule={listScheduleData} />
           </div>
         </div>
 
         <div class="box-add-schedules">
-            <div class="d-grid gap-2 col-6 mx-auto">
-  <button class="btn btn-primary add-schedule-btn" type="button">Thêm mới lịch bay</button>
-            </div>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary add-schedule-btn" type="button">Thêm mới lịch bay</button>
+          </div>
         </div>
 
         <div className="mt-5 home_members_weather">

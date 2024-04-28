@@ -67,12 +67,15 @@ body {
   flex-direction: column;
   transition: margin-left 0.3s ease-in-out;
 }
+
 .line {
   border-bottom: 1px solid black;
 }
+
 .container-bar {
   width: 45%
 }
+
 .add-schedule-btn {
   background: #113f62;
   border: none;
@@ -81,23 +84,67 @@ body {
   color: #ffffff;
   transition: background-color 0.3s ease;
 }
+
 .add-schedule-btn:hover {
   background-color: #3777afa8;
-  color:var(--primary-color);
+  color: var(--primary-color);
 }
+
 .input-container {
   position: relative;
 }
+
 .box-add {
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 100px;
   padding-right: 100px;
 }
-.action-airport-button{
+
+.action-airport-button {
   padding: 10px;
   height: match-parent;
   width: 150px;
 }
 
+.text-pt {
+  background: var(--primary-color-80);
+}
 
+.text-tg {
+  background: var(--bg-yellow-color);
+  width: 50px;
+}
+
+.fix-size {
+  height: 70px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--primary-color-15);
+  font-size: 20px;
+}
+
+td {
+  text-align: center !important;
+}
+
+.report-container {
+  padding: 20px;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.chart-wrapper {
+  width: calc(50% - 10px);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 20px;
+}
