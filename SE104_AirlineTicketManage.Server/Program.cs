@@ -1,12 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using SE104_AirlineTicketManage.Server;
 using SE104_AirlineTicketManage.Server.Data;
+using SE104_AirlineTicketManage.Server.Interfaces;
+using SE104_AirlineTicketManage.Server.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IChuyenBayRepository, ChuyenBayRepository>();
 //builder.Services.AddTransient<Seed>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

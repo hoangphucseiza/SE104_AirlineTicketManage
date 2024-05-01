@@ -67,3 +67,5 @@ D:\CODE FROJECT\SE104_AirlineTicketManage\SE104_AirlineTicketManage.Server\obj\D
 D:\CODE FROJECT\SE104_AirlineTicketManage\SE104_AirlineTicketManage.Server\obj\Debug\net8.0\SE104_AirlineTicketManage.Server.pdb
 D:\CODE FROJECT\SE104_AirlineTicketManage\SE104_AirlineTicketManage.Server\obj\Debug\net8.0\SE104_AirlineTicketManage.Server.genruntimeconfig.cache
 D:\CODE FROJECT\SE104_AirlineTicketManage\SE104_AirlineTicketManage.Server\obj\Debug\net8.0\ref\SE104_AirlineTicketManage.Server.dll
+D:\CODE FROJECT\SE104_AirlineTicketManage\SE104_AirlineTicketManage.Server\bin\Debug\net8.0\AutoMapper.dll
+D:\CODE FROJECT\SE104_AirlineTicketManage\SE104_AirlineTicketManage.Server\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
