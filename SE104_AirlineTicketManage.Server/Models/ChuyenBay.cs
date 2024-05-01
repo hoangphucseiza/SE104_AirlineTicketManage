@@ -18,5 +18,7 @@ namespace SE104_AirlineTicketManage.Server.Models
         public ICollection<SanBayTrungGian> SanBayTrungGians { get; set; }
 
         public ICollection<ChuyenBayHangVe> ChuyenBayHangVes { get; set; }
+
+        public ICollection<VeMayBay> VeMayBays  { get; set; }
     }
 }

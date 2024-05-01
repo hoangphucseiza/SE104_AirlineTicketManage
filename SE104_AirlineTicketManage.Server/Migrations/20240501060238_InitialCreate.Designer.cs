@@ -12,8 +12,8 @@ using SE104_AirlineTicketManage.Server.Data;
 namespace SE104_AirlineTicketManage.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240408170318_Initial")]
-    partial class Initial
+    [Migration("20240501060238_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,17 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.HasKey("MaCB");
 
                     b.ToTable("ChuyenBays");
+
+                    b.HasData(
+                        new
+                        {
+                            MaCB = "CB01",
+                            GiaVe = 1000000m,
+                            MaSB_Den = "SB02",
+                            MaSB_Di = "SB01",
+                            NgayGio = new DateTime(2021, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ThoiGianBay = 120
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.ChuyenBayHangVe", b =>
@@ -67,6 +78,14 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.HasIndex("MaCB");
 
                     b.ToTable("ChuyenBayHangVes");
+
+                    b.HasData(
+                        new
+                        {
+                            MaHV = "HV01",
+                            MaCB = "CB01",
+                            SoLuong = 100
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.HangVe", b =>
@@ -84,6 +103,20 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.HasKey("MaHV");
 
                     b.ToTable("HangVes");
+
+                    b.HasData(
+                        new
+                        {
+                            MaHV = "HV01",
+                            TenHV = "Hang thuong gia",
+                            TiLe_Gia = 1.5
+                        },
+                        new
+                        {
+                            MaHV = "HV02",
+                            TenHV = "Hang pho thong",
+                            TiLe_Gia = 1.0
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.KhachHang", b =>
@@ -106,17 +139,42 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.HasKey("MaKH");
 
                     b.ToTable("KhachHangs");
+
+                    b.HasData(
+                        new
+                        {
+                            MaKH = "KH01",
+                            CMND = "123456789",
+                            SDT = "0123456789",
+                            TenKH = "Nguyen Van A"
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.QuyDinhChung", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
                     b.Property<int>("ThoiGianChamNhatDatVe")
                         .HasColumnType("int");
 
                     b.Property<int>("ThoiGianHuyDatVe")
                         .HasColumnType("int");
 
+                    b.HasKey("ID");
+
                     b.ToTable("QuyDinhChungs");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            ThoiGianChamNhatDatVe = 30,
+                            ThoiGianHuyDatVe = 3
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.SanBay", b =>
@@ -141,6 +199,24 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.HasKey("MaSB");
 
                     b.ToTable("SanBays");
+
+                    b.HasData(
+                        new
+                        {
+                            MaSB = "SB01",
+                            TGDungMax = 60,
+                            TGDungMin = 30,
+                            TenSB = "Noi Bai",
+                            ViTri = "Ha Noi"
+                        },
+                        new
+                        {
+                            MaSB = "SB02",
+                            TGDungMax = 60,
+                            TGDungMin = 30,
+                            TenSB = "Tan Son Nhat",
+                            ViTri = "Ho Chi Minh"
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.SanBayTrungGian", b =>
@@ -163,6 +239,15 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.HasIndex("MaSB");
 
                     b.ToTable("SanBayTrungGians");
+
+                    b.HasData(
+                        new
+                        {
+                            MaCB = "CB01",
+                            MaSB = "SB01",
+                            GhiChu = "Ghi chu 1",
+                            TGDung = 45
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.SoSanBayDung", b =>
@@ -173,22 +258,20 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.Property<string>("MaSanBayDen")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("SanBay_DenMaSB")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SanBay_DiMaSB")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("SoSBDung_Max")
                         .HasColumnType("int");
 
                     b.HasKey("MaSanBayDi", "MaSanBayDen");
 
-                    b.HasIndex("SanBay_DenMaSB");
-
-                    b.HasIndex("SanBay_DiMaSB");
-
                     b.ToTable("SoSanBayDungs");
+
+                    b.HasData(
+                        new
+                        {
+                            MaSanBayDi = "SB01",
+                            MaSanBayDen = "SB02",
+                            SoSBDung_Max = 1
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.VeMayBay", b =>
@@ -196,16 +279,19 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.Property<string>("MaVe")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ChuyenBayMaCB")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<decimal>("GiaTien")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("HangVeMaHV")
+                    b.Property<string>("MaCB")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("KhachHangMaKH")
+                    b.Property<string>("MaHV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MaKH")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("NgayDat")
@@ -220,13 +306,26 @@ namespace SE104_AirlineTicketManage.Server.Migrations
 
                     b.HasKey("MaVe");
 
-                    b.HasIndex("ChuyenBayMaCB");
+                    b.HasIndex("MaCB");
 
-                    b.HasIndex("HangVeMaHV");
+                    b.HasIndex("MaHV");
 
-                    b.HasIndex("KhachHangMaKH");
+                    b.HasIndex("MaKH");
 
                     b.ToTable("VeMayBays");
+
+                    b.HasData(
+                        new
+                        {
+                            MaVe = "VMB01",
+                            GiaTien = 1500000m,
+                            MaCB = "CB01",
+                            MaHV = "HV01",
+                            MaKH = "KH01",
+                            NgayDat = new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayMua = new DateTime(2021, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TrangThai = "Da mua"
+                        });
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.ChuyenBayHangVe", b =>
@@ -267,34 +366,25 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.Navigation("SanBay");
                 });
 
-            modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.SoSanBayDung", b =>
-                {
-                    b.HasOne("SE104_AirlineTicketManage.Server.Models.SanBay", "SanBay_Den")
-                        .WithMany()
-                        .HasForeignKey("SanBay_DenMaSB");
-
-                    b.HasOne("SE104_AirlineTicketManage.Server.Models.SanBay", "SanBay_Di")
-                        .WithMany()
-                        .HasForeignKey("SanBay_DiMaSB");
-
-                    b.Navigation("SanBay_Den");
-
-                    b.Navigation("SanBay_Di");
-                });
-
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.VeMayBay", b =>
                 {
                     b.HasOne("SE104_AirlineTicketManage.Server.Models.ChuyenBay", "ChuyenBay")
-                        .WithMany()
-                        .HasForeignKey("ChuyenBayMaCB");
+                        .WithMany("VeMayBays")
+                        .HasForeignKey("MaCB")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SE104_AirlineTicketManage.Server.Models.HangVe", "HangVe")
-                        .WithMany()
-                        .HasForeignKey("HangVeMaHV");
+                        .WithMany("VeMayBays")
+                        .HasForeignKey("MaHV")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SE104_AirlineTicketManage.Server.Models.KhachHang", "KhachHang")
-                        .WithMany()
-                        .HasForeignKey("KhachHangMaKH");
+                        .WithMany("VeMayBays")
+                        .HasForeignKey("MaKH")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ChuyenBay");
 
@@ -308,11 +398,20 @@ namespace SE104_AirlineTicketManage.Server.Migrations
                     b.Navigation("ChuyenBayHangVes");
 
                     b.Navigation("SanBayTrungGians");
+
+                    b.Navigation("VeMayBays");
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.HangVe", b =>
                 {
                     b.Navigation("ChuyenBayHangVes");
+
+                    b.Navigation("VeMayBays");
+                });
+
+            modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.KhachHang", b =>
+                {
+                    b.Navigation("VeMayBays");
                 });
 
             modelBuilder.Entity("SE104_AirlineTicketManage.Server.Models.SanBay", b =>

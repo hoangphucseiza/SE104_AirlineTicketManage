@@ -9,5 +9,7 @@ namespace SE104_AirlineTicketManage.Server.Models
         public string TenKH { get; set; }
         public string CMND { get; set; }
         public string SDT { get; set; }
+
+        public ICollection<VeMayBay> VeMayBays { get; set; }
     }
 }
