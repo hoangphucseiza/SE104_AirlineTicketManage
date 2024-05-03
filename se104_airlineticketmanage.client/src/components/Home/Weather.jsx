@@ -15,9 +15,8 @@ const Weather = () => {
       `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=vi`
     );
     const data = await res.json();
-    console.log(data);
-    setCity(data.city.name.replace("Thành phố", ""));
-    setWeather(
+    setCity(data.city?.name?.replace("Thành phố", ""));
+    data.list && setWeather(
       data.list
         .filter((forecast) => forecast.dt_txt.includes("12:00:00"))
         .slice(0, 3)
@@ -43,7 +42,7 @@ const Weather = () => {
     getLocation();
   }, [lat, lon]);
 
-  const cappializeFirstLetter = (string) => {
+  const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
@@ -66,7 +65,7 @@ const Weather = () => {
                 <div className="weather_forecast_item-desc">
                   <span>{city}</span>
                   <p className="mb-0">
-                    {cappializeFirstLetter(forecast.weather[0].description)}
+                    {capitalizeFirstLetter(forecast.weather[0].description)}
                   </p>
                 </div>
                 <img

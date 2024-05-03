@@ -131,6 +131,7 @@
   display: inline-block;
 }
 
+
 .home-flight-left-filters .dropdown .btn {
   display: inline-block;
   width: unset;
@@ -142,14 +143,31 @@
   padding: 8px 12px;
 }
 
-.home-flight-left-filters .dropdown .btn::after {
-  margin-left: 16px;
-  border: none;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  transform: translateY(6px);
+
+.home-flight-left-filters .dropdown-menu {
+  padding: 16px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 3px 2px -2px,
+    rgba(0, 0, 0, 0.03) 0px 5px 3px -2px;
+  text-wrap: nowrap;
+}
+
+.home-flight-left-filters-airports {
+  max-height: 600px;
+}
+
+.home-flight-left-filters-airports > li {
+  color: var(--primary-color);
+  font-weight: 400;
+  font-size: 16px;
+  border-bottom: 1.5px solid var(--border-color);
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.home-flight-left-filters-airports > li:hover {
+  text-decoration: underline;
 }
 
 /* Flight Right */
@@ -363,17 +381,16 @@
   color: var(--danger-color);
 }
 
-
 .weather_forecast_item-extra {
   text-align: center;
-  color:var(--text-color-light);
+  color: var(--text-color-light);
   font-size: 14px;
 }
 
-.weather_forecast_item-extra > span{
+.weather_forecast_item-extra > span {
   margin-right: 16px;
 }
 
-.weather_forecast_item-extra > span:last-child{
+.weather_forecast_item-extra > span:last-child {
   margin-right: 0;
 }

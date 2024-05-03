@@ -65,7 +65,7 @@ function App() {
               <Route path="/airports">
                 <Route index element={<Airports />} />
                 <Route path="add" element={<AddAirPort />} />
-                <Route path="update" element={<UpdateAirPort />} />
+                <Route path="update/:id" element={<UpdateAirPort />} />
               </Route>
               <Route path="/schedules">
                 <Route index element={<Schedules />} />
@@ -78,7 +78,7 @@ function App() {
               </Route>
               <Route path="/tickets" element={<Tickets />}></Route>
               <Route path="/report" element={<Report />}></Route>
-              <Route path="/customers" element={<Customers />}>
+              <Route path="/customers">
                 <Route index element={<Customers />} />
                 <Route path="view" element={<ViewCustomer />} />
               </Route>
