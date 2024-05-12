@@ -9,6 +9,10 @@ namespace SE104_AirlineTicketManage.Server.Helper
         public MappingProfiles()
         {
             CreateMap<ChuyenBay, ChuyenBayDto>();
+            CreateMap<HangVe, HangVeDto>();
+            CreateMap<SanBay, SanBayDto>();
+            CreateMap<KhachHang, KhachHangDto>();
+            CreateMap<VeMayBay, VeMayBayDto>();
         }
     }
 }

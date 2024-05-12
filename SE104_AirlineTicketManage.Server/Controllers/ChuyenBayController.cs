@@ -21,18 +21,18 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllChuyenBay")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ChuyenBay>))]
         public IActionResult GetChuyenBays()
         {
             var chuyenBays = _mapper.Map<List<ChuyenBayDto>>(_chuyenBayRepository.GetChuyenBays());
-
+           
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             return Ok(chuyenBays);
         }
-        [HttpGet("{maCB}")]
+        [HttpGet("GetChuyenBayByID/{maCB}")]
         [ProducesResponseType(200, Type = typeof(ChuyenBay))]
         [ProducesResponseType(400)]
         public IActionResult GetChuyenBay(string maCB)
@@ -41,6 +41,7 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return NotFound();
 
             var chuyenBay = _mapper.Map<ChuyenBayDto>(_chuyenBayRepository.GetChuyenBay(maCB));
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
