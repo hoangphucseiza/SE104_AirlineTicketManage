@@ -142,7 +142,6 @@ function Filter({ filter, setFilter }) {
         </h6>
         <select
           className="form-select"
-          required
           value={filter.sort}
           onChange={(e) =>
             setFilter({
@@ -151,14 +150,14 @@ function Filter({ filter, setFilter }) {
             })
           }
         >
-          <option value="default">Mặc định</option>
+          <option value="default">Mặc định</option> 
           <option value="name_A_to_Z">Tên sân bay từ A đến Z</option>
-          <option value="name_Z_to_A">Tên sân bay từ Z đến Z</option>
+          <option value="name_Z_to_A">Tên sân bay từ Z đến A</option>
           <option value="transit_min_high_to_low">
-            Thời gian dừng tối thiểu từ thấp đến cao
+            Thời gian dừng tối thiểu từ cao đến thấp
           </option>
           <option value="transit_max_high_to_low">
-            Thời gian dừng tối đa từ thấp đến cao
+            Thời gian dừng tối đa từ cao đến thấp
           </option>
         </select>
       </div>

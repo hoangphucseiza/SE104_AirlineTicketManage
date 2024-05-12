@@ -59,15 +59,13 @@ const AirportList = ({ airports }) => {
                 className="btn btn_table btn_edit  me-4"
               >
                 <i className="fa-regular fa-pen-to-square" />
-                Sửa SB
+                Sửa Sân Bay
               </Link>
-              <button className="btn btn_table btn_delete">
-                <i className="fa-solid fa-delete-left" />
-                Xóa SB
-              </button>
             </td>
           </tr>
         ))}
+
+        
       </tbody>
     </table>
   );

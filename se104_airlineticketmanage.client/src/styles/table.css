@@ -8,7 +8,7 @@
 }
 
 .table th {
-  color: var(--text-color-medium);
+  color: var(--text-color-bold);
   font-weight: 500;
 }
 
@@ -53,7 +53,7 @@
 .table .btn_table {
   color: #fff;
   font-weight: 500;
-  padding: 12px 8px;
+  padding: 8px 12px;
 }
 
 .table .btn_table i {

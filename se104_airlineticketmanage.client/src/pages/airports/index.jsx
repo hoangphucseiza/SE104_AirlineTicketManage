@@ -9,22 +9,15 @@ const fakeData = [
     id: "HAN",
     name: "Nội Bài",
     transit_min: 30,
+    transit_max: 90,
+    address: "Hà Nội",
+  },
+  {
+    id: "SGN",
+    name: "Tân Sơn Nhất",
+    transit_min: 40,
     transit_max: 60,
     address: "Hà Nội",
-    number_transit_airports: [
-      {
-        destination_id: "SGN",
-        destination_name: "Tân Sơn Nhất",
-        destination_add: "Hồ Chí Minh",
-        max_transit_airports: 2,
-      },
-      {
-        destination_id: "DAD",
-        destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-        destination_add: "Đà Nẵng",
-        max_transit_airports: 1,
-      },
-    ],
   },
   {
     id: "HAN",
@@ -32,20 +25,6 @@ const fakeData = [
     transit_min: 30,
     transit_max: 60,
     address: "Hà Nội",
-    number_transit_airports: [
-      {
-        destination_id: "SGN",
-        destination_name: "Tân Sơn Nhất",
-        destination_add: "Hồ Chí Minh",
-        max_transit_airports: 2,
-      },
-      {
-        destination_id: "DAD",
-        destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-        destination_add: "Đà Nẵng",
-        max_transit_airports: 2,
-      },
-    ],
   },
   {
     id: "HAN",
@@ -53,20 +32,6 @@ const fakeData = [
     transit_min: 30,
     transit_max: 60,
     address: "Hà Nội",
-    number_transit_airports: [
-      {
-        destination_id: "SGN",
-        destination_name: "Tân Sơn Nhất",
-        destination_add: "Hồ Chí Minh",
-        max_transit_airports: 2,
-      },
-      {
-        destination_id: "DAD",
-        destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-        destination_add: "Đà Nẵng",
-        max_transit_airports: 2,
-      },
-    ],
   },
   {
     id: "HAN",
@@ -74,20 +39,6 @@ const fakeData = [
     transit_min: 30,
     transit_max: 60,
     address: "Hà Nội",
-    number_transit_airports: [
-      {
-        destination_id: "SGN",
-        destination_name: "Tân Sơn Nhất",
-        destination_add: "Hồ Chí Minh",
-        max_transit_airports: 2,
-      },
-      {
-        destination_id: "DAD",
-        destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-        destination_add: "Đà Nẵng",
-        max_transit_airports: 2,
-      },
-    ],
   },
   {
     id: "HAN",
@@ -95,41 +46,6 @@ const fakeData = [
     transit_min: 30,
     transit_max: 60,
     address: "Hà Nội",
-    number_transit_airports: [
-      {
-        destination_id: "SGN",
-        destination_name: "Tân Sơn Nhất",
-        destination_add: "Hồ Chí Minh",
-        max_transit_airports: 2,
-      },
-      {
-        destination_id: "DAD",
-        destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-        destination_add: "Đà Nẵng",
-        max_transit_airports: 2,
-      },
-    ],
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-    number_transit_airports: [
-      {
-        destination_id: "SGN",
-        destination_name: "Tân Sơn Nhất",
-        destination_add: "Hồ Chí Minh",
-        max_transit_airports: 2,
-      },
-      {
-        destination_id: "DAD",
-        destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-        destination_add: "Đà Nẵng",
-        max_transit_airports: 2,
-      },
-    ],
   },
   {
     id: "HAN",
@@ -167,8 +83,36 @@ const Airports = () => {
   const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   useEffect(() => {
-    setShowAirports(airports);
+    setShowAirports([...airports]);
   }, [airports]);
+
+  useEffect(() => {
+    switch (filter.sort) {
+      case "name_A_to_Z":
+        setShowAirports((prev) =>
+          [...prev].sort((a, b) => a.name.localeCompare(b.name))
+        );
+        break;
+      case "name_Z_to_A":
+        setShowAirports((prev) =>
+          [...prev].sort((a, b) => -a.name.localeCompare(b.name))
+        );
+        break;
+      case "transit_min_high_to_low":
+        setShowAirports((prev) =>
+          [...prev].sort((a, b) => b.transit_min - a.transit_min)
+        );
+
+        break;
+      case "transit_max_high_to_low":
+        setShowAirports((prev) =>
+          [...prev].sort((a, b) => b.transit_max - a.transit_max)
+        );
+        break;
+      default:
+        setShowAirports([...airports]);
+    }
+  }, [filter.sort]);
 
   const customData = useCallback(() => {
     return airports.map((airport) => ({
@@ -180,6 +124,25 @@ const Airports = () => {
     }));
   }, [airports]);
 
+  useEffect(() => {
+    let hash = "";
+    if (filter.transit_time[0] !== 0) {
+      hash += `transit_from=${filter.transit_time[0]}`;
+    }
+    if (filter.transit_time[1] !== 0) {
+      hash += `${hash.length > 0 ? "&" : ""}transit_to=${
+        filter.transit_time[1]
+      }`;
+    }
+    hash += `${hash.length > 0 ? "&" : ""}page=${page}`;
+    window.location.hash = hash;
+  }, [page, filter.transit_time]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    window.location.hash = `search=${search}&page=1`;
+  };
+
   return (
     <div className="mb-4 table">
       <div className="box_shadow mb-3 table_container">
@@ -187,7 +150,10 @@ const Airports = () => {
           <div className="d-flex justify-content-between align-items-center mb-3 ">
             <h5>Danh sách Sân bay</h5>
             <div className="d-flex align-items-center gap-4">
-              <form className="d-flex justify-content-between align-items-center table_search">
+              <form
+                className="d-flex justify-content-between align-items-center table_search"
+                onSubmit={handleSearch}
+              >
                 <input
                   type="text"
                   placeholder="Tìm kiếm sân bay..."
@@ -217,7 +183,7 @@ const Airports = () => {
           </div>
         </div>
         <div className="mb-3">
-          <AirportList airports={airports} />
+          <AirportList airports={showAirports} />
         </div>
       </div>
       <div className="d-flex justify-content-between align-items-center ">
