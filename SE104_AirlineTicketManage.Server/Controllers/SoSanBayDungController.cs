@@ -26,5 +26,18 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             return Ok(x);
         }
 
+        [HttpPut("UpdateSoSBDungMax")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateSoSBDungMax([FromQuery]string MaSB1,[FromQuery] string MaSB2,[FromQuery] int SoSBDungMax)
+        {
+            if (!_soSanBayDungRepository.SoSanBayDungExists(MaSB1, MaSB2))
+                return NotFound("Không tìm thấy cặp mã sân bay");
+
+            _soSanBayDungRepository.UpdateSoSBDungToiDa(MaSB1, MaSB2, SoSBDungMax);
+            return Ok("Thay đổi thành công");
+        }
+
     }
 }

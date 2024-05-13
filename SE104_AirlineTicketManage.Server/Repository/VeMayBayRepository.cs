@@ -30,6 +30,12 @@ namespace SE104_AirlineTicketManage.Server.Repository
 
         }
 
+        public bool DeleteVeMayBay(string maVe)
+        {
+            _context.VeMayBays.Remove(GetVeMayBay(maVe));
+            return Save();
+        }
+
         public VeMayBay GetVeMayBay(string maVe)
         {
             return _context.VeMayBays.Where(p => p.MaVe == maVe).FirstOrDefault();

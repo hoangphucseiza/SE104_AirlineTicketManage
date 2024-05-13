@@ -34,7 +34,7 @@ namespace SE104_AirlineTicketManage.Server.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateVeMayBay([FromQuery] string maCB, [FromQuery] string maKH, 
-            [FromQuery] string maHV, [FromBody] VeMayBayDto veMayBayCreate)
+            [FromQuery] string maHV, [FromBody] CreateVeMayBayDto veMayBayCreate)
         {
             if (veMayBayCreate == null)
                 return BadRequest(ModelState);
@@ -53,6 +53,24 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return StatusCode(500, ModelState);
             }
             return Ok("Tạo Vé Thành Công");
+        }
+
+        [HttpDelete("DeleteVeMayBay{maVe}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteVeMayBay(string maVe)
+        {
+            if (!_veMayBayRepository.VeMayBayExists(maVe))
+                return NotFound();
+
+
+            if (!_veMayBayRepository.DeleteVeMayBay(maVe))
+            {
+                ModelState.AddModelError("", $"Something went wrong when deleting the record {maVe}");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Xóa vé máy bay thành công");
         }
     }
 }
