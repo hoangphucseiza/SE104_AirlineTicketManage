@@ -16,8 +16,11 @@ import FindTickets from "./pages/booking/find_tickets";
 import Tickets from "./pages/tickets";
 import Customers from "./pages/customers";
 import ViewCustomer from "./pages/customers/view_customer";
+
 import Report from "./pages/report";
 import NotFound from "./components/NotFound";
+import Alert from "./components/Alert";
+import DetailAirport from './pages/schedules/detail_airport';
 
 import moment from "moment";
 
@@ -39,56 +42,62 @@ moment.updateLocale("en", {
   ],
 });
 
+export const AppContext = React.createContext(null);
+
 function App() {
   const [showSideBar, setShowSideBar] = useState(true);
+  const [alert, setAlert] = useState(false);
 
   return (
     <BrowserRouter>
-      <div className="App">
-        <SideBar showSideBar={showSideBar} />
-        <div
-          className="main_container"
-          style={{
-            marginLeft: showSideBar ? "260px" : "0",
-          }}
-        >
-          <Header setShowSideBar={setShowSideBar} />
+      <AppContext.Provider value={{ alert, setAlert }}>
+        <div className="App">
+          <SideBar showSideBar={showSideBar} />
           <div
+            className="main_container"
             style={{
-              flex: 1,
-              padding: "16px 24px",
-              backgroundColor: "var(--bg-color)",
+              marginLeft: showSideBar ? "260px" : "0",
             }}
           >
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/airports">
-                <Route index element={<Airports />} />
-                <Route path="add" element={<AddAirPort />} />
-                <Route path="update" element={<UpdateAirPort />} />
-              </Route>
-              <Route path="/schedules">
-                <Route index element={<Schedules />} />
-                <Route path="add" element={<AddSchedule />} />
-                <Route path="update" element={<UpdateSchedule />} />
-              </Route>
-              <Route path="/booking">
-                <Route index element={<Booking />} />
-                <Route path="find" element={<FindTickets />} />
-              </Route>
-              <Route path="/tickets" element={<Tickets />}></Route>
-              <Route path="/report" element={<Report />}></Route>
-              <Route path="/customers" element={<Customers />}>
-                <Route index element={<Customers />} />
-                <Route path="view" element={<ViewCustomer />} />
-              </Route>
+            <Header setShowSideBar={setShowSideBar} />
+            <div
+              style={{
+                flex: 1,
+                padding: "16px 24px",
+                backgroundColor: "var(--bg-color)",
+              }}
+            >
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/airports">
+                  <Route index element={<Airports />} />
+                  <Route path="add" element={<AddAirPort />} />
+                  <Route path="update/:id" element={<UpdateAirPort />} />
+                </Route>
+                <Route path="/schedules">
+                  <Route index element={<Schedules />} />
+                  <Route path="add" element={<AddSchedule />} />
+                  <Route path="update" element={<UpdateSchedule />} />
+                </Route>
+                <Route path="/booking">
+                  <Route index element={<Booking />} />
+                  <Route path="find" element={<FindTickets />} />
+                </Route>
+                <Route path="/tickets" element={<Tickets />}></Route>
+                <Route path="/report" element={<Report />}></Route>
+                <Route path="/customers">
+                  <Route index element={<Customers />} />
+                  <Route path="view/:id" element={<ViewCustomer />} />
+                </Route>
 
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            <Footer />
           </div>
-          <Footer />
+          <Alert />
         </div>
-      </div>
+      </AppContext.Provider>
     </BrowserRouter>
   );
 }

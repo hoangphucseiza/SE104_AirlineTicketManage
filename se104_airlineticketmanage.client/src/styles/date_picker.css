@@ -1,0 +1,64 @@
+.date-picker {
+  min-height: 300px;
+  padding: 0 12px;
+}
+
+.date-picker-header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-picker-header h5 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.date-picker-header i {
+  color: var(--text-color-medium);
+  font-size: 20px;
+  text-align: center;
+}
+
+.date-picker-header i:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.date-picker-body-header {
+  display: flex;
+}
+
+.date-picker-body-header div {
+  width: 40px;
+  padding: 6px;
+  color: var(--text-color-medium);
+  text-align: center;
+  font-size: 18px;
+}
+.date-picker-body-calender {
+  display: flex;
+  flex-wrap: wrap;
+  border-collapse: collapse;
+}
+
+.date-picker-body-calender div {
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  color: var(--text-color-bold);
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.date-picker-body-calender div.picked {
+  background-color: var(--primary-color);
+  color: #fff!important;   
+  border-color: var(--primary-color); 
+}

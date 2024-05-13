@@ -16,22 +16,27 @@
 /* --------- HOME -----------*/
 @import url("./home.css");
 
+/* --------- DATE PICKER -----------*/
+@import url("./date_picker.css");
 
+/* --------- AIRPORT -----------*/
+@import url("./airports.css");
 
 :root {
-  --primary-color: #1779C4;
+  --primary-color: #1779c4;
   --primary-color-80: rgba(23, 121, 196, 0.8);
   --primary-color-15: rgba(23, 121, 196, 0.15);
-  --bg-color: #F8F9FB;
-  --text-color-bold: #09121E;
-  --text-color-medium:#4E4E4E;
-  --text-color-light:#727171;
-  --text-color-lighter:#CFD5E2;
+  --bg-color: #f8f9fb;
+  --text-color-bold: #09121e;
+  --text-color-medium: #4e4e4e;
+  --text-color-light: #727171;
+  --text-color-lighter: #cfd5e2;
   --border-color: #e4e7ec;
-  --success-color: #036B26;
-  --bg-success-color: #E7F6EC;
-  --danger-color: #D42620;
-  --bg-danger-color: #FBEAE9;
+  --success-color: #036b26;
+  --bg-success-color: #e7f6ec;
+  --danger-color: #d42620;
+  --bg-danger-color: #fbeae9;
+  --bg-yellow-color: #FFDC7B;
 
 }
 
@@ -61,13 +66,203 @@ body {
 
 .main_container {
   min-height: 100vh;
- 
+
   display: flex;
   flex-direction: column;
-  transition: margin-left 0.3s ease-in-out; 
-
+  transition: margin-left 0.3s ease-in-out;
 }
 
+/* Custom Button */
 
+.btn_normal {
+  padding: 12px 16px;
+  max-width: 150px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+  font-weight: 500;
+  color: var(--text-color-bold);
+  font-size: 16px;
+}
+.btn_normal i {
+  color: inherit;
+  font-size: 20px;
+  transform: translateY(2px);
+  margin-right: 8px;
+}
 
+.btn_normal.btn_accept {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+.btn_normal.btn_success {
+  background-color: var(--success-color);
+  color: #fff;
+  border-color: var(--success-color);
+}
 
+.btn_normal.btn_except {
+  border-color: var(--danger-color);
+  color: var(--danger-color);
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.btn_page {
+  background-color: #fff;
+  min-width: 50px;
+  border-radius: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+}
+.btn_page.active {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Custom Filter */
+
+.filter_menu {
+  min-width: 300px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 12px;
+}
+
+.filter_menu > div {
+  flex: 1 1 45%;
+}
+.filter_menu > div.active {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.filter_menu > div.active .form-check-input:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.filter_range {
+  min-width: 350px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter_range > div {
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+.filter_range > div input {
+  border: none;
+  flex: 1;
+  padding-right: 8px;
+  text-align: right;
+}
+.filter_range > hr {
+  width: 60px;
+  background-color: var(--border-color);
+  height: 1px;
+  opacity: 1;
+}
+.filter_range > div span {
+  opacity: 0.5;
+}
+
+.dropdown button::after {
+  margin-left: 16px;
+  border: unset;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  transform: translateY(6px);
+}
+
+.line {
+  border-bottom: 1px solid black;
+}
+
+.container-bar {
+  width: 45%
+}
+
+.add-schedule-btn {
+  background: #113f62;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.add-schedule-btn:hover {
+  background-color: #3777afa8;
+  color: var(--primary-color);
+}
+
+.input-container {
+  position: relative;
+}
+
+.box-add {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.action-airport-button {
+  padding: 10px;
+  height: match-parent;
+  width: 150px;
+}
+
+.text-pt {
+  background: var(--primary-color-80);
+}
+
+.text-tg {
+  background: var(--bg-yellow-color);
+  width: 50px;
+}
+
+.fix-size {
+  height: 70px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--primary-color-15);
+  font-size: 20px;
+}
+
+.report-container {
+  padding: 20px;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.chart-wrapper {
+  width: calc(50% - 10px);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 20px;
+}
