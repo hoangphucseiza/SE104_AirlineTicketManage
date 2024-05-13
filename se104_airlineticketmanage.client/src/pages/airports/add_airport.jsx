@@ -12,35 +12,35 @@ const AddAirPort = () => {
     transit_min: 0,
     transit_max: 0,
     address: "",
-    number_transit_airports: [],
+    destination_airports: [],
   });
   const [error, setError] = useState({});
   const [showSearchAirport, setShowSearchAirport] = useState(false);
   const [searchAirport, setSearchAirport] = useState("");
   const [searchAirportList, setSearchAirportList] = useState([]);
 
-  const handleChangeTransit = (newValue, id) => {
+  const handleChangeDestination = (newValue, id, keyName) => {
     if (newValue < 1) return;
 
-    const newNumberTransitAirports = airport.number_transit_airports.map(
+    const newNumberTransitAirports = airport.destination_airports.map(
       (destination) =>
         destination.destination_id === id
-          ? { ...destination, max_transit_airports: newValue }
+          ? { ...destination, [keyName]: newValue }
           : destination
     );
     setAirport({
       ...airport,
-      number_transit_airports: newNumberTransitAirports,
+      destination_airports: newNumberTransitAirports,
     });
   };
 
   const handleDeleteTransit = (id) => {
-    const newNumberTransitAirports = airport.number_transit_airports.filter(
+    const newNumberTransitAirports = airport.destination_airports.filter(
       (destination) => destination.destination_id !== id
     );
     setAirport({
       ...airport,
-      number_transit_airports: newNumberTransitAirports,
+      destination_airports: newNumberTransitAirports,
     });
   };
 
@@ -69,7 +69,7 @@ const AddAirPort = () => {
     setShowSearchAirport(false);
 
     if (
-      airport.number_transit_airports.find(
+      airport.destination_airports.find(
         (des) => des.destination_id === destination.id
       )
     ) {
@@ -84,10 +84,11 @@ const AddAirPort = () => {
       destination_id: destination.id,
       destination_name: destination.name,
       max_transit_airports: 1,
+      min_flight_time: 30,
     };
     setAirport({
       ...airport,
-      number_transit_airports: [...airport.number_transit_airports, newItem],
+      destination_airports: [...airport.destination_airports, newItem],
     });
   };
 
@@ -249,11 +250,12 @@ const AddAirPort = () => {
               <th scope="col">Mã sân bay đến</th>
               <th scope="col">Tên sân bay đến</th>
               <th scope="col">Số sân bay dừng tối đa</th>
+              <th scope="col">Thời gian bay tối thiểu</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            {airport.number_transit_airports.map((destination, index) => (
+            {airport.destination_airports.map((destination, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{airport.id}</td>
@@ -265,9 +267,24 @@ const AddAirPort = () => {
                     className="form-control"
                     value={destination.max_transit_airports}
                     onChange={(e) =>
-                      handleChangeTransit(
+                      handleChangeDestination(
                         e.target.value,
-                        destination.destination_id
+                        destination.destination_id,
+                        "max_transit_airports"
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    className="form-control"
+                    value={destination.min_flight_time}
+                    onChange={(e) =>
+                      handleChangeDestination(
+                        e.target.value,
+                        destination.destination_id,
+                        "min_flight_time"
                       )
                     }
                   />

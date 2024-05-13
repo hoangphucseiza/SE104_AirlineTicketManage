@@ -8,16 +8,18 @@ const fakeData = {
   transit_min: 30,
   transit_max: 90,
   address: "Hà Nội",
-  number_transit_airports: [
+  destination_airports: [
     {
       destination_id: "SGN",
       destination_name: "Tân Sơn Nhất",
       max_transit_airports: 2,
+      min_flight_time: 30,
     },
     {
       destination_id: "DAD",
       destination_name: "Cảng hàng không quốc tế Đà Nẵng",
       max_transit_airports: 1,
+      min_flight_time: 30,
     },
   ],
 };
@@ -32,28 +34,28 @@ const UpdateAirPort = () => {
   const [searchAirport, setSearchAirport] = useState("");
   const [searchAirportList, setSearchAirportList] = useState([]);
 
-  const handleChangeTransit = (newValue, id) => {
+  const handleChangeDestination = (newValue, id, keyName) => {
     if (newValue < 1) return;
 
-    const newNumberTransitAirports = airport.number_transit_airports.map(
+    const newNumberTransitAirports = airport.destination_airports.map(
       (destination) =>
         destination.destination_id === id
-          ? { ...destination, max_transit_airports: newValue }
+          ? { ...destination, [keyName]: newValue }
           : destination
     );
     setAirport({
       ...airport,
-      number_transit_airports: newNumberTransitAirports,
+      destination_airports: newNumberTransitAirports,
     });
   };
 
   const handleDeleteTransit = (id) => {
-    const newNumberTransitAirports = airport.number_transit_airports.filter(
+    const newNumberTransitAirports = airport.destination_airports.filter(
       (destination) => destination.destination_id !== id
     );
     setAirport({
       ...airport,
-      number_transit_airports: newNumberTransitAirports,
+      destination_airports: newNumberTransitAirports,
     });
   };
 
@@ -82,7 +84,7 @@ const UpdateAirPort = () => {
     setShowSearchAirport(false);
 
     if (
-      airport.number_transit_airports.find(
+      airport.destination_airports.find(
         (des) => des.destination_id === destination.id
       )
     ) {
@@ -97,10 +99,11 @@ const UpdateAirPort = () => {
       destination_id: destination.id,
       destination_name: destination.name,
       max_transit_airports: 1,
+      min_fight_time: 30,
     };
     setAirport({
       ...airport,
-      number_transit_airports: [...airport.number_transit_airports, newItem],
+      destination_airports: [...airport.destination_airports, newItem],
     });
   };
 
@@ -253,7 +256,7 @@ const UpdateAirPort = () => {
         </div>
       </div>
       <div className="airport_content">
-        <h5 className="mb-4">Danh sách sân bay dừng</h5>
+        <h5 className="mb-4">Danh sách sân bay đến</h5>
         <table className="table">
           <thead>
             <tr>
@@ -262,11 +265,12 @@ const UpdateAirPort = () => {
               <th scope="col">Mã sân bay đến</th>
               <th scope="col">Tên sân bay đến</th>
               <th scope="col">Số sân bay dừng tối đa</th>
+              <th scope="col">Thời gian bay tối thiểu</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            {airport.number_transit_airports.map((destination, index) => (
+            {airport.destination_airports.map((destination, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{airport.id}</td>
@@ -278,9 +282,24 @@ const UpdateAirPort = () => {
                     className="form-control"
                     value={destination.max_transit_airports}
                     onChange={(e) =>
-                      handleChangeTransit(
+                      handleChangeDestination(
                         e.target.value,
-                        destination.destination_id
+                        destination.destination_id,
+                        "max_transit_airports"
+                      )
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    className="form-control"
+                    value={destination.min_fight_time}
+                    onChange={(e) =>
+                      handleChangeDestination(
+                        e.target.value,
+                        destination.destination_id,
+                        "min_fight_time"
                       )
                     }
                   />

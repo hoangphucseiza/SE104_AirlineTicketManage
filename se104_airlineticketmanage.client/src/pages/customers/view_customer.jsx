@@ -3,7 +3,7 @@ import React from 'react'
 const ViewCustomer = () => {
   return (
     <div>
-      View Customer
+      <h3>Nguyễn Thị Bích Hảo</h3>
     </div>
   )
 }
