@@ -18,6 +18,9 @@ namespace SE104_AirlineTicketManage.Server.Helper
             CreateMap<KhachHangDto, KhachHang>();
             CreateMap<VeMayBay, VeMayBayDto>();
             CreateMap<VeMayBayDto, VeMayBay>();
+
+            // Mapping CreateVeMayBayDto to VeMayBay
+            CreateMap<CreateVeMayBayDto, VeMayBay>();
         }
     }
 }

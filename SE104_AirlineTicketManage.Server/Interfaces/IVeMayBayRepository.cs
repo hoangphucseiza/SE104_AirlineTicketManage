@@ -11,6 +11,8 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
 
         bool CreateVeMayBay(string maCB, string maKH, string maHV ,VeMayBay veMayBay);
 
+        bool DeleteVeMayBay(string maVe);
+
         bool Save();
     }
 }
