@@ -294,12 +294,12 @@ const UpdateAirPort = () => {
                   <input
                     type="number"
                     className="form-control"
-                    value={destination.min_fight_time}
+                    value={destination.min_flight_time}
                     onChange={(e) =>
                       handleChangeDestination(
                         e.target.value,
                         destination.destination_id,
-                        "min_fight_time"
+                        "min_flight_time"
                       )
                     }
                   />

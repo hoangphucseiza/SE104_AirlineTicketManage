@@ -40,11 +40,11 @@ const flight_Schedules = [
     id: "DA001",
     depart: {
       id: "HAN",
-      location: "Hà Nội",
+      address: "Hà Nội",
     },
     destination: {
       id: "VDH",
-      location: "Quảng Bình",
+      address: "Quảng Bình",
     },
     depart_date: new Date("5/4/2024 10:00"),
     landing_date: new Date("5/4/2024 12:00"),
@@ -55,11 +55,11 @@ const flight_Schedules = [
     id: "DA002",
     depart: {
       id: "HAN",
-      location: "Hà Nội",
+      address: "Hà Nội",
     },
     destination: {
       id: "DAD",
-      location: "Đà Nẵng",
+      address: "Đà Nẵng",
     },
     depart_date: new Date("12/4/2024 10:00"),
     landing_date: new Date("12/4/2024 12:00"),
@@ -70,11 +70,11 @@ const flight_Schedules = [
     id: "DA003",
     depart: {
       id: "SGN",
-      location: "TP. Hồ Chí Minh",
+      address: "TP. Hồ Chí Minh",
     },
     destination: {
       id: "VDH",
-      location: "Quảng Bình",
+      address: "Quảng Bình",
     },
     depart_date: new Date("12/4/2024 10:00"),
     landing_date: new Date("12/4/2024 12:00"),
@@ -85,11 +85,11 @@ const flight_Schedules = [
     id: "DA004",
     depart: {
       id: "HAN",
-      location: "Hà Nội",
+      address: "Hà Nội",
     },
     destination: {
       id: "PQC",
-      location: "Phú Quốc",
+      address: "Phú Quốc",
     },
     depart_date: new Date("12/4/2024 10:00"),
     landing_date: new Date("12/4/2024 12:00"),

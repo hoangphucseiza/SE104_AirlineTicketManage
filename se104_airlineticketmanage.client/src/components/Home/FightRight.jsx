@@ -43,7 +43,7 @@ const FlightRight = ({ flight }) => {
       </div>
       <div className="d-flex align-items-center flex-column mt-3 home-flights-right-below">
         <div className="mb-3 home-flights-rights-header">
-          <span>Phiếu đặt vé đã hủy</span>
+          <span>Số lượng ghế trống</span>
         </div>
         <h5 className="mb-3">{flight.id}</h5>
 
