@@ -22,11 +22,14 @@ namespace SE104_AirlineTicketManage.Server.Repository
             return _context.ChuyenBays.Where(p => p.MaCB == maCB).FirstOrDefault();
         }
 
-  
-
         public ICollection<ChuyenBay> GetChuyenBays()
         {
             return _context.ChuyenBays.OrderBy(p => p.MaCB).ToList();
+        }
+
+        public ICollection<VeMayBay> GetVeMayBayFromChuyenBay(string maCB)
+        {
+            return _context.VeMayBays.Where(p => p.MaCB == maCB).ToList();
         }
     }
 }

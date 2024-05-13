@@ -13,7 +13,7 @@ namespace SE104_AirlineTicketManage.Server.Repository
         }
         public ICollection<SanBay> GetSanBays()
         {
-            throw new NotImplementedException();
+           return _context.SanBays.OrderBy(p => p.MaSB).ToList();
         }
 
         public SanBay GetSanBay(string maSB)
@@ -26,6 +26,24 @@ namespace SE104_AirlineTicketManage.Server.Repository
             return _context.SanBays.Any(p => p.MaSB == maSB);
         }
 
-       
+
+        public bool CreateSanBay(SanBay sanBay)
+        {
+            _context.Add(sanBay);
+
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved >= 0 ? true : false;
+        }
+
+        public bool UpdateSanBay(SanBay sanBay)
+        {
+            _context.Update(sanBay);
+            return Save();
+        }
     }
 }

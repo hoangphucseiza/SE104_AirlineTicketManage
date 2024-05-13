@@ -47,5 +47,20 @@ namespace SE104_AirlineTicketManage.Server.Controllers
 
             return Ok(chuyenBay);
         }
+        [HttpGet("GetVeMayBayFromChuyenBay/{maCB}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<VeMayBay>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetVeMayBayFromChuyenBay(string maCB)
+        {
+            if (!_chuyenBayRepository.ChuyenBayExists(maCB))
+                return NotFound();
+
+            var veMayBays = _mapper.Map<List<VeMayBayDto>>(_chuyenBayRepository.GetVeMayBayFromChuyenBay(maCB));
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(veMayBays);
+        }
     }
 }

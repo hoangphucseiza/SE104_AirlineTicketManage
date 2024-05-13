@@ -8,5 +8,11 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         SanBay GetSanBay(string maSB);
 
         bool SanbayExists(string maSB);
+
+        bool CreateSanBay(SanBay sanBay);
+
+        bool UpdateSanBay(SanBay sanBay);
+
+        bool Save();
     }
 }
