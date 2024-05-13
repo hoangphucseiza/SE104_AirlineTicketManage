@@ -1,0 +1,26 @@
+.table tr {
+  border-color: var(--border-color);
+  cursor: pointer;
+}
+
+.table tr:hover {
+  background-color: var(--border-color);
+}
+
+.table th {
+  color: var(--text-color-medium);
+  font-weight: 500;
+}
+
+.table td {
+  color: var(--text-color-bold);
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+
+.table tr,
+.table th,
+.table td {
+  background-color: unset;
+  vertical-align: middle;
+}

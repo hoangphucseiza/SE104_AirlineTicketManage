@@ -1,0 +1,72 @@
+.footer {
+}
+
+.footer-slogan {
+  padding: 16px 80px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.footer-slogan img {
+  width: 76px;
+  margin-right: 16px;
+}
+
+.footer-slogan p {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color-medium);
+  margin-bottom: 4px;
+}
+
+.footer-slogan p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-regulations {
+  padding: 32px 80px;
+  background-color: var(--primary-color-15);
+  color: var(--text-color-medium);
+}
+
+.footer-regulations-intro {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.footer-regulations-intro-block {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  font-size: 16px;
+  flex: 1 0 33%;
+}
+
+.footer-regulations-intro-block h6 {
+  margin-bottom: 12px;
+}
+.footer-regulations-intro-block a {
+  text-decoration: none;
+  color: var(--text-color-light);
+  font-style: 16;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+.footer-regulations-contact {
+  margin-top: 48px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+}
+
+.footer-regulations-contact i {
+  font-size: 20px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.footer-regulations-contact > div {
+  flex-basis: 33%;
+}
