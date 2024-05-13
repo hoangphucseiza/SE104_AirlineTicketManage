@@ -29,5 +29,30 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return BadRequest(ModelState);
             return Ok(veMayBays);
         }
+
+        [HttpPost("CreateVeMayBay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateVeMayBay([FromQuery] string maCB, [FromQuery] string maKH, 
+            [FromQuery] string maHV, [FromBody] VeMayBayDto veMayBayCreate)
+        {
+            if (veMayBayCreate == null)
+                return BadRequest(ModelState);
+
+            if (_veMayBayRepository.VeMayBayExists(veMayBayCreate.MaVe))
+            {
+                ModelState.AddModelError("", "VeMayBay đã tồn tại");
+                return StatusCode(422, ModelState);
+            }
+            
+            var PokemonMap = _mapper.Map<VeMayBay>(veMayBayCreate);
+
+            if(!_veMayBayRepository.CreateVeMayBay(maCB, maKH, maHV, PokemonMap))
+            {
+                ModelState.AddModelError("", $"Something went wrong when saving the record {veMayBayCreate.MaVe}");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Tạo Vé Thành Công");
+        }
     }
 }

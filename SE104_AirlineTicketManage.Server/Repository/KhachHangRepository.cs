@@ -11,6 +11,12 @@ namespace SE104_AirlineTicketManage.Server.Repository
         {
             _context = context;
         }
+
+        public bool CreateKhachHang()
+        {
+            throw new NotImplementedException();
+        }
+
         public KhachHang GetKhachHang(string maKH)
         {
             throw new NotImplementedException();
@@ -24,6 +30,12 @@ namespace SE104_AirlineTicketManage.Server.Repository
         public bool KhachHangExists(string maKH)
         {
             return _context.KhachHangs.Any(p => p.MaKH == maKH);
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

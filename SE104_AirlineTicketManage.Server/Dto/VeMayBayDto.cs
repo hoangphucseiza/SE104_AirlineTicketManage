@@ -8,10 +8,6 @@ namespace SE104_AirlineTicketManage.Server.Dto
         [Key]
         public string MaVe { get; set; }
 
-        public string MaCB { get; set; }
-
-        public string MaKH { get; set; }
-        public string MaHV { get; set; }
 
         public decimal GiaTien { get; set; }
 

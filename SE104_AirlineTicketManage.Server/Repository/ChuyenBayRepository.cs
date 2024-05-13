@@ -31,5 +31,11 @@ namespace SE104_AirlineTicketManage.Server.Repository
         {
             return _context.VeMayBays.Where(p => p.MaCB == maCB).ToList();
         }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

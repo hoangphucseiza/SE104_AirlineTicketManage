@@ -10,5 +10,6 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         ICollection<VeMayBay> GetVeMayBayFromChuyenBay(string maCB);
 
         bool ChuyenBayExists(string maCB);
+        bool Save();
     }
 }

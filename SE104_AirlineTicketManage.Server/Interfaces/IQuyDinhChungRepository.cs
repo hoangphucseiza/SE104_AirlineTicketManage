@@ -4,5 +4,7 @@
     {
         int GetThoiGianChamNhatDatVe();
         int GetThoiGianHuyDatVe();
+
+        bool Save();
     }
 }

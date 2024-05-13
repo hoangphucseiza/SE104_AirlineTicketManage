@@ -8,5 +8,8 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         KhachHang GetKhachHang(string maKH);
 
         bool KhachHangExists(string maKH);
+
+        bool CreateKhachHang();
+        bool Save();
     }
 }

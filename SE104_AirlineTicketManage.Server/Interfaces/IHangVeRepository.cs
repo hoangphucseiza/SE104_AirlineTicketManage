@@ -8,5 +8,7 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         float GetTiLeHangVe(string maHV);
 
         bool HangVeExists(string maHV);
+
+        bool Save();
     }
 }

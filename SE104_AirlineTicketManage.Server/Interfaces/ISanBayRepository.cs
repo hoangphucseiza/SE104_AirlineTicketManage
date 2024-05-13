@@ -11,7 +11,7 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
 
         bool CreateSanBay(SanBay sanBay);
 
-        bool UpdateSanBay(SanBay sanBay);
+        bool UpdateSanBay(SanBay sanBay); 
 
         bool Save();
     }

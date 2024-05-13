@@ -26,5 +26,11 @@ namespace SE104_AirlineTicketManage.Server.Repository
         {
             throw new NotImplementedException();
         }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }
