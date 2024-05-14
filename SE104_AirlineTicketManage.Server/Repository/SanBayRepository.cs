@@ -16,11 +16,6 @@ namespace SE104_AirlineTicketManage.Server.Repository
            return _context.SanBays.OrderBy(p => p.MaSB).ToList();
         }
 
-        public SanBay GetSanBay(string maSB)
-        {
-            return _context.SanBays.Where(p => p.MaSB == maSB).FirstOrDefault();
-        }
-
         public bool SanbayExists(string maSB)
         {
             return _context.SanBays.Any(p => p.MaSB == maSB);
@@ -44,6 +39,48 @@ namespace SE104_AirlineTicketManage.Server.Repository
         {
             _context.Update(sanBay);
             return Save();
+        }
+
+        public SanBay GetSanBayByMaSB(string maSB)
+        {
+            return _context.SanBays.Where(p => p.MaSB == maSB).FirstOrDefault();
+        }
+
+        public ICollection<SanBay> GetDanhSachSanBay(int phantrang)
+        {
+            int pageSize = (phantrang -1 ) * 10;
+
+            return _context.SanBays.OrderBy(p => p.MaSB).Skip(pageSize).Take(10).ToList();
+        }
+
+        public ICollection<SanBay> GetSanBayByTGDungToiDa(int thoigiandung, int phantrang)
+        {
+            var sanBays = _context.SanBays.Where(p => p.TGDungMax <= thoigiandung)
+                .OrderBy(p => p.MaSB)
+                .Skip((phantrang - 1) * 10)
+                .Take(10)
+                .ToList();
+            return sanBays;
+        }
+
+        public ICollection<SanBay> GetSanBayByTGDungToiThieu(int thoigiandung, int phantrang)
+        {
+            var sanBays = _context.SanBays.Where(p => p.TGDungMin >= thoigiandung)
+                .OrderBy(p => p.MaSB)
+                .Skip((phantrang - 1) * 10)
+                .Take(10)
+                .ToList();
+            return sanBays;
+        }
+
+        public ICollection<SanBay> GetSanBayByTGDung(int dungtoithieu, int dungtoida, int phantrang)
+        {
+            var sanBays = _context.SanBays.Where(p => p.TGDungMin >= dungtoithieu && p.TGDungMax <= dungtoida)
+              .OrderBy(p => p.MaSB)
+              .Skip((phantrang - 1) * 10)
+              .Take(10)
+              .ToList();
+            return sanBays;
         }
     }
 }

@@ -163,7 +163,8 @@ namespace SE104_AirlineTicketManage.Server.Repository
                     title = "Doanh thu",
                     value = valueDoanhThu,
                     increase = tiLeTangTruongDoanhThu,
-                    date_time = homnay
+                    date_time = homnay,
+                    is_money = true
                 }
             };
 

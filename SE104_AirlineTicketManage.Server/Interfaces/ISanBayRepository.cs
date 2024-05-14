@@ -4,8 +4,15 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
 {
     public interface ISanBayRepository
     {
-        ICollection<SanBay> GetSanBays();
-        SanBay GetSanBay(string maSB);
+        ICollection<SanBay> GetDanhSachSanBay(int phantrang);
+
+        ICollection<SanBay> GetSanBayByTGDungToiDa(int thoigiandung, int phantrang);
+
+        ICollection<SanBay> GetSanBayByTGDungToiThieu(int thoigiandung, int phantrang);
+
+        ICollection<SanBay> GetSanBayByTGDung(int dungtoithieu, int dungtoida, int phantrang);
+        SanBay GetSanBayByMaSB(string maSB);
+
 
         bool SanbayExists(string maSB);
 
