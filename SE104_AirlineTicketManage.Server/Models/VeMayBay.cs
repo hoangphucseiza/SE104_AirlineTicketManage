@@ -21,7 +21,7 @@ namespace SE104_AirlineTicketManage.Server.Models
 
         public DateTime NgayDat { get; set; }
 
-        public DateTime NgayMua { get; set; }
+        public DateTime? NgayMua { get; set; }
 
         public string TrangThai { get; set; }
     }
