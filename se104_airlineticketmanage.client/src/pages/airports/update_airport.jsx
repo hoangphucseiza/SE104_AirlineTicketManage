@@ -1,38 +1,63 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
-
-const fakeData = {
-  id: "HAN",
-  name: "Nội Bài",
-  transit_min: 30,
-  transit_max: 90,
-  address: "Hà Nội",
-  destination_airports: [
-    {
-      destination_id: "SGN",
-      destination_name: "Tân Sơn Nhất",
-      max_transit_airports: 2,
-      min_flight_time: 30,
-    },
-    {
-      destination_id: "DAD",
-      destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-      max_transit_airports: 1,
-      min_flight_time: 30,
-    },
-  ],
-};
+import { getDataAPI } from "../../utils/fetchData";
 
 const UpdateAirPort = () => {
   const { setAlert } = useContext(AppContext);
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const [airport, setAirport] = useState(fakeData);
+  const [airport, setAirport] = useState({});
   const [error, setError] = useState({});
   const [showSearchAirport, setShowSearchAirport] = useState(false);
   const [searchAirport, setSearchAirport] = useState("");
   const [searchAirportList, setSearchAirportList] = useState([]);
+
+  useEffect(() => {
+    const getAirport = async () => {
+      try {
+        if (!id) return;
+        const res = await getDataAPI(`api/SanBay/GetSanBayByMaSB/${id}`);
+
+        if (!res.data) return;
+
+        const newAirport = {
+          id: res.data.maSB,
+          name: res.data.tenSB,
+          address: res.data.viTri,
+          transit_max: res.data.tgDungMax,
+          transit_min: res.data.tgDungMin,
+          destination_airports: [
+            {
+              destination_id: "SGN",
+              destination_name: "Tân Sơn Nhất",
+              max_transit_airports: 2,
+              min_flight_time: 30,
+            },
+            {
+              destination_id: "DAD",
+              destination_name: "Cảng hàng không quốc tế Đà Nẵng",
+              max_transit_airports: 1,
+              min_flight_time: 30,
+            },
+          ],
+        };
+        setAirport(newAirport);
+      } catch (err) {
+        return setAlert({
+          title: "Không tìm thấy sân bay",
+          data:
+            err.response.data.message || `Không tìm thấy sân bay có mã ${id}!`,
+          type: "error",
+        });
+      }
+    };
+
+    getAirport();
+  }, [id]);
+
+  console.log(airport);
 
   const handleChangeDestination = (newValue, id, keyName) => {
     if (newValue < 1) return;
@@ -270,7 +295,7 @@ const UpdateAirPort = () => {
             </tr>
           </thead>
           <tbody>
-            {airport.destination_airports.map((destination, index) => (
+            {airport?.destination_airports?.map((destination, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{airport.id}</td>

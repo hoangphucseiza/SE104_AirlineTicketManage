@@ -20,7 +20,8 @@ import ViewCustomer from "./pages/customers/view_customer";
 import Report from "./pages/report";
 import NotFound from "./components/NotFound";
 import Alert from "./components/Alert";
-import DetailAirport from './pages/schedules/detail_airport';
+import DetailAirport from "./pages/schedules/detail_airport";
+import TicketDetail from "./pages/booking/ticket_detail";
 
 import moment from "moment";
 
@@ -82,6 +83,7 @@ function App() {
                 <Route path="/booking">
                   <Route index element={<Booking />} />
                   <Route path="find" element={<FindTickets />} />
+                  <Route path="ticket/:id" element={<TicketDetail />} />
                 </Route>
                 <Route path="/tickets" element={<Tickets />}></Route>
                 <Route path="/report" element={<Report />}></Route>

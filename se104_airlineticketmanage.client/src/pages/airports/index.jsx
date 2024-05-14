@@ -4,74 +4,11 @@ import ExportCSV from "../../components/ExportCSV";
 import Filter from "../../components/Airports/Filter";
 import AirportList from "../../components/Airports/AirportList";
 
-const fakeData = [
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 90,
-    address: "Hà Nội",
-  },
-  {
-    id: "SGN",
-    name: "Tân Sơn Nhất",
-    transit_min: 40,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-    number_transit_airports: [
-      {
-        destination_id: "SGN",
-        destination_name: "Tân Sơn Nhất",
-        destination_add: "Hồ Chí Minh",
-        max_transit_airports: 2,
-      },
-      {
-        destination_id: "DAD",
-        destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-        destination_add: "Đà Nẵng",
-        max_transit_airports: 2,
-      },
-    ],
-  },
-];
+import { getDataAPI } from "../../utils/fetchData";
+
 
 const Airports = () => {
-  const [airports, setAirports] = useState(fakeData);
+  const [airports, setAirports] = useState([]);
   const [showAirports, setShowAirports] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -81,6 +18,28 @@ const Airports = () => {
   });
   const [page, setPage] = useState(1);
   const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  useEffect(() => {
+    const getAirports = async () => {
+      try {
+        const res = await getDataAPI("api/SanBay/GetDanhSachSanBay");
+        res.data &&
+          setAirports(
+            res.data["$values"].map((airport) => ({
+              id: airport.maSB,
+              name: airport.tenSB,
+              address: airport.viTri,
+              transit_max: airport.tgDungMax,
+              transit_min: airport.tgDungMin,
+            }))
+          );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getAirports();
+  }, []);
 
   useEffect(() => {
     setShowAirports([...airports]);

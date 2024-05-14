@@ -83,6 +83,7 @@ const listItemInput = [
 
 ];
 
+const min_flight_time = 30;
 
 const AddSchedule = () => {
   const handleTextChange = (value, index) => {

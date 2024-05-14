@@ -5,6 +5,36 @@ import TableRevenueYear from "../components/ReportSummary/TableRevenueYear";
 import ChartFlight from "../components/ReportSummary/ChartFlight";
 import ChartYear from "../components/ReportSummary/ChartYear";
 
+const fakeDataMonth = [
+  {
+    id: "CB01",
+    number_tickets: 250,
+    revenue: 12000000,
+    percent: 50,
+  },
+  {
+    id: "CB02",
+    number_tickets: 250,
+    revenue: 12000000,
+    percent: 10,
+  },
+];
+
+const fakeDataYear = [
+  {
+    month: 1,
+    number_flights: 20,
+    revenue: 12000000,
+    percent: 10,
+  },
+  {
+    month: 2,
+    number_flights: 20,
+    revenue: 12000000,
+    percent: 10,
+  },
+];
+
 const Report = () => {
   const [textFilter1, setTextFilter1] = useState("");
 
@@ -15,12 +45,12 @@ const Report = () => {
   const filterOptions1 = [
     {
       label: "THÁNG",
-      values: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+      values: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
     },
     {
       label: "NĂM",
-      values: ["2022", "2023", "2024"]
-    }
+      values: ["2022", "2023", "2024"],
+    },
   ];
 
   const [textFilter2, setTextFilter2] = useState("");
@@ -32,8 +62,8 @@ const Report = () => {
   const filterOptions2 = [
     {
       label: "NĂM",
-      values: ["2020", "2021", "2022", "2023", "2024"]
-    }
+      values: ["2020", "2021", "2022", "2023", "2024"],
+    },
   ];
 
   const list_flights = [
@@ -43,7 +73,7 @@ const Report = () => {
       count_ticket: "Sum Ticket of maCB",
       revenue: "Sum GiaTien of maCB",
       // percent: "(revenue/Revenue Month)*100"
-      percent: "70%"
+      percent: "70%",
     },
     {
       id_auto: 2,
@@ -51,8 +81,8 @@ const Report = () => {
       count_ticket: "Sum Ticket of maCB",
       revenue: "Sum GiaTien of maCB",
       // percent: "(revenue/Revenue Month)*100"
-      percent: "30%"
-    }
+      percent: "30%",
+    },
   ];
 
   // State cho danh sách chuyến bay
@@ -66,7 +96,7 @@ const Report = () => {
       count_flight: "Sum flight of month",
       revenue: "Sum revenue",
       // percent: "(revenue/Revenue Year)*100"
-      percent: "50%"
+      percent: "50%",
     },
     {
       id_auto: 2,
@@ -74,8 +104,8 @@ const Report = () => {
       count_flight: "Sum flight of month",
       revenue: "Sum revenue",
       // percent: "(revenue/Revenue Year)*100"
-      percent: "50%"
-    }
+      percent: "50%",
+    },
   ];
 
   const [listMonth, setListMonth] = useState(list_month);
@@ -99,20 +129,18 @@ const Report = () => {
     { Thang: "Thang 9", revenue: Math.floor(Math.random() * 10000000) + 1 },
     { Thang: "Thang 10", revenue: Math.floor(Math.random() * 10000000) + 1 },
     { Thang: "Thang 11", revenue: Math.floor(Math.random() * 10000000) + 1 },
-    { Thang: "Thang 12", revenue: Math.floor(Math.random() * 10000000) + 1 }
+    { Thang: "Thang 12", revenue: Math.floor(Math.random() * 10000000) + 1 },
   ];
 
   return (
     <div className="report-container">
       <div className="chart-container">
         <div className="chart-wrapper">
-          <h4>BIỂU ĐỒ DOANH THU BÁN VÉ CÁC CHUYẾN BAY
-          </h4>
+          <h4>BIỂU ĐỒ DOANH THU BÁN VÉ CÁC CHUYẾN BAY</h4>
           <ChartFlight data={chartDataFlight} />
         </div>
         <div className="chart-wrapper">
-          <h4>BIỂU ĐỒ DOANH THU NĂM
-          </h4>
+          <h4>BIỂU ĐỒ DOANH THU NĂM</h4>
           <ChartYear data={chartDataYear} />
         </div>
       </div>
@@ -132,10 +160,8 @@ const Report = () => {
         onTextSearchChange={handleTextFilterChange2}
       />
       <TableRevenueYear listMonth={listMonth} />
-
-
     </div>
   );
-}
+};
 
 export default Report;

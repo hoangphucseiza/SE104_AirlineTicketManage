@@ -22,6 +22,9 @@
 /* --------- AIRPORT -----------*/
 @import url("./airports.css");
 
+/* --------- BOOKING -----------*/
+@import url("./booking.css");
+
 :root {
   --primary-color: #1779c4;
   --primary-color-80: rgba(23, 121, 196, 0.8);
@@ -36,8 +39,8 @@
   --bg-success-color: #e7f6ec;
   --danger-color: #d42620;
   --bg-danger-color: #fbeae9;
-  --bg-yellow-color: #FFDC7B;
-
+  --bg-yellow-color: #ffdc7b;
+  --bg-gold-color: #e6b441;
 }
 
 body {
@@ -127,6 +130,27 @@ body {
   font-weight: 500;
 }
 
+/* Customer Rank Ticket */
+.rank_ticket {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 130px;
+}
+
+.rank_ticket.rank_1 {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.rank_ticket.rank_2 {
+  background-color: var(--bg-gold-color);
+  color: var(--text-color-bold);
+}
+
 /* Custom Filter */
 
 .filter_menu {
@@ -190,12 +214,23 @@ body {
   transform: translateY(6px);
 }
 
+.dropdown .btn.filter {
+  display: inline-block;
+  width: unset;
+  margin-right: 12px;
+  outline: none;
+  border: none;
+  background-color: #f0f2f5;
+  color: var(--text-color-bold);
+  padding: 8px 12px;
+}
+
 .line {
   border-bottom: 1px solid black;
 }
 
 .container-bar {
-  width: 45%
+  width: 45%;
 }
 
 .add-schedule-btn {
