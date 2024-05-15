@@ -12,7 +12,7 @@ using SE104_AirlineTicketManage.Server.Data;
 namespace SE104_AirlineTicketManage.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240514043758_initial")]
+    [Migration("20240514070429_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

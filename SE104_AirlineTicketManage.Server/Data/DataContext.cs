@@ -23,6 +23,7 @@ namespace SE104_AirlineTicketManage.Server.Data
         public DbSet<SanBay> SanBays { get; set; }
 
         public DbSet<SoSanBayDung> SoSanBayDungs { get; set; }
+        public object HangVe { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -841,7 +842,7 @@ namespace SE104_AirlineTicketManage.Server.Data
         public DataContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-            optionsBuilder.UseSqlServer("Server=HOANGPHUCSEIZA\\MSSQLSERVER01;Database=SE104_AirlineTicketManage;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-OOEM27J;Database=SE104_AirlineTicketManage;Trusted_Connection=true");
 
             return new DataContext(optionsBuilder.Options);
         }

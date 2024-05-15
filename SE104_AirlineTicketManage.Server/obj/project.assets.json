@@ -2523,19 +2523,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hoang\\.nuget\\packages\\": {}
+    "C:\\Users\\NhatQuang\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj",
+      "projectUniqueName": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj",
       "projectName": "SE104_AirlineTicketManage.Server",
-      "projectPath": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj",
-      "packagesPath": "C:\\Users\\hoang\\.nuget\\packages\\",
-      "outputPath": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\obj\\",
+      "projectPath": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj",
+      "packagesPath": "C:\\Users\\NhatQuang\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\hoang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\NhatQuang\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2622,7 +2622,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
