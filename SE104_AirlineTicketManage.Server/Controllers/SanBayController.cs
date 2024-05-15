@@ -131,6 +131,24 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return StatusCode(500, ModelState);
         }
 
+        [HttpPut("UpdateSanBay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateSanBay([FromBody] UpdateSanBayDto sanbaymoi)
+        {
+
+            bool capNhatSanBay = _sanBayRepository.UpdateSanBay(sanbaymoi);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (capNhatSanBay)
+                return Ok("Cập nhật sân bay thành công");
+            else
+                return StatusCode(500, ModelState);
+        }
+
 
 
         //[HttpPost("AddSanBay")]

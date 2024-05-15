@@ -144,5 +144,73 @@ namespace SE104_AirlineTicketManage.Server.Repository
             }
             return true;
         }
+
+        public bool UpdateSanBay(UpdateSanBayDto updateSanBay)
+        {
+            // Cập nhật giá trị sân bay đến
+            var sanBay = new SanBay();
+            sanBay.MaSB = updateSanBay.MaSanBay;
+            sanBay.TenSB = updateSanBay.TenSanBay;
+            sanBay.TGDungMin = updateSanBay.ThoiGianDungMin;
+            sanBay.TGDungMax = updateSanBay.ThoiGianDungMax;
+            sanBay.ViTri = updateSanBay.ViTri;
+            _context.SanBays.Update(sanBay);
+            _context.SaveChanges();
+
+            // Lấy danh sách sân bay dừng và cập nhật thêm xóa sửa
+            var sanBayDenLucSaus = updateSanBay.SanBayDens;
+            var SanBayDenLucDaus = GetUpdateSanBay(updateSanBay.MaSanBay).SanBayDens;
+
+            // Duyệt qua từng phần tử lúc đầu, so sánh với mảng lúc sau, nếu không tìm thấy => Xóa
+            foreach (var sanBayDenLucDau in SanBayDenLucDaus)
+            {
+                if (!sanBayDenLucSaus.Any(p => p.MaSanBay == sanBayDenLucDau.MaSanBay))
+                {
+                    var SanBayXoa = _context.SoSanBayDungs.Where(p => p.MaSanBayDi == updateSanBay.MaSanBay && p.MaSanBayDen == sanBayDenLucDau.MaSanBay).FirstOrDefault();
+
+                    if (SanBayXoa != null)
+                    {
+                        SanBayXoa.SoSBDung_Max = sanBayDenLucDau.SoSanBayDungToiDa;
+                        SanBayXoa.ThoiGianBayToiThieu = sanBayDenLucDau.ThoiGianBayToiThieu;
+
+                        _context.SoSanBayDungs.Remove(SanBayXoa);
+                        _context.SaveChanges();
+                    }    
+                   
+                }
+            }
+
+            // Duyệt qua từng phần tử lúc sau, so sánh với mảng lúc đầu, nếu không tìm thấy => Thêm, Ngược lại Update toàn bộ
+            foreach (var sanBayDenLucSau in sanBayDenLucSaus)
+            {
+                // Thêm sân bay dừng mới nếu phát hiện sân bay dừng mới
+                if (SanBayDenLucDaus.Any(p => p.MaSanBay == sanBayDenLucSau.MaSanBay) == false)
+                {
+                    var sanBayDung = new SoSanBayDung();
+                    sanBayDung.MaSanBayDi = updateSanBay.MaSanBay;
+                    sanBayDung.MaSanBayDen = sanBayDenLucSau.MaSanBay;
+                    sanBayDung.SoSBDung_Max = sanBayDenLucSau.SoSanBayDungToiDa;
+                    sanBayDung.ThoiGianBayToiThieu = sanBayDenLucSau.ThoiGianBayToiThieu;
+
+                    _context.SoSanBayDungs.Add(sanBayDung);
+                    _context.SaveChanges();
+                }
+                else if (SanBayDenLucDaus.Any(p => p.MaSanBay == sanBayDenLucSau.MaSanBay) == true)
+                {
+                   var sanBaySua = _context.SoSanBayDungs.Where(p => p.MaSanBayDi == updateSanBay.MaSanBay && p.MaSanBayDen == sanBayDenLucSau.MaSanBay).FirstOrDefault();
+
+                    if (sanBaySua != null)
+                    {
+                        sanBaySua.SoSBDung_Max = sanBayDenLucSau.SoSanBayDungToiDa;
+                        sanBaySua.ThoiGianBayToiThieu = sanBayDenLucSau.ThoiGianBayToiThieu;
+                        _context.SoSanBayDungs.Update(sanBaySua);
+                        _context.SaveChanges();
+                    }
+                    
+                }
+            }
+          
+            return true;
+        }
     }
 }
