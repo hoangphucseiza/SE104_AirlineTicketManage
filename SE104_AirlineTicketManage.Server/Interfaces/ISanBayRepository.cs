@@ -1,4 +1,5 @@
-﻿using SE104_AirlineTicketManage.Server.Models;
+﻿using SE104_AirlineTicketManage.Server.Dto;
+using SE104_AirlineTicketManage.Server.Models;
 
 namespace SE104_AirlineTicketManage.Server.Interfaces
 {
@@ -11,6 +12,11 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         ICollection<SanBay> GetSanBayByTGDungToiThieu(int thoigiandung, int phantrang);
 
         ICollection<SanBay> GetSanBayByTGDung(int dungtoithieu, int dungtoida, int phantrang);
+
+        UpdateSanBayDto GetUpdateSanBay(string maSB);
+
+        bool CreateSanBay(UpdateSanBayDto sanbay);
+
         SanBay GetSanBayByMaSB(string maSB);
 
 

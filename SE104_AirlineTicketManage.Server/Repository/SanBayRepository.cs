@@ -1,4 +1,6 @@
-﻿using SE104_AirlineTicketManage.Server.Data;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using SE104_AirlineTicketManage.Server.Data;
+using SE104_AirlineTicketManage.Server.Dto;
 using SE104_AirlineTicketManage.Server.Interfaces;
 using SE104_AirlineTicketManage.Server.Models;
 
@@ -81,6 +83,66 @@ namespace SE104_AirlineTicketManage.Server.Repository
               .Take(10)
               .ToList();
             return sanBays;
+        }
+
+        public UpdateSanBayDto GetUpdateSanBay(string maSBdi)
+        {
+            var updateSanBayDto = new UpdateSanBayDto();
+            var sanBayDenDtos = new List<SanBayDenDto>();
+
+            // Lấy thông tin sân bay đi
+            var sanBay = GetSanBayByMaSB(maSBdi);
+            
+            // Gán thông tin sân bay đi
+            updateSanBayDto.MaSanBay = sanBay.MaSB;
+            updateSanBayDto.TenSanBay = sanBay.TenSB;
+            updateSanBayDto.ThoiGianDungMin = sanBay.TGDungMin;
+            updateSanBayDto.ThoiGianDungMax = sanBay.TGDungMax;
+            updateSanBayDto.ViTri = sanBay.ViTri;
+
+            // Lấy danh sách sân bay đến
+            var sanBayDung = _context.SoSanBayDungs.Where(p => p.MaSanBayDi == maSBdi).ToList();
+            foreach (var sanbaydung in sanBayDung)
+            {
+                var sanBayDen = new SanBayDenDto();
+                sanBayDen.MaSanBay = sanbaydung.MaSanBayDen;
+                sanBayDen.TenSanBay = GetSanBayByMaSB(sanbaydung.MaSanBayDen).TenSB;
+                sanBayDen.SoSanBayDungToiDa = sanbaydung.SoSBDung_Max;
+                sanBayDen.ThoiGianBayToiThieu = sanbaydung.ThoiGianBayToiThieu;
+                sanBayDenDtos.Add(sanBayDen);
+            }
+            updateSanBayDto.SanBayDens = sanBayDenDtos;
+
+            return updateSanBayDto;
+        }
+
+        public bool CreateSanBay(UpdateSanBayDto sanbaymoi)
+        {
+            // Thêm sân bay đi
+            SanBay sanbaydi = new SanBay();
+            sanbaydi.MaSB = sanbaymoi.MaSanBay;
+            sanbaydi.TenSB = sanbaymoi.TenSanBay;
+            sanbaydi.TGDungMin = sanbaymoi.ThoiGianDungMin;
+            sanbaydi.TGDungMax = sanbaymoi.ThoiGianDungMax;
+            sanbaydi.ViTri = sanbaymoi.ViTri;
+
+            _context.SanBays.Add(sanbaydi);
+
+            // Tạo sân bay dừng từ sân bay đến
+            var sanBayDens = sanbaymoi.SanBayDens;
+
+            foreach(var sanBayDen in sanBayDens)
+            {
+                var sanBayDung = new SoSanBayDung();
+                sanBayDung.MaSanBayDi = sanbaymoi.MaSanBay;
+                sanBayDung.MaSanBayDen = sanBayDen.MaSanBay;
+                sanBayDung.SoSBDung_Max = sanBayDen.SoSanBayDungToiDa;
+                sanBayDung.ThoiGianBayToiThieu = sanBayDen.ThoiGianBayToiThieu;
+
+                _context.SoSanBayDungs.Add(sanBayDung);
+                _context.SaveChanges();
+            }
+            return true;
         }
     }
 }

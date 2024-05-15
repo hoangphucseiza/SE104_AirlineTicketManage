@@ -5,6 +5,7 @@ using SE104_AirlineTicketManage.Server.Dto;
 using SE104_AirlineTicketManage.Server.Interfaces;
 using SE104_AirlineTicketManage.Server.Models;
 using System.Data.SqlTypes;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SE104_AirlineTicketManage.Server.Controllers
 {
@@ -90,6 +91,47 @@ namespace SE104_AirlineTicketManage.Server.Controllers
 
             return Ok(sanBays);
         }
+
+        [HttpGet("GetUpdateSanBay/{maSBdi}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<UpdateSanBayDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetUpdateSanBay(string maSBdi)
+        {
+            var updateSanBayDto = _mapper.Map<UpdateSanBayDto>(_sanBayRepository.GetUpdateSanBay(maSBdi));
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(updateSanBayDto);
+        }
+
+        [HttpPost("CreateSanBay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateSanBay([FromBody] UpdateSanBayDto sanbaymoi)
+        {
+            string maSB = sanbaymoi.MaSanBay;
+
+            var kiemTraTonTai = _sanBayRepository.GetSanBayByMaSB(maSB);
+            
+            if (kiemTraTonTai != null)
+            {
+                ModelState.AddModelError("", $"Sân bay {maSB} đã tồn tại");
+                return StatusCode(404, ModelState);
+            }
+
+            bool taoSanBay = _sanBayRepository.CreateSanBay(sanbaymoi);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if(taoSanBay)
+                return Ok("Tạo sân bay thành công");
+            else
+                return StatusCode(500, ModelState);
+        }
+
+
 
         //[HttpPost("AddSanBay")]
         //[ProducesResponseType(204)]
