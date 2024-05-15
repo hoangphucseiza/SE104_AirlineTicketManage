@@ -77,6 +77,9 @@ const TicketList = () => {
     },
   ];
 
+  const [page, setPage] = useState(1);
+  const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
   const getTicketRankClassName = (ticketRankId) => {
     var index = ticketRanks.findIndex((rank) => rank.id === ticketRankId) + 1;
     return index !== -1 ? "rank_" + index : "";
@@ -239,6 +242,37 @@ const TicketList = () => {
           ))}
         </tbody>
       </table>
+      <div className="d-flex justify-content-between align-items-center ">
+        <p>
+          Hiển thị {(page - 1) * 10 + 1} đến {page * 10} trong tổng số{" "}
+          {pages.length * 10} vé máy bay
+        </p>
+        <div className="pagination">
+          <button
+            className="btn btn_page"
+            disabled={page <= 1 && true}
+            onClick={() => setPage(page - 1)}
+          >
+            Trước
+          </button>
+          {pages.map((id) => (
+            <button
+              key={id}
+              className={`btn btn_page ${id === page ? "active" : ""} `}
+              onClick={() => setPage(id)}
+            >
+              {id}
+            </button>
+          ))}
+          <button
+            className="btn btn_page"
+            disabled={page >= pages.length && true}
+            onClick={() => setPage(page + 1)}
+          >
+            Sau
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

@@ -22,6 +22,8 @@ import NotFound from "./components/NotFound";
 import Alert from "./components/Alert";
 import DetailAirport from "./pages/schedules/detail_airport";
 import TicketDetail from "./pages/booking/ticket_detail";
+import FillInformation from "./pages/booking/fill_information";
+import Setting from "./pages/setting";
 
 import moment from "moment";
 
@@ -83,6 +85,8 @@ function App() {
                 <Route path="/booking">
                   <Route index element={<Booking />} />
                   <Route path="find" element={<FindTickets />} />
+                  <Route path="find/fill/:id" element={<FillInformation />} />
+
                   <Route path="ticket/:id" element={<TicketDetail />} />
                 </Route>
                 <Route path="/tickets" element={<Tickets />}></Route>
@@ -92,6 +96,7 @@ function App() {
                   <Route path="view/:id" element={<ViewCustomer />} />
                 </Route>
 
+                <Route path="/setting" element={<Setting />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

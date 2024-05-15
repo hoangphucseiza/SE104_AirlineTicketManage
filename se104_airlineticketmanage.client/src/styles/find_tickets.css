@@ -1,0 +1,110 @@
+.find_tickets {
+}
+
+.find_tickets h5 {
+  color: var(--primary-color);
+  font-size: 24px;
+}
+
+.find_tickets_header {
+}
+
+.find_tickets_header > p {
+  color: var(--text-color-medium);
+  font-weight: 500;
+}
+
+.find_tickets_header > div {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 3px 2px -2px,
+    rgba(0, 0, 0, 0.03) 0px 5px 3px -2px;
+}
+
+.find_tickets_header > div > p {
+  font-weight: 500;
+}
+
+.find_tickets_list_flight {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 3px 2px -2px,
+    rgba(0, 0, 0, 0.03) 0px 5px 3px -2px;
+}
+
+.find_tickets_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.find_tickets_wrapper_left {
+  flex: 1 1 calc(8 / 12 * 100% - 24px);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.find_tickets_wrapper_right {
+  flex: 1 1 calc(4 / 12 * 100% - 24px);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+}
+
+.find_tickets_wrapper_left h6 {
+  font-size: 18px;
+}
+
+
+.find_tickets_wrapper header {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  color: var(--text-color-bold);
+  padding: 10px 12px;
+}
+
+.find_tickets_wrapper_left header span {
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.find_tickets_wrapper_left body {
+  background-color: var(--primary-color-10);
+  padding: 10px 12px;
+  color: var(--text-color-bold);
+}
+
+.find_tickets_wrapper_left body .form-floating,
+.find_tickets_wrapper_left body .dropdown {
+  flex-basis: calc(50% - 12px);
+  border-radius: 4px;
+}
+
+.find_tickets_wrapper_left body .form-floating label {
+  color: var(--text-color-light) !important;
+}
+
+.find_tickets_wrapper_left_tickets > div {
+  cursor: pointer;
+}
+
+.find_tickets_wrapper_left_tickets > div.disabled {
+  filter: grayscale(0.4);
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.find_tickets_wrapper_right > div {
+  padding: 10px 12px;
+  color:var(--text-color-bold);
+}
+
+
+.find_tickets_wrapper_right  i {
+  font-size: 20px;
+}

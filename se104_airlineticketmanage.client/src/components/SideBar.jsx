@@ -59,7 +59,7 @@ function SideBar({ showSideBar }) {
         id: 8,
         title: "Cài đặt",
         icon: "fa-solid fa-gear",
-        link: "/settings",
+        link: "/setting",
       },
       {
         id: 9,
