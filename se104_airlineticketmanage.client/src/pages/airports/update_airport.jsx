@@ -18,31 +18,26 @@ const UpdateAirPort = () => {
     const getAirport = async () => {
       try {
         if (!id) return;
-        const res = await getDataAPI(`api/SanBay/GetSanBayByMaSB/${id}`);
+        const res = await getDataAPI(`api/SanBay/GetUpdateSanBay/${id}`);
+
+        console.log(res.data);
 
         if (!res.data) return;
 
         const newAirport = {
-          id: res.data.maSB,
-          name: res.data.tenSB,
+          id: res.data.maSanBay,
+          name: res.data.tenSanBay,
           address: res.data.viTri,
-          transit_max: res.data.tgDungMax,
-          transit_min: res.data.tgDungMin,
-          destination_airports: [
-            {
-              destination_id: "SGN",
-              destination_name: "Tân Sơn Nhất",
-              max_transit_airports: 2,
-              min_flight_time: 30,
-            },
-            {
-              destination_id: "DAD",
-              destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-              max_transit_airports: 1,
-              min_flight_time: 30,
-            },
-          ],
+          transit_max: res.data.thoiGianDungMax,
+          transit_min: res.data.thoiGianDungMin,
+          destination_airports: res.data.sanBayDens["$values"].map((des) => ({
+            destination_id: des.maSanBay,
+            destination_name: des.tenSanBay,
+            max_transit_airports: des.soSanBayDungToiDa,
+            min_flight_time: des.thoiGianBayToiThieu,
+          })),
         };
+        
         setAirport(newAirport);
       } catch (err) {
         return setAlert({
@@ -56,8 +51,6 @@ const UpdateAirPort = () => {
 
     getAirport();
   }, [id]);
-
-  console.log(airport);
 
   const handleChangeDestination = (newValue, id, keyName) => {
     if (newValue < 1) return;

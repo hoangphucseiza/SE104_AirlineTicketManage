@@ -6,7 +6,6 @@ import AirportList from "../../components/Airports/AirportList";
 
 import { getDataAPI } from "../../utils/fetchData";
 
-
 const Airports = () => {
   const [airports, setAirports] = useState([]);
   const [showAirports, setShowAirports] = useState([]);
@@ -22,7 +21,17 @@ const Airports = () => {
   useEffect(() => {
     const getAirports = async () => {
       try {
-        const res = await getDataAPI("api/SanBay/GetDanhSachSanBay");
+        let api = "";
+
+        if (filter.transit_time[0] > 0 && filter.transit_time[1] === 0) {
+          api = `api/SanBay/GetSanBayByTGDungToiThieu/${filter.transit_time[0]}/${page}`;
+        } else if (filter.transit_time[1] > 0) {
+          api = `api/SanBay/GetSanBayByTGDung/${filter.transit_time[0]}/${filter.transit_time[1]}/${page}`;
+        } else {
+          api = `api/SanBay/GetDanhSachSanBay${page}`;
+        }
+
+        const res = await getDataAPI(api);
         res.data &&
           setAirports(
             res.data["$values"].map((airport) => ({
@@ -39,7 +48,7 @@ const Airports = () => {
     };
 
     getAirports();
-  }, []);
+  }, [page, filter.transit_time]);
 
   useEffect(() => {
     setShowAirports([...airports]);
@@ -100,6 +109,11 @@ const Airports = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     window.location.hash = `search=${search}&page=1`;
+
+    const searchAirports = airports.filter((airport) =>
+      airport.id.toLowerCase().includes(search.toLowerCase())
+    );
+    setShowAirports(searchAirports);
   };
 
   return (

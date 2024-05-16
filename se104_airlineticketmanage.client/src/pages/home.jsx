@@ -4,114 +4,74 @@ import FlightLeft from "../components/Home/FlightLeft";
 import FlightRight from "../components/Home/FightRight";
 import Members from "../components/Home/Members";
 import Weather from "../components/Home/Weather";
+import { getDataAPI } from "../utils/fetchData";
 
 import moment from "moment";
 
-const Home_Statistical_Values = [
-  {
-    title: "Hành khách",
-    value: 320,
-    increase: 16.9,
-    date_time: new Date(),
-  },
-  {
-    title: "Chuyến bay",
-    value: 25,
-    increase: -16.9,
-    date_time: new Date(),
-  },
-  {
-    title: "Phiếu đặt chỗ bị hủy",
-    value: 120,
-    increase: 8.9,
-    date_time: new Date(),
-  },
-  {
-    title: "Doanh thu",
-    value: 220000000,
-    increase: -16.9,
-    date_time: new Date(),
-    is_money: true,
-  },
-];
-
-const flight_Schedules = [
-  {
-    id: "DA001",
-    depart: {
-      id: "HAN",
-      address: "Hà Nội",
-    },
-    destination: {
-      id: "VDH",
-      address: "Quảng Bình",
-    },
-    depart_date: new Date("5/4/2024 10:00"),
-    landing_date: new Date("5/4/2024 12:00"),
-    capacity: 150,
-    passengers: 80,
-  },
-  {
-    id: "DA002",
-    depart: {
-      id: "HAN",
-      address: "Hà Nội",
-    },
-    destination: {
-      id: "DAD",
-      address: "Đà Nẵng",
-    },
-    depart_date: new Date("12/4/2024 10:00"),
-    landing_date: new Date("12/4/2024 12:00"),
-    capacity: 80,
-    passengers: 80,
-  },
-  {
-    id: "DA003",
-    depart: {
-      id: "SGN",
-      address: "TP. Hồ Chí Minh",
-    },
-    destination: {
-      id: "VDH",
-      address: "Quảng Bình",
-    },
-    depart_date: new Date("12/4/2024 10:00"),
-    landing_date: new Date("12/4/2024 12:00"),
-    capacity: 80,
-    passengers: 80,
-  },
-  {
-    id: "DA004",
-    depart: {
-      id: "HAN",
-      address: "Hà Nội",
-    },
-    destination: {
-      id: "PQC",
-      address: "Phú Quốc",
-    },
-    depart_date: new Date("12/4/2024 10:00"),
-    landing_date: new Date("12/4/2024 12:00"),
-    capacity: 80,
-    passengers: 80,
-  },
-];
-
 const Home = () => {
-  const [statisticValues, setStatisticValues] = useState(
-    Home_Statistical_Values
-  );
-  const [flightsSchedule, setFlightsSchedule] = useState(flight_Schedules);
+  const [statisticValues, setStatisticValues] = useState([]);
+  const [flightsSchedule, setFlightsSchedule] = useState([]);
 
   const [showFlights, setShowFlights] = useState([]);
   const [searchFlights, setSearchFlights] = useState("");
+  const [showFlightRight, setShowFlightRight] = useState(false);
 
   const [filters, setFilters] = useState({
     depart: null,
     destination: null,
     date: null,
   });
+
+  useEffect(() => {
+    const getStatisticValues = async () => {
+      try {
+        const res = await getDataAPI(`api/ChuyenBay/ThongKeTrangChu`);
+        const data = res.data["$values"].map((item) => ({
+          title: item.title,
+          value: item.value,
+          increase: item.increase,
+          date_time: new Date(),
+          is_money: item.title === "Doanh thu" ? true : false,
+        }));
+        setStatisticValues(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getStatisticValues();
+  }, []);
+
+  useEffect(() => {
+    const getFlightSchedules = async () => {
+      try {
+        const res = await getDataAPI(`api/ChuyenBay/Get4ChuyenBay`);
+
+        const data = res.data["$values"].map((item) => ({
+          id: item.maCB,
+          depart: {
+            id: item.sanBayDen.maSB,
+            address: item.sanBayDen.viTri,
+          },
+          destination: {
+            id: item.sanBayDi.maSB,
+            address: item.sanBayDi.viTri,
+          },
+          depart_date: new Date(item.ngayGioBay),
+          landing_date: new Date(item.ngayGioDen),
+          capacity: item.tongSoVe,
+          passengers: item.soVeMua,
+        }));
+
+        setFlightsSchedule(data);
+        setShowFlightRight(data[0]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getFlightSchedules();
+  }, []);
 
   useEffect(() => {
     setShowFlights(flightsSchedule);
@@ -133,7 +93,7 @@ const Home = () => {
   }, [flightsSchedule, searchFlights]);
 
   const filterFlights = useCallback(() => {
-    const new_flights = flight_Schedules.filter((flight) => {
+    const new_flights = flightsSchedule.filter((flight) => {
       if (filters.depart && filters.depart.id !== flight.depart.id) {
         return false;
       }
@@ -158,9 +118,7 @@ const Home = () => {
       return true;
     });
     return new_flights;
-  }, [filters]);
-
-  console.log(filters);
+  }, [filters, flightsSchedule]);
 
   return (
     <div className="home">
@@ -193,8 +151,9 @@ const Home = () => {
             searchFlights={searchFlights}
             setSearchFlights={setSearchFlights}
             setFilters={setFilters}
+            setShowFlightRight={setShowFlightRight}
           />
-          <FlightRight flight={flightsSchedule[0]} />
+          <FlightRight flight={showFlightRight} />
         </div>
       </div>
       <div className="mt-5 home_members_weather">

@@ -11,6 +11,7 @@ const FlightLeft = ({
   setFilters,
   searchFlights,
   setSearchFlights,
+  setShowFlightRight,
 }) => {
   const [departs, setDeparts] = useState([]);
   const [destinations, setDestinations] = useState([]);
@@ -63,7 +64,9 @@ const FlightLeft = ({
             type="button"
             data-bs-toggle="dropdown"
           >
-            {filters.date ? moment(filters.date).format("DD/MM/YYYY") : "Ngày khởi hành"}
+            {filters.date
+              ? moment(filters.date).format("DD/MM/YYYY")
+              : "Ngày khởi hành"}
           </button>
           <ul className="dropdown-menu">
             <DatePicker date={filters.date} onChangeDate={handleChangeDate} />
@@ -129,7 +132,13 @@ const FlightLeft = ({
         </thead>
         <tbody>
           {showFlights.map((flight, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              style={{
+                cursor: "pointer",
+              }}
+              onClick={() => setShowFlightRight(flight)}
+            >
               <td>{flight.id}</td>
               <td
                 style={{

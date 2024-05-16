@@ -121,8 +121,8 @@ namespace SE104_AirlineTicketManage.Server.Repository
 
 
             // Khởi tạo các biến của Doanh Thu
-            var valueDoanhThu = _context.VeMayBays.Where(p => p.NgayMua == homnay).Sum(p => p.GiaTien);
-            var valueDoanhThuHomQua = _context.VeMayBays.Where(p => p.NgayMua == homqua).Sum(p => p.GiaTien);
+            var valueDoanhThu = _context.VeMayBays.Where(p => p.NgayMua >= homnay).Sum(p => p.GiaTien);
+            var valueDoanhThuHomQua = _context.VeMayBays.Where(p => p.NgayMua >= homqua && p.NgayMua < homnay).Sum(p => p.GiaTien);
 
             decimal tiLeTangTruongDoanhThu = 0;
             if (valueDoanhThuHomQua == 0)
