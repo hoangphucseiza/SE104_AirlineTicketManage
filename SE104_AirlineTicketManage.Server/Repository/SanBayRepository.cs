@@ -212,5 +212,11 @@ namespace SE104_AirlineTicketManage.Server.Repository
           
             return true;
         }
+
+        public ICollection<SanBay> GetSanBayBySearch(string search)
+        {
+            var sanBays = _context.SanBays.Where(p => p.MaSB.Contains(search)).ToList();
+            return sanBays;
+        }
     }
 }

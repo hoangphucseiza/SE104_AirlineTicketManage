@@ -19,6 +19,8 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
 
         bool UpdateSanBay(UpdateSanBayDto sanbay);
 
+        ICollection<SanBay> GetSanBayBySearch(string search);
+
         SanBay GetSanBayByMaSB(string maSB);
 
 
