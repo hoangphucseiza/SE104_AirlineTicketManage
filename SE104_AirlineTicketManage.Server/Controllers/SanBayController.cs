@@ -149,45 +149,18 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return StatusCode(500, ModelState);
         }
 
+        [HttpGet("GetSanBayBySearch/{search}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<SanBay>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetSanBayBySearch(string search)
+        {
+            var sanBays = _mapper.Map<List<SanBayDto>>(_sanBayRepository.GetSanBayBySearch(search));
 
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        //[HttpPost("AddSanBay")]
-        //[ProducesResponseType(204)]
-        //[ProducesResponseType(400)]
-        //public IActionResult CreateCategory([FromBody] SanBayDto sanBayCreate)
-        //{
-        //    if (sanBayCreate == null)
-        //        return BadRequest(ModelState);
-
-        //    var sanBay = _sanBayRepository.GetSanBays()
-        //        .Where(s => s.TenSB.Trim().ToUpper() == sanBayCreate.TenSB.TrimEnd().ToUpper())
-        //        .FirstOrDefault();
-
-        //    if (sanBay != null)
-        //    {
-        //        ModelState.AddModelError("", $"San bay {sanBayCreate.TenSB} da ton tai");
-        //    }
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var sanBayMap = _mapper.Map<SanBay>(sanBayCreate);
-
-        //    if(!_sanBayRepository.CreateSanBay(sanBayMap))
-        //    {
-        //        ModelState.AddModelError("", $"Something went wrong when saving the record {sanBayMap.TenSB}");
-        //        return StatusCode(500, ModelState);
-        //    }    
-        //    return Ok("Tạo Sân Bay Thành Công");
-        //}
-
-        //[HttpPut("UpdateSanBay")]
-        //[ProducesResponseType(400)]
-        //[ProducesResponseType(204)]
-        //[ProducesResponseType(404)]
-        //public IActionResult UpdateCategory
+            return Ok(sanBays);
+        }   
 
 
     }

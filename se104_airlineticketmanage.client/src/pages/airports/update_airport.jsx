@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
-import { getDataAPI } from "../../utils/fetchData";
+import { getDataAPI, putDataAPI } from "../../utils/fetchData";
 
 const UpdateAirPort = () => {
   const { setAlert } = useContext(AppContext);
@@ -37,7 +37,7 @@ const UpdateAirPort = () => {
             min_flight_time: des.thoiGianBayToiThieu,
           })),
         };
-        
+
         setAirport(newAirport);
       } catch (err) {
         return setAlert({
@@ -80,20 +80,20 @@ const UpdateAirPort = () => {
   const handleSearchAirport = async (value) => {
     setSearchAirport(value);
 
-    const res = {
-      data: [
-        {
-          id: "VDH",
-          name: "Sân bay Đồng Hới",
-        },
-        {
-          id: "DAD",
-          name: "Cảng hàng không quốc tế Đà Nẵng",
-        },
-      ],
-    };
+    try {
+      const res = await getDataAPI(
+        `api/SanBay/GetSanBayBySearch/${value.toUpperCase()}`
+      );
 
-    setSearchAirportList(res.data);
+      const data = res.data["$values"].map((item) => ({
+        id: item.maSB,
+        name: item.tenSB,
+      }));
+
+      setSearchAirportList(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleClickAirport = (destination) => {
@@ -103,7 +103,8 @@ const UpdateAirPort = () => {
 
     if (
       airport.destination_airports.find(
-        (des) => des.destination_id === destination.id
+        (des) =>
+          des.destination_id === destination.id || destination.id === airport.id
       )
     ) {
       return setAlert({
@@ -117,15 +118,16 @@ const UpdateAirPort = () => {
       destination_id: destination.id,
       destination_name: destination.name,
       max_transit_airports: 1,
-      min_fight_time: 30,
+      min_flight_time: 30,
     };
+
     setAirport({
       ...airport,
       destination_airports: [...airport.destination_airports, newItem],
     });
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const newError = {};
     console.log(airport);
@@ -140,19 +142,46 @@ const UpdateAirPort = () => {
       newError.transit_min =
         "*Thời gian dừng tối thiểu phải lớn hơn hoặc bằng 0";
 
-    if (airport.transit_max < 0)
+    if (airport.transit_max < 1)
+      newError.transit_max = "*Thời gian dừng tối thiểu phải lớn hơn 0";
+    else if (parseInt(airport.transit_max) < parseInt(airport.transit_min))
       newError.transit_max =
-        "*Thời gian dừng tối thiểu phải lớn hơn hoặc bằng 0";
-    else if (airport.transit_max < airport.transit_min)
-      newError.transit_max =
-        "*Thời gian dừng tối đa phải lớn hơn hoặc bằng thời gian dừng tối thiểu";
+        "*Thời gian dừng tối đa phải lớn hơn thời gian dừng tối thiểu";
 
     setError(newError);
     if (Object.keys(newError).length > 0) {
       return;
     }
 
-    console.log(airport);
+    const postData = {
+      maSanBay: airport.id,
+      tenSanBay: airport.name,
+      thoiGianDungMin: airport.transit_min,
+      thoiGianDungMax: airport.transit_max,
+      viTri: airport.address,
+      sanBayDens: airport.destination_airports.map((destination) => ({
+        maSanBay: destination.destination_id,
+        tenSanBay: destination.destination_name,
+        soSanBayDungToiDa: destination.max_transit_airports,
+        thoiGianBayToiThieu: destination.min_flight_time,
+      })),
+    };
+
+    try {
+      const res = await putDataAPI("api/SanBay/UpdateSanBay", postData);
+      navigate("/airports");
+      return setAlert({
+        title: "Cập nhật sân bay thành công",
+        data: `Cập nhật sân bay ${airport.id} - ${airport.name} thành công!`,
+        type: "success",
+      });
+    } catch (err) {
+      return setAlert({
+        title: "Cập nhật sân bay thất bại",
+        data: `Cập nhật sân bay ${airport.id} - ${airport.name} không thành công!`,
+        type: "error",
+      });
+    }
   };
 
   return (

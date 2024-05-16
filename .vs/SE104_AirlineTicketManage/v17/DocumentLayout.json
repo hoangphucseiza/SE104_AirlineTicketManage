@@ -58,8 +58,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Repository\\QuyDinhChungRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:36:03.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:36:03.389Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Repository\\VeMayBayRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:35:59.795Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:35:59.795Z"
             },
             {
               "$type": "Document",
@@ -84,8 +82,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Repository\\SoSanBayDungRepository.cs",
               "ViewState": "AQIAAA8AAAAAAAAAAAAYwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:35:59.275Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:35:59.275Z"
             },
             {
               "$type": "Document",
@@ -97,8 +94,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Repository\\ChuyenBayRepository.cs",
               "ViewState": "AQIAAHsAAAAAAAAAAAAAwHcAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:31:37.345Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:31:37.345Z"
             },
             {
               "$type": "Document",
@@ -108,7 +104,7 @@
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\SanBayRepository.cs",
               "ToolTip": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\SanBayRepository.cs",
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Repository\\SanBayRepository.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAA7wC8AAABQAAAA",
+              "ViewState": "AQIAACIAAAAAAAAAAAAkwC8AAABQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-16T11:01:09.58Z",
               "EditorCaption": ""
@@ -123,8 +119,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Controllers\\SanBayController.cs",
               "ViewState": "AQIAAC8AAAAAAAAAAAAgwDsAAABfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:00:43.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:00:43.948Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Migrations\\20240516104340_initial.cs",
               "ViewState": "AQIAAAABAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:18:22.742Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:18:22.742Z"
             },
             {
               "$type": "Document",
@@ -149,8 +143,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Data\\DataContext.cs",
               "ViewState": "AQIAAA8DAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:18:03.226Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:18:03.226Z"
             }
           ]
         }

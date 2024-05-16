@@ -117,6 +117,149 @@ namespace SE104_AirlineTicketManage.Server.Repository
             return baoCaoDoanhThuThangDtos;
         }
 
+       
+        // Bộ lọc tra cứu vé theo hang ve va loai ve
+        public List<TraCuuVeMayBayDto> BoLocHangVe_LoaiVe(List<TraCuuVeMayBayDto> traCuuVeMayBays, string hangve, string loaiVe)
+        {
+           if(hangve != "All")
+            {
+                traCuuVeMayBays = traCuuVeMayBays.Where(p => p.maHV == hangve).ToList();
+            }
+
+           if (loaiVe != "All")
+            {
+                string loaiVeLoc = "";
+                if (loaiVe == "0")
+                {
+                    loaiVeLoc = "thanh";
+                }
+                else if (loaiVe == "1")
+                {
+                    loaiVeLoc = "mua";
+                }
+                else if (loaiVe == "2")
+                {
+                    loaiVeLoc = "hủy";
+                }
+
+                traCuuVeMayBays = traCuuVeMayBays.Where(p => p.TrangThai.TrimStart().TrimEnd().ToLower().Contains(loaiVeLoc)).ToList();
+            }    
+           
+           
+            return traCuuVeMayBays;
+        }
+
+        public ICollection<TraCuuVeMayBayDto> GetVeByMaCB(string? searchMaCB, string hangVe, string loaiVe, int phantrang)
+        {
+            IQueryable<VeMayBay> veMayBaysQuery = _context.VeMayBays;
+
+            if (!string.IsNullOrEmpty(searchMaCB))
+            {
+                veMayBaysQuery = veMayBaysQuery.Where(p => p.MaCB.Contains(searchMaCB) || p.MaCB == searchMaCB);
+            }
+
+            var veMayBays = veMayBaysQuery.ToList();
+            var traCuuVeMayBays = new List<TraCuuVeMayBayDto>();
+
+            foreach (var veMayBay in veMayBays)
+            {
+                var traCuuVeMayBay = new TraCuuVeMayBayDto();
+                traCuuVeMayBay.maVe = veMayBay.MaVe;
+                traCuuVeMayBay.maChuyenbay = veMayBay.MaCB;
+                traCuuVeMayBay.TenKhachHang = _context.KhachHangs.Where(p => p.MaKH == veMayBay.MaKH).FirstOrDefault().TenKH;
+                traCuuVeMayBay.SDT = _context.KhachHangs.Where(p => p.MaKH == veMayBay.MaKH).FirstOrDefault().SDT;
+                traCuuVeMayBay.NgayDatVe = veMayBay.NgayDat;
+                traCuuVeMayBay.maHV = veMayBay.MaHV;
+                traCuuVeMayBay.HangVe = _context.HangVes.Where(p => p.MaHV == veMayBay.MaHV).FirstOrDefault().TenHV;
+                traCuuVeMayBay.TrangThai = veMayBay.TrangThai;
+
+                traCuuVeMayBays.Add(traCuuVeMayBay);
+            }
+
+            traCuuVeMayBays = BoLocHangVe_LoaiVe(traCuuVeMayBays, hangVe, loaiVe);
+            traCuuVeMayBays = traCuuVeMayBays.Skip((phantrang - 1) * 10).Take(10).ToList();
+            return traCuuVeMayBays;
+
+        }
+
+        public ICollection<TraCuuVeMayBayDto> GetVeByMaVe(string? searchMaVe, string hangVe, string loaiVe, int phantrang)
+        {
+            var traCuuVeMayBays = new List<TraCuuVeMayBayDto>();
+            // Nếu như search trống, thì lấy tất cả
+            if (string.IsNullOrEmpty(searchMaVe))
+            {
+                var veMayBays = _context.VeMayBays.ToList();
+                foreach (var veMayBay in veMayBays)
+                {
+                    var traCuuVeMayBay = new TraCuuVeMayBayDto();
+                    traCuuVeMayBay.maVe = veMayBay.MaVe;
+                    traCuuVeMayBay.maChuyenbay = veMayBay.MaCB;
+                    traCuuVeMayBay.TenKhachHang = _context.KhachHangs.Where(p => p.MaKH == veMayBay.MaKH).FirstOrDefault().TenKH;
+                    traCuuVeMayBay.SDT = _context.KhachHangs.Where(p => p.MaKH == veMayBay.MaKH).FirstOrDefault().SDT;
+                    traCuuVeMayBay.NgayDatVe = veMayBay.NgayDat;
+                    traCuuVeMayBay.maHV = veMayBay.MaHV;
+                    traCuuVeMayBay.HangVe = _context.HangVes.Where(p => p.MaHV == veMayBay.MaHV).FirstOrDefault().TenHV;
+                    traCuuVeMayBay.TrangThai = veMayBay.TrangThai;
+
+                    traCuuVeMayBays.Add(traCuuVeMayBay);
+                }
+            }
+            else // Ngược lại thì lấy danh sách những vé có từ chứa đó
+            {
+                var veMayBays = _context.VeMayBays.Where(p => p.MaVe.Contains(searchMaVe) || p.MaVe == searchMaVe).ToList();
+                foreach (var veMayBay in veMayBays)
+                {
+                    var traCuuVeMayBay = new TraCuuVeMayBayDto();
+                    traCuuVeMayBay.maVe = veMayBay.MaVe;
+                    traCuuVeMayBay.maChuyenbay = veMayBay.MaCB;
+                    traCuuVeMayBay.TenKhachHang = _context.KhachHangs.Where(p => p.MaKH == veMayBay.MaKH).FirstOrDefault().TenKH;
+                    traCuuVeMayBay.SDT = _context.KhachHangs.Where(p => p.MaKH == veMayBay.MaKH).FirstOrDefault().SDT;
+                    traCuuVeMayBay.NgayDatVe = veMayBay.NgayDat;
+                    traCuuVeMayBay.maHV = veMayBay.MaHV;
+                    traCuuVeMayBay.HangVe = _context.HangVes.Where(p => p.MaHV == veMayBay.MaHV).FirstOrDefault().TenHV;
+                    traCuuVeMayBay.TrangThai = veMayBay.TrangThai;
+
+                    traCuuVeMayBays.Add(traCuuVeMayBay);
+                }
+
+            }
+            traCuuVeMayBays = BoLocHangVe_LoaiVe(traCuuVeMayBays, hangVe, loaiVe);
+            traCuuVeMayBays = traCuuVeMayBays.Skip((phantrang - 1) * 10).Take(10).ToList();
+            return traCuuVeMayBays;
+        }
+
+        public ICollection<TraCuuVeMayBayDto> GetVeBySDT(string? searchSDT, string hangVe, string loaiVe, int phantrang)
+        {
+            IQueryable<VeMayBay> veMayBaysQuery = _context.VeMayBays;
+
+            if (!string.IsNullOrEmpty(searchSDT))
+            {
+                veMayBaysQuery = veMayBaysQuery.Where(p =>  p.KhachHang.SDT == searchSDT);
+            }
+
+            var veMayBays = veMayBaysQuery.ToList();
+            var traCuuVeMayBays = new List<TraCuuVeMayBayDto>();
+
+            foreach (var veMayBay in veMayBays)
+            {
+                var traCuuVeMayBay = new TraCuuVeMayBayDto();
+                traCuuVeMayBay.maVe = veMayBay.MaVe;
+                traCuuVeMayBay.maChuyenbay = veMayBay.MaCB;
+                traCuuVeMayBay.TenKhachHang = _context.KhachHangs.Where(p => p.MaKH == veMayBay.MaKH).FirstOrDefault().TenKH;
+                traCuuVeMayBay.SDT = _context.KhachHangs.Where(p => p.MaKH == veMayBay.MaKH).FirstOrDefault().SDT;
+                traCuuVeMayBay.NgayDatVe = veMayBay.NgayDat;
+                traCuuVeMayBay.maHV = veMayBay.MaHV;
+                traCuuVeMayBay.HangVe = _context.HangVes.Where(p => p.MaHV == veMayBay.MaHV).FirstOrDefault().TenHV;
+                traCuuVeMayBay.TrangThai = veMayBay.TrangThai;
+
+                traCuuVeMayBays.Add(traCuuVeMayBay);
+            }
+
+            traCuuVeMayBays = BoLocHangVe_LoaiVe(traCuuVeMayBays, hangVe, loaiVe);
+            traCuuVeMayBays = traCuuVeMayBays.Skip((phantrang - 1) * 10).Take(10).ToList();
+            return traCuuVeMayBays;
+        }
+
         public VeMayBay GetVeMayBay(string maVe)
         {
             return _context.VeMayBays.Where(p => p.MaVe == maVe).FirstOrDefault();
