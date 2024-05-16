@@ -234,7 +234,7 @@ namespace SE104_AirlineTicketManage.Server.Repository
 
             if (!string.IsNullOrEmpty(searchSDT))
             {
-                veMayBaysQuery = veMayBaysQuery.Where(p =>  p.KhachHang.SDT == searchSDT);
+                veMayBaysQuery = veMayBaysQuery.Where(p =>  p.KhachHang.SDT.Contains(searchSDT));
             }
 
             var veMayBays = veMayBaysQuery.ToList();
@@ -280,5 +280,44 @@ namespace SE104_AirlineTicketManage.Server.Repository
         {
             return _context.VeMayBays.Any(p => p.MaVe == maVe);
         }
+
+        public bool CapNhatTrangThaiVe(string maVe, string TrangThai, DateTime NgayMua)
+        {
+            if (TrangThai == "Đã mua")
+            {
+                var veMayBay = GetVeMayBay(maVe);
+                veMayBay.TrangThai = TrangThai;
+                veMayBay.NgayMua = NgayMua;
+                return Save();
+            }
+            else
+            {
+                var veMayBay = GetVeMayBay(maVe);
+                veMayBay.TrangThai = TrangThai;
+                return Save();
+            }
+
+        }
+
+        public bool CapNhatVeMayBayMoiNgay()
+        {
+            int? thoiGianHuyVe = _context.QuyDinhChungs.Select(p => p.ThoiGianHuyDatVe).FirstOrDefault();
+
+            string chuaThanhToan = "thanh";
+
+            var veMayBays = _context.VeMayBays.Where(p => p.TrangThai.TrimStart().TrimEnd().ToLower().Contains(chuaThanhToan)).ToList();
+            foreach (var veMayBay in veMayBays)
+            {
+                var soNgayTruoc = (DateTime.Today - veMayBay.NgayDat).Days;
+                if (soNgayTruoc < thoiGianHuyVe)
+                {
+                    veMayBay.TrangThai = "Đã hủy";
+                }
+            }
+
+            _context.SaveChanges();
+            return true;
+        }
+
     }
 }

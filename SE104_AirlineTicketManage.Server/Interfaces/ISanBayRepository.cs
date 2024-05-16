@@ -21,6 +21,8 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
 
         ICollection<SanBay> GetSanBayBySearch(string search);
 
+        ICollection<SanBay> GetSanBayAll();
+
         SanBay GetSanBayByMaSB(string maSB);
 
 

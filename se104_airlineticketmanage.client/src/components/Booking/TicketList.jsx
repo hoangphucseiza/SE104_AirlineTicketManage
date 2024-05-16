@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import DatePicker from "../DatePicker";
+import { getDataAPI } from "../../utils/fetchData";
 
 const fakeData = [
   {
@@ -29,10 +30,10 @@ const fakeData = [
 ];
 
 const TicketList = () => {
-  const [searchFlights, setSearchFlights] = useState("");
+  const [searchValues, setSearchValues] = useState("");
   const [filters, setFilters] = useState({
-    ticket_rank: "all",
-    ticket_type: "all",
+    ticket_rank: "All",
+    ticket_type: "All",
     search_by: "ticket_id",
   });
   const navigate = useNavigate();
@@ -41,12 +42,29 @@ const TicketList = () => {
   const searchBys = ["ticket_id", "flight_id", "passenger_name"];
   const [tickets, setTickets] = useState([]);
 
+  const ticketTypes = [
+    {
+      id: 0,
+      name: "Phiếu đặt chỗ",
+    },
+    {
+      id: 1,
+      name: "Vé máy bay",
+    },
+    {
+      id: 2,
+      name: "Đã hủy",
+    },
+  ];
+
+  const [page, setPage] = useState(1);
+  const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   useEffect(() => {
     const getTicketRanks = async () => {
       try {
         const fakeData = [
-          { id: 1, name: "Phổ thông" },
-          { id: 2, name: "Thương gia" },
+          { id: "HV01", name: "Thương gia" },
+          { id: "HV02", name: "Phổ thông" },
         ];
 
         setTicketRanks(fakeData);
@@ -59,26 +77,54 @@ const TicketList = () => {
   }, []);
 
   useEffect(() => {
-    setTickets([...fakeData]);
-  }, []);
+    const getTickets = async () => {
+      try {
+        let api = "api/VeMayBay";
 
-  const ticketTypes = [
-    {
-      id: 1,
-      name: "Vé máy bay",
-    },
-    {
-      id: 2,
-      name: "Phiếu đặt chỗ",
-    },
-    {
-      id: 3,
-      name: "Đã hủy",
-    },
-  ];
+        switch (filters.search_by) {
+          case "ticket_id":
+            api += "/GetVeByMaVe?searchMaVe=" + searchValues;
+            break;
+          case "flight_id":
+            api += "/GetVeByMaCB?searchMaCB=" + searchValues;
+            break;
+          default:
+            api += "/GetVeBySDT?searchSDT=" + searchValues;
+        }
 
-  const [page, setPage] = useState(1);
-  const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        api += `&hangVe=${
+          filters.ticket_rank === "All"
+            ? filters.ticket_rank
+            : filters.ticket_rank.id
+        }&loaiVe=${
+          filters.ticket_type === "All"
+            ? filters.ticket_type
+            : filters.ticket_type.id
+        }&phantrang=${page}`;
+
+        const res = await getDataAPI(api);
+
+        const data = res.data["$values"].map((item) => ({
+          ticket_id: item.maVe,
+          flight_id: item.maChuyenbay,
+          passenger_name: item.tenKhachHang,
+          passenger_phone: item.sdt,
+          booking_date: new Date(item.ngayDatVe),
+          ticket_rank_id: item.maHV,
+          ticket_rank_name: item.hangVe,
+          ticket_state: item.trangThai,
+        }));
+
+        setTickets(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getTickets();
+  }, [searchValues, filters, page]);
+
+  console.log(tickets);
 
   const getTicketRankClassName = (ticketRankId) => {
     var index = ticketRanks.findIndex((rank) => rank.id === ticketRankId) + 1;
@@ -98,8 +144,8 @@ const TicketList = () => {
           <i className="fa-solid fa-magnifying-glass me-2" />
           <input
             placeholder="Tìm kiếm..."
-            value={searchFlights}
-            onChange={(e) => setSearchFlights(e.target.value)}
+            value={searchValues}
+            onChange={(e) => setSearchValues(e.target.value)}
           />
         </div>
         <div className="dropdown">
@@ -113,7 +159,7 @@ const TicketList = () => {
                 ? "Mã vé"
                 : filters.search_by === "flight_id"
                 ? "Mã chuyến bay"
-                : "Tên hành khách"
+                : "Số điện thoại"
             }`}
           </button>
           <ul
@@ -131,7 +177,7 @@ const TicketList = () => {
                   ? "Mã vé"
                   : search === "flight_id"
                   ? "Mã chuyến bay"
-                  : "Tên hành khách"}
+                  : "Số điện thoại"}
               </li>
             ))}
           </ul>
@@ -145,12 +191,12 @@ const TicketList = () => {
             type="button"
             data-bs-toggle="dropdown"
           >
-            {filters.ticket_rank === "all"
+            {filters.ticket_rank === "All"
               ? "Hạng vé"
               : "Hạng " + filters.ticket_rank.name}
           </button>
           <ul className="dropdown-menu home-flight-left-filters-airports">
-            <li onClick={() => setFilters({ ...filters, ticket_rank: "all" })}>
+            <li onClick={() => setFilters({ ...filters, ticket_rank: "All" })}>
               Tất cả
             </li>
             {ticketRanks.map((rank, index) => (
@@ -169,12 +215,12 @@ const TicketList = () => {
             type="button"
             data-bs-toggle="dropdown"
           >
-            {filters.ticket_type === "all"
+            {filters.ticket_type === "All"
               ? "Loại vé"
               : filters.ticket_type.name}
           </button>
           <ul className="dropdown-menu home-flight-left-filters-airports">
-            <li onClick={() => setFilters({ ...filters, ticket_type: "all" })}>
+            <li onClick={() => setFilters({ ...filters, ticket_type: "All" })}>
               Tất cả
             </li>
             {ticketTypes.map((ticket, index) => (
@@ -212,6 +258,13 @@ const TicketList = () => {
           </tr>
         </thead>
         <tbody>
+          {tickets.length === 0 && (
+            <tr>
+              <td colSpan="7" className="text-center">
+                Không tìm thấy vé máy bay
+              </td>
+            </tr>
+          )}
           {tickets.map((ticket, index) => (
             <tr
               key={index}

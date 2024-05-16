@@ -1,11 +1,32 @@
 import { useState, useEffect } from "react";
-import React from "react";
+import { getDataAPI } from "../utils/fetchData";
 
 const Setting = () => {
   const [regulation, setRegulation] = useState({
-    min_booking_time: 1,
+    min_booking_time: 0,
     cancel_time: 0,
   });
+
+  useEffect(() => {
+    const getRegulation = async () => {
+      try {
+        const res1 = await getDataAPI(
+          "api/QuyDinhChung/GetThoiGianChamNhatDatVe"
+        );
+
+        const res2 = await getDataAPI("api/QuyDinhChung/GetThoiGianHuyDatVe");
+
+        setRegulation({
+          min_booking_time: res1.data,
+          cancel_time: res2.data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getRegulation();
+  }, []);
 
   const handleChangeBookingTime = (value) => {
     if (value < 1) return;

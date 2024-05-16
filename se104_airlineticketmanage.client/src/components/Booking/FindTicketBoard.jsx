@@ -1,12 +1,15 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "../../components/DatePicker";
 import Slide1 from "../../images/slide1.png";
 import Slide2 from "../../images/slide2.png";
 import Slide3 from "../../images/slide3.png";
+import { getDataAPI } from "../../utils/fetchData";
 
-const FindTicketBoard = ({ airports }) => {
+const FindTicketBoard = () => {
+  const [airports, setAirports] = useState([]);
+
   const [conditions, setConditions] = useState({
     depart: {
       address: null,
@@ -20,6 +23,26 @@ const FindTicketBoard = ({ airports }) => {
   });
   const [error, setError] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getAirports = async () => {
+      try {
+        const res = await getDataAPI("api/SanBay/GetSanBayAll");
+
+        res.data &&
+          setAirports(
+            res.data["$values"].map((airport) => ({
+              id: airport.maSB,
+              address: airport.viTri,
+            }))
+          );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getAirports();
+  }, []);
 
   const desAirports = useMemo(() => {
     return airports.filter((airport) => airport.id !== conditions.depart.id);
@@ -262,27 +285,26 @@ const FindTicketBoard = ({ airports }) => {
             </div>
 
             <div
-            style={{
-              textAlign: "right",
-            }}
-          >
-            <button
-              className="btn btn_normal btn_accept"
               style={{
-                maxWidth: "unset",
-                fontWeight: "400",
-                paddingLeft: "64px",
-                paddingRight: "64px",
-                borderRadius: "4px",
-                fontSize: "18px",
+                textAlign: "right",
               }}
-              onClick={handleFindTickets}
             >
-              Tìm chuyến bay
-            </button>
+              <button
+                className="btn btn_normal btn_accept"
+                style={{
+                  maxWidth: "unset",
+                  fontWeight: "400",
+                  paddingLeft: "64px",
+                  paddingRight: "64px",
+                  borderRadius: "4px",
+                  fontSize: "18px",
+                }}
+                onClick={handleFindTickets}
+              >
+                Tìm chuyến bay
+              </button>
+            </div>
           </div>
-          </div>
-        
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import FormatMoney from "../../utils/FormatMoney";
+import { getDataAPI } from "../../utils/fetchData";
 
 const fakeFlight = {
   id: "CB001",
@@ -62,9 +63,31 @@ const FillInformartion = () => {
   const [error, setError] = useState({});
 
   const [regulation, setRegulation] = useState({
-    min_booking_time: 1,
+    min_booking_time: 0,
     cancel_time: 0,
   });
+
+  
+  useEffect(() => {
+    const getRegulation = async () => {
+      try {
+        const res1 = await getDataAPI(
+          "api/QuyDinhChung/GetThoiGianChamNhatDatVe"
+        );
+
+        const res2 = await getDataAPI("api/QuyDinhChung/GetThoiGianHuyDatVe");
+
+        setRegulation({
+          min_booking_time: res1.data,
+          cancel_time: res2.data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getRegulation();
+  }, []);
 
   const handleChangeTicket = (e) => {
     const { name, value } = e.target;

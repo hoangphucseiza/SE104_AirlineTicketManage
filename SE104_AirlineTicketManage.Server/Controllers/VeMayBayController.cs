@@ -128,5 +128,34 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return BadRequest(ModelState);
             return Ok(veMayBays);
         }
+
+        [HttpPut("CapNhatTrangThaiVe")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CapNhatTrangThaiVe([FromQuery] string maVe, [FromQuery] string TrangThai, [FromQuery] DateTime NgayMua)
+        {
+            if (!_veMayBayRepository.VeMayBayExists(maVe))
+                return NotFound();
+
+            if (!_veMayBayRepository.CapNhatTrangThaiVe(maVe, TrangThai, NgayMua))
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating the record {maVe}");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Cập nhật trạng thái vé máy bay thành công");
+        }
+
+        [HttpPut("CapNhatVeMayBayMoiNgay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CapNhatVeMayBayMoiNgay()
+        {
+            if (!_veMayBayRepository.CapNhatVeMayBayMoiNgay())
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating the record");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Cập nhật vé máy bay mới mỗi ngày thành công");
+        }
     }
 }

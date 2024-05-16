@@ -180,13 +180,13 @@ body {
 }
 
 .rank_ticket.rank_1 {
-  background-color: var(--primary-color);
-  color: #fff;
+  background-color: var(--bg-gold-color);
+  color: var(--text-color-bold);
 }
 
 .rank_ticket.rank_2 {
-  background-color: var(--bg-gold-color);
-  color: var(--text-color-bold);
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 /* Custom Filter */

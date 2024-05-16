@@ -17,6 +17,10 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         ICollection<TraCuuVeMayBayDto> GetVeByMaCB(string? searchMaCB, string hangVe, string loaiVe, int phantrang);
         ICollection<TraCuuVeMayBayDto> GetVeBySDT(string? searchSDT, string hangVe, string loaiVe, int phantrang);
 
+
+        bool CapNhatVeMayBayMoiNgay();
+        bool CapNhatTrangThaiVe(string maVe, string TrangThai, DateTime NgayMua);
+
         bool VeMayBayExists(string maVe);
 
         bool CreateVeMayBay(string maCB, string maKH, string maHV ,VeMayBay veMayBay);

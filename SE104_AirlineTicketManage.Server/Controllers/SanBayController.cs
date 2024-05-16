@@ -160,8 +160,20 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return BadRequest(ModelState);
 
             return Ok(sanBays);
-        }   
+        }
 
+        [HttpGet("GetSanBayAll")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<SanBay>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetSanBayAll()
+        {
+            var sanBays = _mapper.Map<List<SanBayDto>>(_sanBayRepository.GetSanBayAll());
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(sanBays);
+        }
 
     }
 }

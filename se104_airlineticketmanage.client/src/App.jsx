@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { putDataAPI } from "./utils/fetchData";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -50,6 +51,19 @@ export const AppContext = React.createContext(null);
 function App() {
   const [showSideBar, setShowSideBar] = useState(true);
   const [alert, setAlert] = useState(false);
+
+  useEffect(() => {
+    const autoCancelTicket = async () => {
+      try {
+        const res = await putDataAPI("api/VeMayBay/CapNhatVeMayBayMoiNgay");
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    autoCancelTicket();
+  }, []);
 
   return (
     <BrowserRouter>
