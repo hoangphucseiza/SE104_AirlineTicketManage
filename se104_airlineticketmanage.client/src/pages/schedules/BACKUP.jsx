@@ -6,22 +6,10 @@ import AirportSelect from '../../components/Schedules/AirportSelect';
 import StopoverList from '../../components/Schedules/StopoverList';
 import TicketClassList from '../../components/Schedules/TicketClassList';
 
+
 const AddSchedule = () => {
   const { setAlert } = useContext(AppContext);
   const navigate = useNavigate();
-
-  const [airportIds, setAirportIds] = useState([]);
-
-  const handleAirportIdsChange = (ids) => {
-    setAirportIds(ids); // Update the state with the airport IDs
-  };
-
-  useEffect(() => {
-    if (airportIds.length > 0) {
-      console.log('Airport IDs:', airportIds);
-      // Use the airport IDs as needed
-    }
-  }, [airportIds]);
 
   const [flight, setFlight] = useState({
     maCB: '',
@@ -41,17 +29,14 @@ const AddSchedule = () => {
         note: ""
       },
       {
-        id_airport: 'GLU',
-        name: "SB Pleiku",
-        location: "Gia Lai",
+        id_airport: 'VHD',
+        name: "SB Đồng Hới",
+        location: "Quảng Bình",
         time_stop: 0,
         note: ""
       }
     ],
-    ticketClasses: [
-      { maHV: 'HV1', tenHV: 'Thương gia', soLuong: 100, tiLeGia: 1, giaHV: "none" },
-      { maHV: 'HV2', tenHV: 'Phổ thông', soLuong: 300, tiLeGia: 1.2, giaHV: "none" }
-    ],
+    ticketClasses: [],
     tgBay_min: 30,
   });
 
@@ -114,7 +99,9 @@ const AddSchedule = () => {
 
       <div className="line"></div>
 
-      <div className="flight-schedule-content mb-4" style={{ paddingTop: "30px" }}>
+      <div className="flight-schedule-content mb-4" style={{
+        paddingTop: "30px",
+      }}>
         <h5 className="mb-4">Thông tin chuyến bay</h5>
         <div className="airport_content_inputs">
           <div className="mb-3">
@@ -145,7 +132,6 @@ const AddSchedule = () => {
               name="maSBDi"
               value={flight.maSBDi}
               onChange={handleChange}
-              onAirportIdsChange={handleAirportIdsChange}
             />
             <span className="text-danger">{error.maSBDi}</span>
           </div>
@@ -155,15 +141,16 @@ const AddSchedule = () => {
               name="maSBDen"
               value={flight.maSBDen}
               onChange={handleChange}
-              onAirportIdsChange={handleAirportIdsChange}
             />
             <span className="text-danger">{error.maSBDen}</span>
           </div>
           <div className="mb-3">
             <h6>Ngày giờ bay:</h6>
             <div>
-              <p> (Ngày - Giờ)</p>
+              <p> (Ngày - Giờ)
+              </p>
             </div>
+
             <input
               className="form-control"
               type="datetime-local"
@@ -175,9 +162,12 @@ const AddSchedule = () => {
           </div>
           <div className="mb-3">
             <h6>Thời gian bay (phút):</h6>
-            <p style={{ color: "var(--danger-color)" }}>
-              (Tối thiểu {flight.tgBay_min} phút)
-            </p>
+            <p
+              style={{
+                color: "var(--danger-color)",
+              }}>
+              ( Tối thiểu {flight.tgBay_min} phút )</p>
+
             <input
               className="form-control"
               type="number"
@@ -187,8 +177,14 @@ const AddSchedule = () => {
             />
             <span className="text-danger">{error.thoiGianBay}</span>
           </div>
+
         </div>
       </div>
+
+      {/* <StopoverList
+        stopovers={flight.stopovers}
+        setStopovers={(newStopovers) => setFlight({ ...flight, stopovers: newStopovers })}
+      /> */}
 
       <StopoverList flight={flight} setFlight={setFlight} />
 
@@ -197,28 +193,62 @@ const AddSchedule = () => {
         setTicketClasses={(newTicketClasses) => setFlight({ ...flight, ticketClasses: newTicketClasses })}
       />
 
-      <div className="box-add-schedules" style={{ paddingTop: '50px' }}>
-        <div className="d-grid gap-2 col-6 mx-auto">
-          <button
-            className="btn btn-primary add-schedule-btn confirm-ad"
-            style={{ backgroundColor: "pink" }}
-            type="button"
-            onClick={() => navigate('/schedules')}
-          >
-            Hủy bỏ
-          </button>
-        </div>
-
-        <div className="box-add-schedules" style={{ paddingTop: '50px' }}>
-          <div className="d-grid gap-2 col-6 mx-auto">
-            <button className="btn btn-primary add-schedule-btn confirm-add" type="submit">
-              XÁC NHẬN TẠO MỚI
-            </button>
-          </div>
-        </div>
+      <div className="py-3 text-center">
+        <button
+          className="btn btn-danger me-3"
+          type="button"
+          onClick={() => navigate('/flights')}
+        >
+          Hủy bỏ
+        </button>
+        <button className="btn btn-success" type="submit">
+          Thêm mới
+        </button>
       </div>
     </form>
   );
 };
 
 export default AddSchedule;
+
+
+
+
+
+//AirportSelect
+import React, { useState, useEffect } from 'react';
+
+const AirportSelect = ({ name, value, onChange }) => {
+    const [airports, setAirports] = useState([]);
+    const mockAirports = [
+        {
+            id: "VDH",
+            name: "Sân bay Đồng Hới",
+            location: "Quảng Bình"
+        },
+        {
+            id: "DAD",
+            name: "Cảng hàng không quốc tế Đà Nẵng",
+            location: "Đà Nẵng"
+        },
+    ];
+
+    useEffect(() => {
+        setAirports(mockAirports);
+    }, []);
+
+    return (
+        <div>
+            <select className="form-control" name={name} value={value} onChange={onChange}>
+                <option value="" disabled hidden>Chọn sân bay</option>
+                {airports.map((airport) => (
+                    <option key={airport.id} value={airport.id}>
+                        {airport.name} - {airport.location}
+                    </option>
+                ))}
+            </select>
+        </div>
+    );
+};
+
+export default AirportSelect;

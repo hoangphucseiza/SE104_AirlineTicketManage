@@ -266,3 +266,7 @@ body {
   background-color: #fff;
   padding: 20px;
 }
+.table th, td{
+  text-align: center; 
+  vertical-align: middle; 
+}

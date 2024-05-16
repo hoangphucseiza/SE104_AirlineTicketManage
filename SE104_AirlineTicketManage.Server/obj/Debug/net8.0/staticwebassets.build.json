@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "xJ46To22sWW1MCx9sU7qE1Ep5l+cN/78jmCFdGy8IRU=",
+  "Hash": "8B73h7UbOh/yCW0PgGk0fUbMw1JllX/pZIn1JTNU8QM=",
   "Source": "SE104_AirlineTicketManage.Server",
   "BasePath": "_content/SE104_AirlineTicketManage.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\se104_airlineticketmanage.client\\se104_airlineticketmanage.client.esproj",
+      "Identity": "D:\\_BTCode\\CNPM\\SE104_AirlineTicketManage\\se104_airlineticketmanage.client\\se104_airlineticketmanage.client.esproj",
       "Version": 2,
       "Source": "se104_airlineticketmanage.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
