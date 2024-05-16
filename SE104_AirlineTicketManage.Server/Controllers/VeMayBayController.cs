@@ -30,6 +30,28 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             return Ok(veMayBays);
         }
 
+        [HttpGet("DoanhThuTheoThang/{thang}/{nam}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<BaoCaoDoanhTheoThangDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult DoanhThuTheoThang(int thang, int nam)
+        {
+            var danhSachDoanhThu = _veMayBayRepository.DoanhThuTheoThang(thang, nam);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(danhSachDoanhThu);
+        }
+
+        [HttpGet("DoanhThuTheoNam/{nam}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<BaoCaoDoanhTheoNamDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult DoanhThuTheoNam( int nam)
+        {
+            var danhSachDoanhThu = _veMayBayRepository.DoanhThuTheoNam(nam);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(danhSachDoanhThu);
+        }
+
         [HttpPost("CreateVeMayBay")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -54,6 +76,7 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             }
             return Ok("Tạo Vé Thành Công");
         }
+       
 
         [HttpDelete("DeleteVeMayBay{maVe}")]
         [ProducesResponseType(204)]

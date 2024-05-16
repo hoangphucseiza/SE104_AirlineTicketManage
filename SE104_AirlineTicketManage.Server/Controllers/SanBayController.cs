@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SE104_AirlineTicketManage.Server.Dto;
 using SE104_AirlineTicketManage.Server.Interfaces;
 using SE104_AirlineTicketManage.Server.Models;
+using System.Data.SqlTypes;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SE104_AirlineTicketManage.Server.Controllers
 {
@@ -20,12 +22,12 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetDanhSachSanBay")]
+        [HttpGet("GetDanhSachSanBay{phantrang}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<SanBay>))]
         [ProducesResponseType(400)]
-        public IActionResult GetSanBays()
+        public IActionResult GetSanBays(int phantrang)
         {
-            var sanBays = _mapper.Map<List<SanBayDto>>(_sanBayRepository.GetSanBays());
+            var sanBays = _mapper.Map<List<SanBayDto>>(_sanBayRepository.GetDanhSachSanBay(phantrang));
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -42,7 +44,7 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             if (!_sanBayRepository.SanbayExists(maSB))
                 return NotFound();
 
-            var sanBay = _mapper.Map<SanBayDto>(_sanBayRepository.GetSanBay(maSB));
+            var sanBay = _mapper.Map<SanBayDto>(_sanBayRepository.GetSanBayByMaSB(maSB));
 
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -50,42 +52,143 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             return Ok(sanBay);
         }
 
-        [HttpPost("AddSanBay")]
-        [ProducesResponseType(204)]
+        [HttpGet("GetSanBayByTGDungToiDa/{thoigiandung}/{phantrang}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<SanBay>))]
         [ProducesResponseType(400)]
-        public IActionResult CreateCategory([FromBody] SanBayDto sanBayCreate)
+        public IActionResult GetSanBayByTGDungToiDa(int thoigiandung, int phantrang)
         {
-            if (sanBayCreate == null)
+            var sanBays = _mapper.Map<List<SanBayDto>>(_sanBayRepository.GetSanBayByTGDungToiDa(thoigiandung, phantrang));
+   
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var sanBay = _sanBayRepository.GetSanBays()
-                .Where(s => s.TenSB.Trim().ToUpper() == sanBayCreate.TenSB.TrimEnd().ToUpper())
-                .FirstOrDefault();
+            return Ok(sanBays);
+        }
+        [HttpGet("GetSanBayByTGDungToiThieu/{thoigiandung}/{phantrang}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<SanBay>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetSanBayByTGDungToiThieu(int thoigiandung, int phantrang)
+        {
+            var sanBays = _mapper.Map<List<SanBayDto>>(_sanBayRepository.GetSanBayByTGDungToiThieu(thoigiandung, phantrang));
 
-            if (sanBay != null)
-            {
-                ModelState.AddModelError("", $"San bay {sanBayCreate.TenSB} da ton tai");
-            }
+           
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(sanBays);
+        }
+
+        [HttpGet("GetSanBayByTGDung/{dungtoithieu}/{dungtoida}/{phantrang}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<SanBay>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetSanBayByTGDung(int dungtoithieu, int dungtoida, int phantrang)
+        {
+            var sanBays = _mapper.Map<List<SanBayDto>>(_sanBayRepository.GetSanBayByTGDung(dungtoithieu, dungtoida , phantrang));
+
+           
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(sanBays);
+        }
+
+        [HttpGet("GetUpdateSanBay/{maSBdi}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<UpdateSanBayDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetUpdateSanBay(string maSBdi)
+        {
+            var updateSanBayDto = _mapper.Map<UpdateSanBayDto>(_sanBayRepository.GetUpdateSanBay(maSBdi));
 
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
-                
-            var sanBayMap = _mapper.Map<SanBay>(sanBayCreate);
 
-            if(!_sanBayRepository.CreateSanBay(sanBayMap))
-            {
-                ModelState.AddModelError("", $"Something went wrong when saving the record {sanBayMap.TenSB}");
-                return StatusCode(500, ModelState);
-            }    
-            return Ok("Tạo Sân Bay Thành Công");
+            return Ok(updateSanBayDto);
         }
+
+        [HttpPost("CreateSanBay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateSanBay([FromBody] UpdateSanBayDto sanbaymoi)
+        {
+            string maSB = sanbaymoi.MaSanBay;
+
+            var kiemTraTonTai = _sanBayRepository.GetSanBayByMaSB(maSB);
+            
+            if (kiemTraTonTai != null)
+            {
+                ModelState.AddModelError("", $"Sân bay {maSB} đã tồn tại");
+                return StatusCode(404, ModelState);
+            }
+
+            bool taoSanBay = _sanBayRepository.CreateSanBay(sanbaymoi);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if(taoSanBay)
+                return Ok("Tạo sân bay thành công");
+            else
+                return StatusCode(500, ModelState);
+        }
+
+        [HttpPut("UpdateSanBay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateSanBay([FromBody] UpdateSanBayDto sanbaymoi)
+        {
+
+            bool capNhatSanBay = _sanBayRepository.UpdateSanBay(sanbaymoi);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (capNhatSanBay)
+                return Ok("Cập nhật sân bay thành công");
+            else
+                return StatusCode(500, ModelState);
+        }
+
+
+
+        //[HttpPost("AddSanBay")]
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //public IActionResult CreateCategory([FromBody] SanBayDto sanBayCreate)
+        //{
+        //    if (sanBayCreate == null)
+        //        return BadRequest(ModelState);
+
+        //    var sanBay = _sanBayRepository.GetSanBays()
+        //        .Where(s => s.TenSB.Trim().ToUpper() == sanBayCreate.TenSB.TrimEnd().ToUpper())
+        //        .FirstOrDefault();
+
+        //    if (sanBay != null)
+        //    {
+        //        ModelState.AddModelError("", $"San bay {sanBayCreate.TenSB} da ton tai");
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var sanBayMap = _mapper.Map<SanBay>(sanBayCreate);
+
+        //    if(!_sanBayRepository.CreateSanBay(sanBayMap))
+        //    {
+        //        ModelState.AddModelError("", $"Something went wrong when saving the record {sanBayMap.TenSB}");
+        //        return StatusCode(500, ModelState);
+        //    }    
+        //    return Ok("Tạo Sân Bay Thành Công");
+        //}
 
         //[HttpPut("UpdateSanBay")]
         //[ProducesResponseType(400)]
         //[ProducesResponseType(204)]
         //[ProducesResponseType(404)]
         //public IActionResult UpdateCategory
+
+
     }
 }

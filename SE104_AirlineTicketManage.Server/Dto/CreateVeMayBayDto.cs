@@ -12,6 +12,6 @@ namespace SE104_AirlineTicketManage.Server.Dto
 
         public DateTime NgayDat { get; set; }
 
-        public DateTime NgayMua { get; set; }
+        public DateTime? NgayMua { get; set; }
     }
 }

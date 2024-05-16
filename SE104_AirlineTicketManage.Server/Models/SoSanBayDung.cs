@@ -6,5 +6,7 @@
 
         public string MaSanBayDen { get; set; }
         public int SoSBDung_Max { get; set; }
+
+        public int ThoiGianBayToiThieu { get; set; }
     }
 }
