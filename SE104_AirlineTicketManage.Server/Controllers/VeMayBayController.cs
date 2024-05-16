@@ -95,5 +95,38 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             }
             return Ok("Xóa vé máy bay thành công");
         }
+
+        [HttpGet("GetVeByMaVe")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<TraCuuVeMayBayDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetVeByMaVe(string? searchMaVe, string hangVe, string loaiVe, int phantrang)
+        {
+            var veMayBays = _veMayBayRepository.GetVeByMaVe(searchMaVe, hangVe, loaiVe, phantrang);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(veMayBays);
+        }
+
+        [HttpGet("GetVeByMaCB")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<TraCuuVeMayBayDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetVeByMaCB(string? searchMaCB, string hangVe, string loaiVe, int phantrang)
+        {
+            var veMayBays = _veMayBayRepository.GetVeByMaCB(searchMaCB, hangVe, loaiVe, phantrang);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(veMayBays);
+        }
+
+        [HttpGet("GetVeBySDT")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<TraCuuVeMayBayDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetVeBySDT(string? searchSDT, string hangVe, string loaiVe, int phantrang)
+        {
+            var veMayBays = _veMayBayRepository.GetVeBySDT(searchSDT, hangVe, loaiVe, phantrang);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(veMayBays);
+        }
     }
 }
