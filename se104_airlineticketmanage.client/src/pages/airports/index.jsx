@@ -54,6 +54,7 @@ const Airports = () => {
     setShowAirports([...airports]);
   }, [airports]);
 
+  
   useEffect(() => {
     switch (filter.sort) {
       case "name_A_to_Z":

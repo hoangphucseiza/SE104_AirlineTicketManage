@@ -103,7 +103,10 @@ function App() {
 
                   <Route path="ticket/:id" element={<TicketDetail />} />
                 </Route>
-                <Route path="/tickets" element={<Tickets />}></Route>
+                <Route path="/tickets" element={<Tickets />}>
+                  <Route path="add" element={<AddAirPort />} />
+                  <Route path="update/:id" element={<UpdateAirPort />} />
+                </Route>
                 <Route path="/report" element={<Report />}></Route>
                 <Route path="/customers">
                   <Route index element={<Customers />} />
