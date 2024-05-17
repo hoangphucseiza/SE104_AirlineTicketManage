@@ -234,5 +234,9 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
+<<<<<<< HEAD
 /Migrations
 >>>>>>> parent of a9757be (Merge BichHao)
+=======
+.vs
+>>>>>>> a9757be6ea5f216aac2c11974bf731a31f4a024b

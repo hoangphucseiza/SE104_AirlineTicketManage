@@ -80,6 +80,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 82,
+<<<<<<< HEAD
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -146,6 +147,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 12,
+=======
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+>>>>>>> a9757be6ea5f216aac2c11974bf731a31f4a024b
               "Title": "UpdateSanBayDto.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Dto\\UpdateSanBayDto.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Dto\\UpdateSanBayDto.cs",
@@ -206,7 +214,11 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 6,
+=======
+              "DocumentIndex": 1,
+>>>>>>> a9757be6ea5f216aac2c11974bf731a31f4a024b
               "Title": "VeMayBayController.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Controllers\\VeMayBayController.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Controllers\\VeMayBayController.cs",
@@ -218,7 +230,11 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 10,
+=======
+              "DocumentIndex": 5,
+>>>>>>> a9757be6ea5f216aac2c11974bf731a31f4a024b
               "Title": "ISanBayRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Interfaces\\ISanBayRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Interfaces\\ISanBayRepository.cs",
