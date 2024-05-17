@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\Code\\SE104_AirlineTicketManage\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\controllers\\hangvecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\controllers\\hangvecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\controllers\\khachhangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\controllers\\khachhangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\repository\\hangverepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\repository\\hangverepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\repository\\khachhangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\repository\\khachhangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\interfaces\\ihangverepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\interfaces\\ihangverepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\interfaces\\ikhachhangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\interfaces\\ikhachhangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\code\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\dto\\getdetailkhachhangdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\dto\\getdetailkhachhangdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 82,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,41 +42,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HangVeController.cs",
-              "DocumentMoniker": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Controllers\\HangVeController.cs",
-              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Controllers\\HangVeController.cs",
-              "ToolTip": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Controllers\\HangVeController.cs",
-              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Controllers\\HangVeController.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAwwFUAAAAqAAAA",
+              "DocumentIndex": 3,
+              "Title": "GetDetailKhachHangDto.cs",
+              "DocumentMoniker": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Dto\\GetDetailKhachHangDto.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Dto\\GetDetailKhachHangDto.cs",
+              "ToolTip": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Dto\\GetDetailKhachHangDto.cs",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Dto\\GetDetailKhachHangDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T08:34:02.62Z",
+              "WhenOpened": "2024-05-17T09:28:58.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "KhachHangController.cs",
+              "DocumentMoniker": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Controllers\\KhachHangController.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Controllers\\KhachHangController.cs",
+              "ToolTip": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Controllers\\KhachHangController.cs*",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Controllers\\KhachHangController.cs*",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAuwHEAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T14:13:12.983Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HangVeRepository.cs",
-              "DocumentMoniker": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\HangVeRepository.cs",
-              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\HangVeRepository.cs",
-              "ToolTip": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\HangVeRepository.cs",
-              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Repository\\HangVeRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAAAAAAA",
+              "Title": "KhachHangRepository.cs",
+              "DocumentMoniker": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\KhachHangRepository.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\KhachHangRepository.cs",
+              "ToolTip": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\KhachHangRepository.cs*",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Repository\\KhachHangRepository.cs*",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAwBwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T08:03:48.746Z",
+              "WhenOpened": "2024-05-16T14:10:05.317Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IHangVeRepository.cs",
-              "DocumentMoniker": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Interfaces\\IHangVeRepository.cs",
-              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Interfaces\\IHangVeRepository.cs",
-              "ToolTip": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Interfaces\\IHangVeRepository.cs",
-              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Interfaces\\IHangVeRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAnAAAA",
+              "Title": "IKhachHangRepository.cs",
+              "DocumentMoniker": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Interfaces\\IKhachHangRepository.cs",
+              "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Interfaces\\IKhachHangRepository.cs",
+              "ToolTip": "D:\\Code\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Interfaces\\IKhachHangRepository.cs*",
+              "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Interfaces\\IKhachHangRepository.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T07:52:52.603Z",
+              "WhenOpened": "2024-05-16T14:09:45.435Z",
               "EditorCaption": ""
             }
           ]
