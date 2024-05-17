@@ -44,7 +44,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.SpaProxy/8.0.4": {
+      "Microsoft.AspNetCore.SpaProxy/8.0.5": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll": {}
@@ -962,10 +962,10 @@
         "logo.png"
       ]
     },
-    "Microsoft.AspNetCore.SpaProxy/8.0.4": {
-      "sha512": "knuNBv+I6bYjaUHb6KoFEU7CjkKgzwHQWmdcMgUZ8DuLzQQxSS8dd/OacVccaKtTEz5PDFDeIKU8Gg+Pgu+Xvw==",
+    "Microsoft.AspNetCore.SpaProxy/8.0.5": {
+      "sha512": "7iEMQelKbwKS5Lk79d/yTOqYSiLPq/wB07Gx4FaFUmF4cv+jtR7vWE55ODaioM+WOHV/ke9HqBCrpfilaaG/Vw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.spaproxy/8.0.4",
+      "path": "microsoft.aspnetcore.spaproxy/8.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -973,7 +973,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "build/Microsoft.AspNetCore.SpaProxy.targets",
         "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll",
-        "microsoft.aspnetcore.spaproxy.8.0.4.nupkg.sha512",
+        "microsoft.aspnetcore.spaproxy.8.0.5.nupkg.sha512",
         "microsoft.aspnetcore.spaproxy.nuspec"
       ]
     },
@@ -2625,5 +2625,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
