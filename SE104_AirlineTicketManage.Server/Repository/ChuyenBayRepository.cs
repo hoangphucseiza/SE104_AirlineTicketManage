@@ -67,6 +67,63 @@ namespace SE104_AirlineTicketManage.Server.Repository
             return _context.ChuyenBays.Where(p => p.MaCB == maCB).FirstOrDefault();
         }
 
+        public ThongTinChiTietChuyenBayDto GetThongTinChuyenBay(string maCB)
+        {
+           var chuyenBay = _context.ChuyenBays.Where(p => p.MaCB == maCB).FirstOrDefault();
+
+            // Lấy thông tin của hạng vé
+            var danhSachThongTinHangVes = new List<ThongTinChiTietChuyenBay_HangVe>();
+            var dshangVe = _context.ChuyenBayHangVes.Where(p => p.MaCB == maCB).ToList();
+            foreach (var hangVe in dshangVe)
+            {
+                var hangVeDto = new ThongTinChiTietChuyenBay_HangVe
+                {
+                   MaHangVe = hangVe.MaHV,
+                   TenHangVe =  _context.HangVes.Where(p => p.MaHV == hangVe.MaHV).FirstOrDefault().TenHV,
+                    TiLeGia = _context.HangVes.Where(p => p.MaHV == hangVe.MaHV).FirstOrDefault().TiLe_Gia,
+                    TongSoVe = hangVe.SoLuong,
+                   SoVeBanDuoc = _context.VeMayBays.Where(p => p.MaCB == maCB && p.MaHV == hangVe.MaHV && p.NgayMua != null).Count()
+                };
+                danhSachThongTinHangVes.Add(hangVeDto);
+            }
+
+            // Lấy thông tin của sân bay dừng
+            var danhSachSanBayDungs = new List<ThongTinChiTietChuyenBay_SanBayDung>();
+            var dsSanBayDung = _context.SanBayTrungGians.Where(p => p.MaCB == maCB).ToList();
+            foreach (var sanBayDung in dsSanBayDung)
+            {
+                var sanBay = _context.SanBays.Where(p => p.MaSB == sanBayDung.MaSB).FirstOrDefault();
+                var sanBayDungDto = new ThongTinChiTietChuyenBay_SanBayDung
+                {
+                    MaSB = sanBay.MaSB,
+                    ViTri = sanBayDung.SanBay.ViTri,
+                };
+                danhSachSanBayDungs.Add(sanBayDungDto);
+            }
+
+            var thongTinChiTietChuyenBay = new ThongTinChiTietChuyenBayDto
+            {
+                MaChuyenBay = chuyenBay.MaCB,
+                NgayGioBay = chuyenBay.NgayGio,
+                NgayGioDen = chuyenBay.NgayGio.AddMinutes(chuyenBay.ThoiGianBay),
+                ThoiGianBay = chuyenBay.ThoiGianBay,
+                GiaVe = chuyenBay.GiaVe,
+                SanBayDi = new ThongTinChiTietChuyenBay_SanBayDto
+                {
+                    MaSB = chuyenBay.MaSB_Di,
+                    ViTri = _context.SanBays.Where(p => p.MaSB == chuyenBay.MaSB_Di).FirstOrDefault().ViTri,
+                },
+                SanBayDen = new ThongTinChiTietChuyenBay_SanBayDto
+                {
+                    MaSB = chuyenBay.MaSB_Den,
+                    ViTri = _context.SanBays.Where(p => p.MaSB == chuyenBay.MaSB_Den).FirstOrDefault().ViTri,
+                },
+                DanhSachThongTinHangVe = danhSachThongTinHangVes,
+                DanhSachSanBayDung = danhSachSanBayDungs,
+            };
+            return thongTinChiTietChuyenBay;
+        }
+
         public ICollection<VeMayBay> GetVeMayBayFromChuyenBay(string maCB)
         {
             return _context.VeMayBays.Where(p => p.MaCB == maCB).ToList();

@@ -27,6 +27,8 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
 
         bool DeleteVeMayBay(string maVe);
 
+        bool ThemPhieuDatCho(ThemPhieuDatChoDto themPhieuDatChoDto);
+
         bool Save();
     }
 }

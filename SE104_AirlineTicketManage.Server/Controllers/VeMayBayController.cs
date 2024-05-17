@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SE104_AirlineTicketManage.Server.Data;
 using SE104_AirlineTicketManage.Server.Dto;
 using SE104_AirlineTicketManage.Server.Interfaces;
 using SE104_AirlineTicketManage.Server.Models;
@@ -10,14 +11,15 @@ namespace SE104_AirlineTicketManage.Server.Controllers
     [ApiController]
     public class VeMayBayController : Controller
     {
-        
+        private readonly DataContext _context;
         private readonly IVeMayBayRepository _veMayBayRepository;
         private readonly IMapper _mapper;
 
-        public VeMayBayController(IVeMayBayRepository veMayBayRepository, IMapper mapper)
+        public VeMayBayController(IVeMayBayRepository veMayBayRepository, IMapper mapper, DataContext dataContext)
         {
             _veMayBayRepository = veMayBayRepository;
             _mapper = mapper;
+            _context = dataContext;
         }
         [HttpGet("GetDanhSachVeMayBay")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<VeMayBay>))]
@@ -156,6 +158,66 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return StatusCode(500, ModelState);
             }
             return Ok("Cập nhật vé máy bay mới mỗi ngày thành công");
+        }
+
+        [HttpPost("ThemPhieuDatCho")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult ThemPhieuDatCho([FromBody] ThemPhieuDatChoDto themPhieuDatChoDto)
+        {
+            var tenkh = themPhieuDatChoDto.TenKhachHang;
+            var sdt = themPhieuDatChoDto.SDT;
+            var cmnd = themPhieuDatChoDto.CMND;
+
+            var khachHangTonTai = _context.KhachHangs.FirstOrDefault(kh => kh.CMND == cmnd);
+
+            if (khachHangTonTai == null)
+            {
+                // Lấy MaKH cao nhất hiện có
+                var lastKhachHang = _context.KhachHangs
+                                            .OrderByDescending(kh => kh.MaKH)
+                                            .FirstOrDefault();
+
+                // Xác định MaKH tiếp theo
+                int nextIdNumber = 1;
+                if (lastKhachHang != null)
+                {
+                    var lastId = lastKhachHang.MaKH;
+                    nextIdNumber = int.Parse(lastId.Substring(2)) + 1;
+                }
+                var newMaKH = "KH" + nextIdNumber.ToString("D2");
+
+                var khachHang = new KhachHang
+                {
+                    MaKH = newMaKH,
+                    TenKH = tenkh,
+                    SDT = sdt,
+                    CMND = cmnd
+                };
+                _context.KhachHangs.Add(khachHang);
+                _context.SaveChanges();
+            }else
+            {
+                if(khachHangTonTai.SDT != sdt)
+                {
+                    ModelState.AddModelError("", "Số điện thoại không khớp với SDT đã đăng ký");
+                    return StatusCode(400, ModelState);
+                }
+                if (khachHangTonTai.TenKH != tenkh)
+                {
+                    ModelState.AddModelError("", "Tên khách hàng không khớp với tên đã đăng ký");
+                    return StatusCode(400, ModelState);
+                }
+            }
+
+
+            if (!_veMayBayRepository.ThemPhieuDatCho(themPhieuDatChoDto))
+            {
+                ModelState.AddModelError("", "Có lỗi xảy ra khi lưu phiếu đặt chỗ");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Thêm phiếu đặt chỗ thành công");
         }
     }
 }

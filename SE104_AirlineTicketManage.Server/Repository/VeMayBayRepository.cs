@@ -319,5 +319,37 @@ namespace SE104_AirlineTicketManage.Server.Repository
             return true;
         }
 
+        public bool ThemPhieuDatCho(ThemPhieuDatChoDto themPhieuDatChoDto)
+        {
+            // Lấy MaVe cao nhất hiện có
+            var lastVe = _context.VeMayBays
+                                        .OrderByDescending(p => p.MaVe)
+                                        .FirstOrDefault();
+
+            // Xác định MaVe tiếp theo
+            int nextIdNumber = 1;
+            if (lastVe != null)
+            {
+                var lastId = lastVe.MaVe;
+                nextIdNumber = int.Parse(lastId.Substring(3)) + 1;
+            }
+            var newVe = "VMB" + nextIdNumber.ToString("D2");
+            var veMayBay = new VeMayBay
+            {
+                MaVe = newVe,
+                MaCB = themPhieuDatChoDto.MaCB,
+                MaKH = _context.KhachHangs.FirstOrDefault(p => p.CMND == themPhieuDatChoDto.CMND).MaKH,
+                GiaTien = themPhieuDatChoDto.GiaTien,
+                MaHV = themPhieuDatChoDto.MaHangVe,
+                NgayDat = themPhieuDatChoDto.NgayDat,
+                NgayMua = themPhieuDatChoDto.NgayMua,
+                TrangThai = themPhieuDatChoDto.TrangThaiVe == 1 ? "Đã mua" : "Chưa thanh toán"
+            };
+
+            _context.VeMayBays.Add(veMayBay);
+            _context.SaveChanges();
+
+            return true;
+        }
     }
 }
