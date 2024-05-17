@@ -30,6 +30,28 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             return Ok(veMayBays);
         }
 
+        [HttpGet("DoanhThuTheoThang/{thang}/{nam}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<BaoCaoDoanhTheoThangDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult DoanhThuTheoThang(int thang, int nam)
+        {
+            var danhSachDoanhThu = _veMayBayRepository.DoanhThuTheoThang(thang, nam);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(danhSachDoanhThu);
+        }
+
+        [HttpGet("DoanhThuTheoNam/{nam}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<BaoCaoDoanhTheoNamDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult DoanhThuTheoNam( int nam)
+        {
+            var danhSachDoanhThu = _veMayBayRepository.DoanhThuTheoNam(nam);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(danhSachDoanhThu);
+        }
+
         [HttpPost("CreateVeMayBay")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -54,6 +76,7 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             }
             return Ok("Tạo Vé Thành Công");
         }
+       
 
         [HttpDelete("DeleteVeMayBay{maVe}")]
         [ProducesResponseType(204)]
@@ -71,6 +94,68 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return StatusCode(500, ModelState);
             }
             return Ok("Xóa vé máy bay thành công");
+        }
+
+        [HttpGet("GetVeByMaVe")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<TraCuuVeMayBayDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetVeByMaVe(string? searchMaVe, string hangVe, string loaiVe, int phantrang)
+        {
+            var veMayBays = _veMayBayRepository.GetVeByMaVe(searchMaVe, hangVe, loaiVe, phantrang);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(veMayBays);
+        }
+
+        [HttpGet("GetVeByMaCB")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<TraCuuVeMayBayDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetVeByMaCB(string? searchMaCB, string hangVe, string loaiVe, int phantrang)
+        {
+            var veMayBays = _veMayBayRepository.GetVeByMaCB(searchMaCB, hangVe, loaiVe, phantrang);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(veMayBays);
+        }
+
+        [HttpGet("GetVeBySDT")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<TraCuuVeMayBayDto>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetVeBySDT(string? searchSDT, string hangVe, string loaiVe, int phantrang)
+        {
+            var veMayBays = _veMayBayRepository.GetVeBySDT(searchSDT, hangVe, loaiVe, phantrang);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(veMayBays);
+        }
+
+        [HttpPut("CapNhatTrangThaiVe")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CapNhatTrangThaiVe([FromQuery] string maVe, [FromQuery] string TrangThai, [FromQuery] DateTime NgayMua)
+        {
+            if (!_veMayBayRepository.VeMayBayExists(maVe))
+                return NotFound();
+
+            if (!_veMayBayRepository.CapNhatTrangThaiVe(maVe, TrangThai, NgayMua))
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating the record {maVe}");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Cập nhật trạng thái vé máy bay thành công");
+        }
+
+        [HttpPut("CapNhatVeMayBayMoiNgay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CapNhatVeMayBayMoiNgay()
+        {
+            if (!_veMayBayRepository.CapNhatVeMayBayMoiNgay())
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating the record");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Cập nhật vé máy bay mới mỗi ngày thành công");
         }
     }
 }

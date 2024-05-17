@@ -3,9 +3,6 @@
   "WorkspaceRootPath": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|d:\\workspace\\nhapmon_cnpm\\se104_airlineticketmanage\\se104_airlineticketmanage.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{4B492088-DEED-4157-BD29-0D62824CC1E2}|SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.csproj|solutionrelative:se104_airlineticketmanage.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -84,17 +81,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Microsoft.PackageDependencyResolution.targets",
-              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets",
-              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets",
-              "ViewState": "AQIAAAoBAAAAAAAAAAAAABoBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-05-17T14:00:41.784Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\appsettings.json",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\appsettings.json",
@@ -107,7 +93,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "SE104_AirlineTicketManage.Server.http",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.http",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.http",
@@ -119,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Program.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Program.cs",
@@ -131,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Microsoft.Common.CurrentVersion.targets",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
@@ -141,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Microsoft.NET.Sdk.StaticWebAssets.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
               "ToolTip": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
@@ -151,7 +137,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "SoSanBayDungRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\SoSanBayDungRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\SoSanBayDungRepository.cs",
@@ -163,7 +149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "ChuyenBayRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\ChuyenBayRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\ChuyenBayRepository.cs",
@@ -175,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "SanBayRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\SanBayRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\SanBayRepository.cs",
@@ -187,7 +173,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "VeMayBayRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\VeMayBayRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\VeMayBayRepository.cs",
@@ -199,7 +185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "VeMayBayController.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Controllers\\VeMayBayController.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Controllers\\VeMayBayController.cs",
@@ -211,7 +197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "ISanBayRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Interfaces\\ISanBayRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Interfaces\\ISanBayRepository.cs",
@@ -223,7 +209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "SanBayController.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Controllers\\SanBayController.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Controllers\\SanBayController.cs",
@@ -235,7 +221,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "KhachHangRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\KhachHangRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\KhachHangRepository.cs",
@@ -247,7 +233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "HangVeRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\HangVeRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\HangVeRepository.cs",
@@ -259,7 +245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "QuyDinhChungRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Repository\\QuyDinhChungRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Repository\\QuyDinhChungRepository.cs",
@@ -271,7 +257,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "20240516104340_initial.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Migrations\\20240516104340_initial.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Migrations\\20240516104340_initial.cs",
@@ -283,7 +269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "DataContext.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Data\\DataContext.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Data\\DataContext.cs",
