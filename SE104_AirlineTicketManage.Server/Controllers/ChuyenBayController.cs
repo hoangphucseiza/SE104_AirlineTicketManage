@@ -89,16 +89,70 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             return Ok(thongTinChuyenBay);
         }
 
-        [HttpGet("GetDanhSachChuyenBay")]
+        //[HttpGet("GetDanhSachChuyenBay")]
+        //[ProducesResponseType(200, Type = typeof(IEnumerable<GetDanhSachChuyenBayDto>))]
+        //public IActionResult GetDSChuyenBay()
+        //{
+        //    var chuyenBays = _chuyenBayRepository.GetDanhSachChuyenBay();
+
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+
+        //    return Ok(chuyenBays);
+        //}
+
+        [HttpGet("TimKiemChuyenBay")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<GetDanhSachChuyenBayDto>))]
-        public IActionResult GetDSChuyenBay()
+        public IActionResult TimKiemChuyenBay([FromQuery] string? maSBDi, [FromQuery] string? maSBDen,  [FromQuery] DateTime? NgayKhoiHanh, [FromQuery] int phantrang, [FromQuery] string? searchMaCB)
         {
-            var chuyenBays = _chuyenBayRepository.GetDanhSachChuyenBay();
+            var chuyenBays = _chuyenBayRepository.TimKiemChuyenBay(maSBDen, maSBDi, NgayKhoiHanh, phantrang, searchMaCB);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             return Ok(chuyenBays);
+        }
+
+        [HttpGet("GetLichChuyenBayByMaCB/{maCB}")]
+        [ProducesResponseType(200, Type = typeof(ThongTinChiTietLichChuyenBayDto))]
+        [ProducesResponseType(400)]
+        public IActionResult GetLichChuyenBayByMaCB(string maCB)
+        {
+
+            var lichChuyenBay = _chuyenBayRepository.GetLichChuyenBayByMaCB(maCB);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(lichChuyenBay);
+        }
+
+        [HttpPut("UpdateLichChuyenBay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult UpdateLichChuyenBay([FromBody] ThemLichChuyenBayDto updateChuyenBay)
+        {
+         
+
+            if (!_chuyenBayRepository.UpdateLichChuyenBay(updateChuyenBay))
+            {
+                ModelState.AddModelError("", $"Something went wrong when updating the record {updateChuyenBay.MaCB}");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Cập nhật chuyến bay thành công");
+        }
+
+        [HttpPost("CreateLichChuyenBay")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateLichChuyenBay([FromBody] ThemLichChuyenBayDto_1 themChuyenBay)
+        {
+            if (!_chuyenBayRepository.CreateLichChuyenBay(themChuyenBay))
+            {
+                ModelState.AddModelError("", $"Something went wrong when creating the record in database");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Tạo chuyến bay thành công");
         }
     }
 }
