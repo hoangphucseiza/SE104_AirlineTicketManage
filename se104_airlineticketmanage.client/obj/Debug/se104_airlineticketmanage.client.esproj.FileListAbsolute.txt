@@ -1,6 +1,2 @@
 D:\CODE FROJECT\SE104_AirlineTicketManage\se104_airlineticketmanage.client\obj\Debug\se104_airlineticketmanage.client.esproj.CoreCompileInputs.cache
-<<<<<<< HEAD
 D:\Workspace\NhapMon_CNPM\SE104_AirlineTicketManage\se104_airlineticketmanage.client\obj\Debug\se104_airlineticketmanage.client.esproj.CoreCompileInputs.cache
-=======
-D:\_BTCode\CNPM\SE104_AirlineTicketManage\se104_airlineticketmanage.client\obj\Debug\se104_airlineticketmanage.client.esproj.CoreCompileInputs.cache
->>>>>>> 2a0bf08d609958d132d68db93c605742a654e96a

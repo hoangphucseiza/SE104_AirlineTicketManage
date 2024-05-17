@@ -94,7 +94,7 @@ function App() {
                 <Route path="/schedules">
                   <Route index element={<Schedules />} />
                   <Route path="add" element={<AddSchedule />} />
-                  <Route path="update/:maCB" element={<UpdateSchedule />} />
+                  <Route path="update" element={<UpdateSchedule />} />
                 </Route>
                 <Route path="/booking">
                   <Route index element={<Booking />} />

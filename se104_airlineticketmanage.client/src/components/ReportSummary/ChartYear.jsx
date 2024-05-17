@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-//install: npm install chart.js@^3.7.0 react-chartjs-2@^3.0.4
-// npm install @fortawesome/react-fontawesome
 
 const ChartYear = ({ data }) => {
   const chartRef = useRef(null);
