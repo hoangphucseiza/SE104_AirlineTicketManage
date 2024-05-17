@@ -62,5 +62,17 @@ namespace SE104_AirlineTicketManage.Server.Controllers
 
             return Ok(veMayBays);
         }
+
+        [HttpGet("GetDanhSachChuyenBay")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<GetDanhSachChuyenBayDto>))]
+        public IActionResult GetDSChuyenBay()
+        {
+            var chuyenBays = _chuyenBayRepository.GetDanhSachChuyenBay();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(chuyenBays);
+        }
     }
 }

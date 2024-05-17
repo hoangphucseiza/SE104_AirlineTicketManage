@@ -1,4 +1,5 @@
-﻿using SE104_AirlineTicketManage.Server.Models;
+﻿using SE104_AirlineTicketManage.Server.Dto;
+using SE104_AirlineTicketManage.Server.Models;
 
 namespace SE104_AirlineTicketManage.Server.Interfaces
 {
@@ -6,6 +7,7 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
     {
         ICollection<VeMayBay> GetVeMayBays();
         VeMayBay GetVeMayBay(string maVe);
+        GetChiTietByMaVeDto GetDetailByMaVe(string maVe);
 
         bool VeMayBayExists(string maVe);
 

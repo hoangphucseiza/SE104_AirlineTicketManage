@@ -19,6 +19,8 @@ namespace SE104_AirlineTicketManage.Server.Helper
             CreateMap<VeMayBay, VeMayBayDto>();
             CreateMap<VeMayBayDto, VeMayBay>();
             CreateMap<QuyDinhChungDto, QuyDinhChung>();
+            CreateMap<GetDanhSachChuyenBayDto, ChuyenBay>();
+            CreateMap<ChuyenBayHangVeDto, ChuyenBayHangVe>();
 
             // Mapping CreateVeMayBayDto to VeMayBay
             CreateMap<CreateVeMayBayDto, VeMayBay>();
