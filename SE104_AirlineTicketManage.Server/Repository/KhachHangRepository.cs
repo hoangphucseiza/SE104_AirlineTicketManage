@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SE104_AirlineTicketManage.Server.Data;
 using SE104_AirlineTicketManage.Server.Dto;
 using SE104_AirlineTicketManage.Server.Interfaces;
@@ -10,9 +11,11 @@ namespace SE104_AirlineTicketManage.Server.Repository
     public class KhachHangRepository : IKhachHangRepository
     {
         private readonly DataContext _context;
-        public KhachHangRepository(DataContext context)
+        private readonly IMapper _mapper;
+       public KhachHangRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public bool CreateKhachHang()
@@ -46,12 +49,14 @@ namespace SE104_AirlineTicketManage.Server.Repository
         {
             var getDetailKhachHangDto = new GetDetailKhachHangDto();
             var kh = _context.KhachHangs.Where(p => p.MaKH == maKH).FirstOrDefault();
-            var vmb = _context.VeMayBays.OrderBy(p => p.MaKH).ToList();
+            var vmb = _mapper.Map<List<VeMayBayDto>>(_context.VeMayBays.OrderBy(p => p.MaKH).ToList());
+
             getDetailKhachHangDto.MaKH = kh.MaKH;
             getDetailKhachHangDto.TenKH = kh.TenKH;
             getDetailKhachHangDto.SDT = kh.SDT;
             getDetailKhachHangDto.CMND = kh.CMND;
-            getDetailKhachHangDto.VeMayBays = (ICollection<VeMayBayDto>)vmb;
+            getDetailKhachHangDto.VeMayBays = vmb;
+
             return getDetailKhachHangDto;
         }
 

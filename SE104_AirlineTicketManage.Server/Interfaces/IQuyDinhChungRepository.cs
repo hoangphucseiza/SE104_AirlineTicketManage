@@ -6,7 +6,8 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
     {
         int GetThoiGianChamNhatDatVe();
         int GetThoiGianHuyDatVe();
-        bool UpdateQuyDinhChung(QuyDinhChung quyDinhChung);
+        bool UpdateThoiGianChamNhatDatVe(int tgChamNhatDatVe);
+        bool UpdateThoiGianHuytDatVe(int tgHuyDatVe);
         bool QuyDinhChungExists(int id);
         bool Save();
     }

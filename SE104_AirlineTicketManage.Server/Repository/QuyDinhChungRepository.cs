@@ -35,9 +35,17 @@ namespace SE104_AirlineTicketManage.Server.Repository
             return saved > 0 ? true : false;
         }
 
-        public bool UpdateQuyDinhChung(QuyDinhChung quyDinhChung)
+        public bool UpdateThoiGianChamNhatDatVe(int tgChamNhatDatVe)
         {
-            _context.Update(quyDinhChung);
+            var quyDinhChung = _context.QuyDinhChungs.Where(p => p.ID == 1).FirstOrDefault();
+            quyDinhChung.ThoiGianChamNhatDatVe = tgChamNhatDatVe;
+            return Save();
+        }
+
+        public bool UpdateThoiGianHuytDatVe(int tgHuyDatVe)
+        {
+            var quyDinhChung = _context.QuyDinhChungs.Where(p => p.ID == 1).FirstOrDefault();
+            quyDinhChung.ThoiGianHuyDatVe = tgHuyDatVe;
             return Save();
         }
     }

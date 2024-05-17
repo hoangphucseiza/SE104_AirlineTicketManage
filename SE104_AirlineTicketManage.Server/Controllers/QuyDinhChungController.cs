@@ -36,33 +36,32 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             return x;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateChamNhatDatVe/{tg}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateThoiGianChamNhatDatVe(int id, [FromBody] QuyDinhChungDto quyDinhChungUpDate)
+        public IActionResult UpdateThoiGianChamNhatDatVe(int tg)
         {
-            if (UpdateThoiGianChamNhatDatVe == null)
-                return BadRequest(ModelState);
-
-            if (id != quyDinhChungUpDate.ID)
-                return BadRequest(ModelState);
-
-            if (!_quyDinhChungRepository.QuyDinhChungExists(id))
-                return NotFound();
+            _quyDinhChungRepository.UpdateThoiGianChamNhatDatVe(tg);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var quyDinhChungMap = _mapper.Map<QuyDinhChung>(quyDinhChungUpDate);
+            return Ok("Cap nhat thanh cong.");
+        }
 
-            if (!_quyDinhChungRepository.UpdateQuyDinhChung(quyDinhChungMap))
-            {
-                ModelState.AddModelError("", "Something went wrong updating Gioi gian cham nhat");
-                return StatusCode(500, ModelState);
-            }
+        [HttpPut("UpdateHuyDatVe/{tg}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateThoiGianHuyDatVe(int tg)
+        {
+            _quyDinhChungRepository.UpdateThoiGianHuytDatVe(tg);
 
-            return NoContent();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok("Cap nhat thanh cong.");
         }
     }
 }
