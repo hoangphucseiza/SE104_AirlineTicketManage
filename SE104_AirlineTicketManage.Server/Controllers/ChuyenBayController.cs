@@ -74,5 +74,19 @@ namespace SE104_AirlineTicketManage.Server.Controllers
 
             return Ok(thongKe);
         }
+
+        [HttpGet("GetThongTinChiTietChuyenBay/{maCB}")]
+        [ProducesResponseType(200, Type = typeof(ThongTinChiTietChuyenBayDto))]
+        [ProducesResponseType(400)]
+        public IActionResult GetThongTinChuyenBay(string maCB)
+        {
+
+            var thongTinChuyenBay = _chuyenBayRepository.GetThongTinChuyenBay(maCB);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(thongTinChuyenBay);
+        }
     }
 }

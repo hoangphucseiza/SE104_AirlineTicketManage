@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SE104_AirlineTicketManage.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff90168bb40d8a73a124d4823f5c568a2f2edd66")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70a602d97618d8e42d402d600fc8e32360662c23")]
 [assembly: System.Reflection.AssemblyProductAttribute("SE104_AirlineTicketManage.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SE104_AirlineTicketManage.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
