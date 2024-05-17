@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "D:\\CODE FROJECT\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\..\\se104_airlineticketmanage.client",
+"WorkingDirectory": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\..\\se104_airlineticketmanage.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
