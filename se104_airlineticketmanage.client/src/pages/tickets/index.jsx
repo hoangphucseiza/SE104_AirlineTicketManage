@@ -54,7 +54,7 @@ const Tickets = () => {
               </form>
               <Link
                 to={{
-                  pathname: "/airports/add",
+                  pathname: "/tickets/add",
                 }}
                 className="btn btn_table btn_add"
               >
