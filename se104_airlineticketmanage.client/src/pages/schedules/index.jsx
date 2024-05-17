@@ -17,6 +17,10 @@ const Schedules = () => {
     setTextFilter(newValue);
   };
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+  };
+
   const filterOptions = [
     {
       label: "Mã CB",
@@ -51,6 +55,7 @@ const Schedules = () => {
       landing_date: new Date("12/4/2024 12:00"),
       tgBay: "20 phut",
       giaVeCB: "700 000 VND",
+      slSBTG: 2,
       hangVe: {
         typePT: "PT",
         slPT: 250,
@@ -72,6 +77,7 @@ const Schedules = () => {
       landing_date: new Date("12/4/2024 12:00"),
       tgBay: "20 phut",
       giaVeCB: "700 000 VND",
+      slSBTG: 1,
       hangVe: {
         typePT: "PT",
         slPT: 250,
@@ -82,34 +88,46 @@ const Schedules = () => {
   ];
 
   return (
-    <div className="box_cus">
-      <div className="home-cards mt-5">
-        <div className="home-cards-header">
-          <h5>TRA CỨU LỊCH CHUYẾN BAY</h5>
-        </div>
-        <div className="container-bar">
-          <SearchBar
-            text_search={"Thông tin chuyến bay..."}
-            onTextSearchChange={handleTextSearchChange}
-          />
-          <FilterBar
-            filterOptions={filterOptions}
-            onTextSearchChange={handleTextFilterChange}
-          />
-        </div>
-
-        <div className="line"></div>
-
-        <div className="home-flights mt-5">
-          <div className="home-flights-wrapper">
-            <SchedulesTable listSchedule={listScheduleData} />
+    <div className="mb-4 table">
+      <div className="box_shadow mb-3 table_container">
+        <div className="mb-3 ">
+          <div className="d-flex justify-content-between align-items-center mb-3 ">
+            <h5>Danh sách Lịch chuyến bay</h5>
+            <div className="d-flex align-items-center gap-4">
+              <form
+                className="d-flex justify-content-between align-items-center table_search"
+                onSubmit={handleSearch}
+              >
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm chuyến bay..."
+                  className="form-control me-2"
+                  value={searchText}
+                  onChange={handleTextSearchChange}
+                />
+                <i className="fa-solid fa-magnifying-glass" />
+              </form>
+              <Link
+                to={{
+                  pathname: "/schedules/add",
+                }}
+                className="btn btn_table btn_add"
+              >
+                <i className="fa-solid fa-plus" />
+                Thêm mới lịch bay
+              </Link>
+              
+            </div>
+          </div>
+          <div className="d-flex justify-content-between mb-3 ">
+            <FilterBar
+               filterOptions={filterOptions}
+               onTextSearchChange={handleTextFilterChange}
+            />
           </div>
         </div>
-
-        <div className="box-add-schedules">
-          <div className="d-grid gap-2 col-6 mx-auto">
-            <Link to="/schedules/add" className="btn btn-primary add-schedule-btn" type="button" >Thêm mới lịch bay</Link>
-          </div>
+        <div className="mb-3">
+          <SchedulesTable listSchedule={listScheduleData} />
         </div>
 
         <div className="mt-5 home_members_weather">
@@ -117,12 +135,12 @@ const Schedules = () => {
             <Members />
           </div>
           <div className="home_weather">
-            <Weather />
-          </div>
-        </div>
-      </div>
+           <Weather />
+           </div>
+         </div>
 
-      <div className="home-flights mt-5"></div>
+      </div>
+      
     </div>
   );
 };
