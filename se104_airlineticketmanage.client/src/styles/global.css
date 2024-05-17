@@ -22,10 +22,20 @@
 /* --------- AIRPORT -----------*/
 @import url("./airports.css");
 
+/* --------- BOOKING -----------*/
+@import url("./booking.css");
+
+/* --------- FIND TICKETS -----------*/
+@import url("./find_tickets.css");
+
+/* --------- TICKET DETAILS-----------*/
+@import url("./ticket_details.css");
+
 :root {
   --primary-color: #1779c4;
   --primary-color-80: rgba(23, 121, 196, 0.8);
   --primary-color-15: rgba(23, 121, 196, 0.15);
+  --primary-color-10: rgba(23, 121, 196, 0.1);
   --bg-color: #f8f9fb;
   --text-color-bold: #09121e;
   --text-color-medium: #4e4e4e;
@@ -36,8 +46,8 @@
   --bg-success-color: #e7f6ec;
   --danger-color: #d42620;
   --bg-danger-color: #fbeae9;
-  --bg-yellow-color: #FFDC7B;
-
+  --bg-yellow-color: #ffdc7b;
+  --bg-gold-color: #e6b441;
 }
 
 body {
@@ -107,6 +117,37 @@ body {
   color: var(--danger-color);
 }
 
+.btn_outline {
+  padding: 12px 36px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border-color);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.btn_outline.btn_outline_primary {
+  background-color: var(--primary-color-10);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn_outline.btn_outline_danger {
+  background-color: var(--bg-danger-color);
+  border-color: var(--danger-color);
+  color: var(--danger-color);
+  cursor: unset;
+}
+
+.btn_outline.btn_outline_success {
+  background-color: var(--bg-success-color);
+  border-color: var(--success-color-color);
+  color: var(--success-color);
+}
+
+.btn_outline i {
+  font-size: 22px;
+}
+
 /* Pagination */
 .pagination {
   display: flex;
@@ -125,6 +166,27 @@ body {
   color: #fff;
   border-color: var(--primary-color);
   font-weight: 500;
+}
+
+/* Customer Rank Ticket */
+.rank_ticket {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-block;
+  min-width: 130px;
+}
+
+.rank_ticket.rank_1 {
+  background-color: var(--bg-gold-color);
+  color: var(--text-color-bold);
+}
+
+.rank_ticket.rank_2 {
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 /* Custom Filter */
@@ -190,12 +252,23 @@ body {
   transform: translateY(6px);
 }
 
+.dropdown .btn.filter {
+  display: inline-block;
+  width: unset;
+  margin-right: 12px;
+  outline: none;
+  border: none;
+  background-color: #f0f2f5;
+  color: var(--text-color-bold);
+  padding: 8px 12px;
+}
+
 .line {
   border-bottom: 1px solid black;
 }
 
 .container-bar {
-  width: 45%
+  width: 45%;
 }
 
 .add-schedule-btn {

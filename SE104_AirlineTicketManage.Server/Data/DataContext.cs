@@ -841,7 +841,7 @@ namespace SE104_AirlineTicketManage.Server.Data
         public DataContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-            optionsBuilder.UseSqlServer("Server=HOANGPHUCSEIZA\\MSSQLSERVER01;Database=SE104_AirlineTicketManage;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-VJLJQ69\\HOANGVIET;Database=SE104_AirlineTicketManage;Trusted_Connection=true");
 
             return new DataContext(optionsBuilder.Options);
         }

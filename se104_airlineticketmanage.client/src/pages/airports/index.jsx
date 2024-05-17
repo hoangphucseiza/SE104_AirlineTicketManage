@@ -4,74 +4,10 @@ import ExportCSV from "../../components/ExportCSV";
 import Filter from "../../components/Airports/Filter";
 import AirportList from "../../components/Airports/AirportList";
 
-const fakeData = [
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 90,
-    address: "Hà Nội",
-  },
-  {
-    id: "SGN",
-    name: "Tân Sơn Nhất",
-    transit_min: 40,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-  },
-  {
-    id: "HAN",
-    name: "Nội Bài",
-    transit_min: 30,
-    transit_max: 60,
-    address: "Hà Nội",
-    number_transit_airports: [
-      {
-        destination_id: "SGN",
-        destination_name: "Tân Sơn Nhất",
-        destination_add: "Hồ Chí Minh",
-        max_transit_airports: 2,
-      },
-      {
-        destination_id: "DAD",
-        destination_name: "Cảng hàng không quốc tế Đà Nẵng",
-        destination_add: "Đà Nẵng",
-        max_transit_airports: 2,
-      },
-    ],
-  },
-];
+import { getDataAPI } from "../../utils/fetchData";
 
 const Airports = () => {
-  const [airports, setAirports] = useState(fakeData);
+  const [airports, setAirports] = useState([]);
   const [showAirports, setShowAirports] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -83,9 +19,42 @@ const Airports = () => {
   const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   useEffect(() => {
+    const getAirports = async () => {
+      try {
+        let api = "";
+
+        if (filter.transit_time[0] > 0 && filter.transit_time[1] === 0) {
+          api = `api/SanBay/GetSanBayByTGDungToiThieu/${filter.transit_time[0]}/${page}`;
+        } else if (filter.transit_time[1] > 0) {
+          api = `api/SanBay/GetSanBayByTGDung/${filter.transit_time[0]}/${filter.transit_time[1]}/${page}`;
+        } else {
+          api = `api/SanBay/GetDanhSachSanBay${page}`;
+        }
+
+        const res = await getDataAPI(api);
+        res.data &&
+          setAirports(
+            res.data["$values"].map((airport) => ({
+              id: airport.maSB,
+              name: airport.tenSB,
+              address: airport.viTri,
+              transit_max: airport.tgDungMax,
+              transit_min: airport.tgDungMin,
+            }))
+          );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getAirports();
+  }, [page, filter.transit_time]);
+
+  useEffect(() => {
     setShowAirports([...airports]);
   }, [airports]);
 
+  
   useEffect(() => {
     switch (filter.sort) {
       case "name_A_to_Z":
@@ -141,6 +110,11 @@ const Airports = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     window.location.hash = `search=${search}&page=1`;
+
+    const searchAirports = airports.filter((airport) =>
+      airport.id.toLowerCase().includes(search.toLowerCase())
+    );
+    setShowAirports(searchAirports);
   };
 
   return (

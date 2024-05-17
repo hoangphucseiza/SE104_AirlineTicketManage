@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\SE104_AirlineTicketManage.Server.props" />
-</Project>

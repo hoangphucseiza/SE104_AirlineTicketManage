@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SE104_AirlineTicketManage.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa306afcf4aefa5170939ef89defdc300f29d7ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14f29983d5aa8a0af5a98843876812842164f22b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SE104_AirlineTicketManage.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SE104_AirlineTicketManage.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

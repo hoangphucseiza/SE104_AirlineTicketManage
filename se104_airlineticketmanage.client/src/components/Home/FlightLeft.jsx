@@ -11,6 +11,7 @@ const FlightLeft = ({
   setFilters,
   searchFlights,
   setSearchFlights,
+  setShowFlightRight,
 }) => {
   const [departs, setDeparts] = useState([]);
   const [destinations, setDestinations] = useState([]);
@@ -63,7 +64,9 @@ const FlightLeft = ({
             type="button"
             data-bs-toggle="dropdown"
           >
-            {filters.date ? moment(filters.date).format("DD/MM/YYYY") : "Ngày khởi hành"}
+            {filters.date
+              ? moment(filters.date).format("DD/MM/YYYY")
+              : "Ngày khởi hành"}
           </button>
           <ul className="dropdown-menu">
             <DatePicker date={filters.date} onChangeDate={handleChangeDate} />
@@ -76,7 +79,7 @@ const FlightLeft = ({
             data-bs-toggle="dropdown"
           >
             {filters.depart
-              ? `Từ: ${filters.depart.location} (${filters.depart.id}), Việt Nam`
+              ? `Từ: ${filters.depart.address} (${filters.depart.id}), Việt Nam`
               : "Điểm đi"}
           </button>
           <ul className="dropdown-menu home-flight-left-filters-airports">
@@ -88,7 +91,7 @@ const FlightLeft = ({
                 key={index}
                 onClick={() => setFilters({ ...filters, depart })}
               >
-                {depart.location} ({depart.id}), Việt Nam
+                {depart.address} ({depart.id}), Việt Nam
               </li>
             ))}
           </ul>
@@ -100,7 +103,7 @@ const FlightLeft = ({
             data-bs-toggle="dropdown"
           >
             {filters.destination
-              ? `Đến: ${filters.destination.location} (${filters.destination.id}), Việt Nam`
+              ? `Đến: ${filters.destination.address} (${filters.destination.id}), Việt Nam`
               : "Điểm đến"}
           </button>
           <ul className="dropdown-menu home-flight-left-filters-airports">
@@ -112,7 +115,7 @@ const FlightLeft = ({
                 key={index}
                 onClick={() => setFilters({ ...filters, destination })}
               >
-                {destination.location} ({destination.id}), Việt Nam
+                {destination.address} ({destination.id}), Việt Nam
               </li>
             ))}
           </ul>
@@ -129,7 +132,13 @@ const FlightLeft = ({
         </thead>
         <tbody>
           {showFlights.map((flight, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              style={{
+                cursor: "pointer",
+              }}
+              onClick={() => setShowFlightRight(flight)}
+            >
               <td>{flight.id}</td>
               <td
                 style={{

@@ -234,7 +234,7 @@ namespace SE104_AirlineTicketManage.Server.Repository
 
             if (!string.IsNullOrEmpty(searchSDT))
             {
-                veMayBaysQuery = veMayBaysQuery.Where(p =>  p.KhachHang.SDT == searchSDT);
+                veMayBaysQuery = veMayBaysQuery.Where(p =>  p.KhachHang.SDT.Contains(searchSDT));
             }
 
             var veMayBays = veMayBaysQuery.ToList();

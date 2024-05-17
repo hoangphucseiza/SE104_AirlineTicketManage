@@ -7,14 +7,14 @@ const FlightBoard = ({ flight }) => {
     <div className="d-flex flight_board">
       <div>
         <h6 className="mb-0">{flight.depart.id}</h6>
-        <p className="mb-2">{flight.depart.location}</p>
-        <span>{moment(flight.depart_date).format("h:mm")}</span>
+        <p className="mb-2">{flight.depart.address}</p>
+        <span>{moment(flight.depart_date).format("HH:mm")}</span>
       </div>
       <img src={Flight_Icon} alt="Flight icon" />
       <div>
         <h6 className="mb-0">{flight.destination.id}</h6>
-        <p className="mb-2">{flight.destination.location}</p>
-        <span>{moment(flight.landing_date).format("h:mm")}</span>
+        <p className="mb-2">{flight.destination.address}</p>
+        <span>{moment(flight.landing_date).format("HH:mm")}</span>
       </div>
     </div>
   );

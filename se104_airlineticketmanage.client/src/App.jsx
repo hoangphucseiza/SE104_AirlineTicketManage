@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { putDataAPI } from "./utils/fetchData";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,7 +21,10 @@ import ViewCustomer from "./pages/customers/view_customer";
 import Report from "./pages/report";
 import NotFound from "./components/NotFound";
 import Alert from "./components/Alert";
-import DetailAirport from './pages/schedules/detail_airport';
+import DetailAirport from "./pages/schedules/detail_airport";
+import TicketDetail from "./pages/booking/ticket_detail";
+import FillInformation from "./pages/booking/fill_information";
+import Setting from "./pages/setting";
 
 import moment from "moment";
 
@@ -47,6 +51,19 @@ export const AppContext = React.createContext(null);
 function App() {
   const [showSideBar, setShowSideBar] = useState(true);
   const [alert, setAlert] = useState(false);
+
+  useEffect(() => {
+    const autoCancelTicket = async () => {
+      try {
+        const res = await putDataAPI("api/VeMayBay/CapNhatVeMayBayMoiNgay");
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    autoCancelTicket();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -82,14 +99,21 @@ function App() {
                 <Route path="/booking">
                   <Route index element={<Booking />} />
                   <Route path="find" element={<FindTickets />} />
+                  <Route path="find/fill/:id" element={<FillInformation />} />
+
+                  <Route path="ticket/:id" element={<TicketDetail />} />
                 </Route>
-                <Route path="/tickets" element={<Tickets />}></Route>
+                <Route path="/tickets" element={<Tickets />}>
+                  <Route path="add" element={<AddAirPort />} />
+                  <Route path="update/:id" element={<UpdateAirPort />} />
+                </Route>
                 <Route path="/report" element={<Report />}></Route>
                 <Route path="/customers">
                   <Route index element={<Customers />} />
                   <Route path="view/:id" element={<ViewCustomer />} />
                 </Route>
 
+                <Route path="/setting" element={<Setting />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

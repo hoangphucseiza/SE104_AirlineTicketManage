@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
+import { getDataAPI, postDataAPI } from "../../utils/fetchData";
 
 const AddAirPort = () => {
   const { setAlert } = useContext(AppContext);
@@ -47,20 +48,20 @@ const AddAirPort = () => {
   const handleSearchAirport = async (value) => {
     setSearchAirport(value);
 
-    const res = {
-      data: [
-        {
-          id: "VDH",
-          name: "Sân bay Đồng Hới",
-        },
-        {
-          id: "DAD",
-          name: "Cảng hàng không quốc tế Đà Nẵng",
-        },
-      ],
-    };
+    try {
+      const res = await getDataAPI(
+        `api/SanBay/GetSanBayBySearch/${value.toUpperCase()}`
+      );
 
-    setSearchAirportList(res.data);
+      const data = res.data["$values"].map((item) => ({
+        id: item.maSB,
+        name: item.tenSB,
+      }));
+
+      setSearchAirportList(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleClickAirport = (destination) => {
@@ -92,15 +93,15 @@ const AddAirPort = () => {
     });
   };
 
-  const handleAdd = (e) => {
+  const handleAdd = async (e) => {
     e.preventDefault();
     const newError = {};
 
     const specialCharacterRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     const vietnameseCharacterRegex = /[^\x00-\x7F]/;
 
-    if (airport.id.length < 4)
-      newError.id = "*Mã sân bay phải có ít nhất 4 ký tự";
+    if (airport.id.length < 3)
+      newError.id = "*Mã sân bay phải có ít nhất 3 ký tự";
     else if (specialCharacterRegex.test(airport.id)) {
       newError.id = "*Mã sân bay không được chứa ký tự đặc biệt";
     } else if (vietnameseCharacterRegex.test(airport.id)) {
@@ -117,19 +118,46 @@ const AddAirPort = () => {
       newError.transit_min =
         "*Thời gian dừng tối thiểu phải lớn hơn hoặc bằng 0";
 
-    if (airport.transit_max < 0)
+    if (airport.transit_max < 1)
+      newError.transit_max = "*Thời gian dừng tối thiểu phải lớn hơn 0";
+    else if (parseInt(airport.transit_max) < parseInt(airport.transit_min))
       newError.transit_max =
-        "*Thời gian dừng tối thiểu phải lớn hơn hoặc bằng 0";
-    else if (airport.transit_max < airport.transit_min)
-      newError.transit_max =
-        "*Thời gian dừng tối đa phải lớn hơn hoặc bằng thời gian dừng tối thiểu";
+        "*Thời gian dừng tối đa phải lớn hơn thời gian dừng tối thiểu";
 
     setError(newError);
     if (Object.keys(newError).length > 0) {
       return;
     }
 
-    console.log(airport);
+    const postData = {
+      maSanBay: airport.id,
+      tenSanBay: airport.name,
+      thoiGianDungMin: airport.transit_min,
+      thoiGianDungMax: airport.transit_max,
+      viTri: airport.address,
+      sanBayDens: airport.destination_airports.map((destination) => ({
+        maSanBay: destination.destination_id,
+        tenSanBay: destination.destination_name,
+        soSanBayDungToiDa: destination.max_transit_airports,
+        thoiGianBayToiThieu: destination.min_flight_time,
+      })),
+    };
+
+    try {
+      const res = await postDataAPI("api/SanBay/CreateSanBay", postData);
+      navigate("/airports");
+      return setAlert({
+        title: "Thêm sân bay thành công",
+        data: `Sân bay ${airport.id} - ${airport.name} đã được thêm vào hệ thống!`,
+        type: "success",
+      });
+    } catch (err) {
+      return setAlert({
+        title: "Thêm sân bay thất bại",
+        data: `Mã sân bay ${airport.id} đã tồn tại!`,
+        type: "error",
+      });
+    }
   };
 
   return (
@@ -226,7 +254,7 @@ const AddAirPort = () => {
               onChange={(e) =>
                 setAirport({
                   ...airport,
-                  transit_max: e.target.value
+                  transit_max: e.target.value,
                 })
               }
             />

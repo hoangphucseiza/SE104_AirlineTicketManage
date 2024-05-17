@@ -6,7 +6,7 @@ import RoutesName from "../utils/Route_Name";
 function Header({ setShowSideBar }) {
   const { pathname } = useLocation();
 
-  const setNagivatorContent = useCallback(() => {
+  const setNavigatorContent = useCallback(() => {
     var pathname_array = pathname.split("/").slice(1);
     var main_path = RoutesName[pathname_array[0]];
     var sub_paths = main_path
@@ -27,7 +27,7 @@ function Header({ setShowSideBar }) {
           className="fa-solid fa-bars me-4"
           onClick={() => setShowSideBar((pre) => !pre)}
         />
-        {setNagivatorContent().map((content, index, array) => (
+        {setNavigatorContent().map((content, index, array) => (
           <>
             <span className={`${index == array.length - 1 ? "active" : ""}`}>
               {content}

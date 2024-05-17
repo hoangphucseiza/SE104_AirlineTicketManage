@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useCallback } from "react";
 import FlightBoard from "../FlightBoard";
+import moment from "moment";
 
 const FlightRight = ({ flight }) => {
+  if (!flight) return <div className="home-flights-right"></div>;
+
+  const renderHeader = useCallback(() => {
+    const nowDate = new Date();
+
+    if (flight.landing_date.getTime() <= nowDate.getTime()) {
+      return "Đã hạ cánh";
+    }
+    if (
+      flight.depart_date.getTime() <= nowDate.getTime() &&
+      flight.landing_date.getTime() >= nowDate.getTime()
+    ) {
+      return "Đang bay";
+    }
+
+    if (flight.depart_date.getTime() >= nowDate.getTime()) {
+      return "Sắp cất cánh";
+    }
+    return "";
+  }, [flight]);
+
   return (
     <div className="home-flights-right">
       <div className="d-flex align-items-center flex-column home-flights-right-above">
         <div className="mb-3 home-flights-rights-header">
-          <span>Đang bay</span>
+          <span>{renderHeader()}</span>
         </div>
-        <h5 className="mb-3">{flight.id}</h5>
+        <h5 className="mb-3">{`${flight.id} - ${moment(
+          flight.depart_date
+        ).format("D MMMM")}`}</h5>
         <FlightBoard flight={flight} />
         <div className="my-3 w-100">
           <div className="home-flight-rights-process mb-1">
@@ -43,7 +67,7 @@ const FlightRight = ({ flight }) => {
       </div>
       <div className="d-flex align-items-center flex-column mt-3 home-flights-right-below">
         <div className="mb-3 home-flights-rights-header">
-          <span>Phiếu đặt vé đã hủy</span>
+          <span>Số lượng ghế trống</span>
         </div>
         <h5 className="mb-3">{flight.id}</h5>
 
