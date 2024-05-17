@@ -80,7 +80,6 @@
       "DocumentGroups": [
         {
           "DockedHeight": 82,
-<<<<<<< HEAD
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -106,8 +105,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\SE104_AirlineTicketManage.Server.http",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-05-17T13:46:58.573Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-17T13:46:58.573Z"
             },
             {
               "$type": "Document",
@@ -119,8 +117,7 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T13:46:57.574Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-17T13:46:57.574Z"
             },
             {
               "$type": "Document",
@@ -130,8 +127,7 @@
               "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "ViewState": "AQIAAJAVAAAAAAAAAAAAAJsVAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-05-17T13:46:42.248Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-17T13:46:42.248Z"
             },
             {
               "$type": "Document",
@@ -141,19 +137,11 @@
               "ToolTip": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
               "ViewState": "AQIAAM8BAAAAAAAAAAAAANoBAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-05-17T13:46:41.783Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-17T13:46:41.783Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-=======
-          "SelectedChildIndex": 4,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
->>>>>>> a9757be6ea5f216aac2c11974bf731a31f4a024b
               "Title": "UpdateSanBayDto.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Dto\\UpdateSanBayDto.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Dto\\UpdateSanBayDto.cs",
@@ -209,16 +197,11 @@
               "RelativeToolTip": "SE104_AirlineTicketManage.Server\\Repository\\VeMayBayRepository.cs",
               "ViewState": "AQIAAJwAAAAAAAAAAADwv+gAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:35:59.795Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:35:59.795Z"
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
               "DocumentIndex": 6,
-=======
-              "DocumentIndex": 1,
->>>>>>> a9757be6ea5f216aac2c11974bf731a31f4a024b
               "Title": "VeMayBayController.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Controllers\\VeMayBayController.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Controllers\\VeMayBayController.cs",
@@ -230,11 +213,7 @@
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
               "DocumentIndex": 10,
-=======
-              "DocumentIndex": 5,
->>>>>>> a9757be6ea5f216aac2c11974bf731a31f4a024b
               "Title": "ISanBayRepository.cs",
               "DocumentMoniker": "D:\\Workspace\\NhapMon_CNPM\\SE104_AirlineTicketManage\\SE104_AirlineTicketManage.Server\\Interfaces\\ISanBayRepository.cs",
               "RelativeDocumentMoniker": "SE104_AirlineTicketManage.Server\\Interfaces\\ISanBayRepository.cs",
