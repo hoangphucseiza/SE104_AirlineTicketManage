@@ -32,5 +32,25 @@ namespace SE104_AirlineTicketManage.Server.Repository
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+        public ICollection<HangVe> GetDanhSachHangVe()
+        {
+            return _context.HangVes.OrderBy(p => p.MaHV).ToList();
+        }
+
+        public HangVe GetDanhSachHangVe(string MaHV)
+        {
+            return _context.HangVes.Where(p => p.MaHV == MaHV).FirstOrDefault();
+        }
+        public bool CreateHangVe(HangVe hangVe)
+        {
+            _context.Add(hangVe);
+
+            return Save();
+        }
+        public bool UpdateHangVe(HangVe hangVe)
+        {
+            _context.Update(hangVe);
+            return Save();
+        }
     }
 }

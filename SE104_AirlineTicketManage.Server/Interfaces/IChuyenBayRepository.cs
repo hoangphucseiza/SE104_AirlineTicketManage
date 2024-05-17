@@ -15,6 +15,7 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         ICollection<dynamic>  ThongKeTrangChu();
 
         ThongTinChiTietChuyenBayDto  GetThongTinChuyenBay(string maCB);
+        ICollection<GetDanhSachChuyenBayDto> GetDanhSachChuyenBay();
 
         bool Save();
     }

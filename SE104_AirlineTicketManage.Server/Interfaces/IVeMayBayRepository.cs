@@ -30,5 +30,7 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         bool ThemPhieuDatCho(ThemPhieuDatChoDto themPhieuDatChoDto);
 
         bool Save();
+
+        GetChiTietByMaVeDto GetDetailByMaVe(string maVe);
     }
 }
