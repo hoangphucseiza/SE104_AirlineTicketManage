@@ -17,6 +17,11 @@ namespace SE104_AirlineTicketManage.Server.Repository
             return _context.SoSanBayDungs.Where(p => p.MaSanBayDi == maSBDi && p.MaSanBayDen == maSBDen).Select(p => p.SoSBDung_Max).FirstOrDefault();
         }
 
+        public int GetThoiGianBayToiThieu(string maSBDi, string maSBDen)
+        {
+            return _context.SoSanBayDungs.Where(p => p.MaSanBayDi == maSBDi && p.MaSanBayDen == maSBDen).Select(p => p.ThoiGianBayToiThieu).FirstOrDefault();
+        }
+
         public bool Save()
         {
            var saved = _context.SaveChanges();

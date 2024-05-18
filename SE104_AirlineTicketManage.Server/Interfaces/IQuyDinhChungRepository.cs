@@ -4,7 +4,9 @@
     {
         int GetThoiGianChamNhatDatVe();
         int GetThoiGianHuyDatVe();
-
+        bool UpdateThoiGianChamNhatDatVe(int tgChamNhatDatVe);
+        bool UpdateThoiGianHuytDatVe(int tgHuyDatVe);
+        bool QuyDinhChungExists(int id);
         bool Save();
     }
 }

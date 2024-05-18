@@ -219,5 +219,17 @@ namespace SE104_AirlineTicketManage.Server.Controllers
 
             return Ok("Thêm phiếu đặt chỗ thành công");
         }
+
+        [HttpGet("GetDetailByMaVe{maVe}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<GetChiTietByMaVeDto>))]
+        public IActionResult GetDetailByMaVe(string maVe)
+        {
+            var chuyenBays = _veMayBayRepository.GetDetailByMaVe(maVe);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(chuyenBays);
+        }
     }
 }
