@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import FindFlightList from "../../components/Booking/FindFlightList";
+
+import { AppContext } from "../../App";
 
 const fakeData = [
   {
-    id:'CB001',
+    id: "CB001",
     depart: {
       id: "HAN",
       address: "Hà Nội",
@@ -21,7 +23,7 @@ const fakeData = [
     ticket_sold: 100,
   },
   {
-    id:'CB001',
+    id: "CB001",
     depart: {
       id: "HAN",
       address: "Hà Nội",
@@ -41,6 +43,9 @@ const fakeData = [
 
 const FindTickets = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const { setAlert } = useContext(AppContext);
 
   const [depart, destination, date] = location.search
     .slice(1)
@@ -49,7 +54,19 @@ const FindTickets = () => {
 
   const [flights, setFlights] = useState(fakeData);
 
-  return (  
+  const handleClickFlight = (flight) => {
+    if (flight.capacity === flight.ticket_sold) {
+      return setAlert({
+        title: "Đặt vé không thành công",
+        data: `Chuyến bay ${flight.depart.id} - ${flight.destination.id} đã hết vé. Vui lòng chọn chuyến bay khác.`,
+        type: "error",
+      });
+    }
+
+    navigate(`/booking/find/fill/${flight.id}`);
+  };
+
+  return (
     <div className="find_tickets">
       <div className="mb-5 find_tickets_header">
         <h5>Chọn chuyến bay</h5>
@@ -87,7 +104,11 @@ const FindTickets = () => {
       </div>
       <div className="find_tickets_list">
         <h5 className="mb-3">Danh sách chuyến bay chiều đi</h5>
-        <FindFlightList flights={flights} />
+        <FindFlightList
+          flights={flights}
+          handleClickFlight={handleClickFlight}
+   
+        />
       </div>
     </div>
   );

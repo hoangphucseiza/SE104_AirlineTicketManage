@@ -4,10 +4,7 @@ import FormatMoney from "../../utils/FormatMoney";
 import FlightBoard from "../FlightBoard";
 import moment from "moment";
 
-import { AppContext } from "../../App";
-
-const FindFlightList = ({ flights }) => {
-  const { setAlert } = useContext(AppContext);
+const FindFlightList = ({ flights, handleClickFlight, showFilter = true }) => {
   const [sortType, setSortType] = useState(null);
   const [ticketRanks, setTicketRanks] = useState([]);
   const sortTypes = ["Ngày khởi hành", "Giá vé", "Số ghế trống"];
@@ -36,52 +33,43 @@ const FindFlightList = ({ flights }) => {
     return `${hours} tiếng ${mins} phút`;
   };
 
-  const handleClickFlight = (flight) => {
-    if (flight.capacity === flight.ticket_sold) {
-      return setAlert({
-        title: "Đặt vé không thành công",
-        data: `Chuyến bay ${flight.depart.id} - ${flight.destination.id} đã hết vé. Vui lòng chọn chuyến bay khác.`,
-        type: "error",
-      });
-    }
-    navigate(`/booking/find/fill/${flight.id}`);
-  };
-
   return (
     <div className="find_tickets_list_flight">
-      <div className="d-flex align-items-center gap-4 mb-4">
-        <p
-          className="mb-0"
-          style={{
-            color: "var(--text-color-bold)",
-            fontWeight: "500",
-          }}
-        >
-          {flights.length} kết quả
-        </p>
-
-        <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown-toggle filter"
-            type="button"
-            data-bs-toggle="dropdown"
-          >
-            {`Sắp xếp theo:  ${sortType ? sortType : ""}`}
-          </button>
-          <ul
-            className="dropdown-menu home-flight-left-filters-airports"
+      {showFilter && (
+        <div className="d-flex align-items-center gap-4 mb-4">
+          <p
+            className="mb-0"
             style={{
-              width: "100%",
+              color: "var(--text-color-bold)",
+              fontWeight: "500",
             }}
           >
-            {sortTypes.map((sort, index) => (
-              <li key={index} onClick={() => setSortType(sort)}>
-                {sort}
-              </li>
-            ))}
-          </ul>
+            {flights.length} kết quả
+          </p>
+
+          <div className="dropdown">
+            <button
+              className="btn btn-secondary dropdown-toggle filter"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              {`Sắp xếp theo:  ${sortType ? sortType : ""}`}
+            </button>
+            <ul
+              className="dropdown-menu home-flight-left-filters-airports"
+              style={{
+                width: "100%",
+              }}
+            >
+              {sortTypes.map((sort, index) => (
+                <li key={index} onClick={() => setSortType(sort)}>
+                  {sort}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
+      )}
       <table className="table">
         <thead>
           <tr>

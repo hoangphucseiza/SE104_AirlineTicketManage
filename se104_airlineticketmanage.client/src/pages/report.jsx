@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import TableRevenueFlight from "../components/ReportSummary/TableRevenueFlight";
 import FilterBar from "../components/Customer/FilterBar";
 import TableRevenueYear from "../components/ReportSummary/TableRevenueYear";
@@ -36,35 +36,47 @@ const fakeDataYear = [
 ];
 
 const Report = () => {
-  const [textFilter1, setTextFilter1] = useState("");
+  const [isShowMonth, setIsShowMonth] = useState(true);
 
-  const handleTextFilterChange1 = (newValue) => {
-    setTextFilter1(newValue);
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+
+  const arrMonths = useMemo(() => {
+    let maxMonth = 0;
+    const monthArray = [];
+
+    if (year === new Date().getFullYear()) {
+      maxMonth = new Date().getMonth() + 1;
+    } else {
+      maxMonth = 12;
+    }
+
+    for (let i = 1; i <= maxMonth; i++) {
+      monthArray.push(i);
+    }
+    return monthArray;
+  }, [year]);
+
+  const yearArray = () => {
+    let maxYear = new Date().getFullYear();
+    const yearArray = [];
+    for (let i = maxYear; i >= 2020; i--) {
+      yearArray.push(i);
+    }
+    return yearArray;
   };
 
-  const filterOptions1 = [
-    {
-      label: "THÁNG",
-      values: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-    },
-    {
-      label: "NĂM",
-      values: ["2022", "2023", "2024"],
-    },
-  ];
+  useEffect(() => {
+    let hash = "";
+    if (isShowMonth) {
+      hash += `month=${month}`;
+    }
 
-  const [textFilter2, setTextFilter2] = useState("");
+    hash += `${hash.length > 0 ? "&" : ""}year=${year}`;
 
-  const handleTextFilterChange2 = (newValue) => {
-    setTextFilter2(newValue);
-  };
-
-  const filterOptions2 = [
-    {
-      label: "NĂM",
-      values: ["2020", "2021", "2022", "2023", "2024"],
-    },
-  ];
+    hash += `${hash.length > 0 ? "&" : ""}`;
+    window.location.hash = hash;
+  }, [year, month, isShowMonth]);
 
   const list_flights = [
     {
@@ -134,32 +146,118 @@ const Report = () => {
 
   return (
     <div className="report-container">
+      <header className="d-flex mb-4">
+        <p
+          className={`mb-0 ${isShowMonth ? "active" : ""}`}
+          style={{
+            borderRight: "1px solid var(--border-color)",
+          }}
+          onClick={() => setIsShowMonth(true)}
+        >
+          Báo cáo doanh thu theo tháng
+        </p>
+        <p
+          className={`mb-0 ${!isShowMonth ? "active" : ""}`}
+          onClick={() => setIsShowMonth(false)}
+        >
+          Báo cáo doanh thu theo năm
+        </p>
+      </header>
       <div className="chart-container">
-        <div className="chart-wrapper">
-          <h4>BIỂU ĐỒ DOANH THU BÁN VÉ CÁC CHUYẾN BAY</h4>
-          <ChartFlight data={chartDataFlight} />
-        </div>
-        <div className="chart-wrapper">
-          <h4>BIỂU ĐỒ DOANH THU NĂM</h4>
-          <ChartYear data={chartDataYear} />
-        </div>
+        {isShowMonth ? (
+          <div className="chart-wrapper">
+            <h4>Biểu đồ doanh thu các chuyến bay trong tháng</h4>
+            <ChartFlight data={chartDataFlight} />
+          </div>
+        ) : (
+          <div className="chart-wrapper">
+            <h4>Biểu đồ doanh thu các chuyến bay của từng tháng trong năm</h4>
+            <ChartYear data={chartDataYear} />
+          </div>
+        )}
       </div>
 
-      <h2>DOANH THU BÁN VÉ CÁC CHUYẾN BAY</h2>
-      {/* FilterBar và TableRevenueFlight */}
-      <FilterBar
-        filterOptions={filterOptions1}
-        onTextSearchChange={handleTextFilterChange1}
-      />
-      <TableRevenueFlight listFlights={listFlights} />
+      {isShowMonth ? (
+        <div className="pt-3">
+          <h4 className="mb-3">
+            Danh sách doanh thu các chuyến bay trong tháng
+          </h4>
 
-      <h2>DOANH THU NĂM</h2>
-      {/* FilterBar và TableRevenueYear */}
-      <FilterBar
-        filterOptions={filterOptions2}
-        onTextSearchChange={handleTextFilterChange2}
-      />
-      <TableRevenueYear listMonth={listMonth} />
+          <div className="home-flight-left-filters mb-4">
+            <h6 className="mb-0 me-3">Bộ lọc</h6>
+
+            <div className="dropdown">
+              <button
+                className="btn btn-secondary dropdown-toggle filter"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                {`Tháng: ${month}`}
+              </button>
+              <ul
+                className="dropdown-menu home-flight-left-filters-airports"
+                style={{
+                  maxHeight: "200px",
+                  overflowY: "auto",
+                }}
+              >
+                {arrMonths.map((item, index) => (
+                  <li key={index} onClick={() => setMonth(index + 1)}>
+                    {`Tháng ${index + 1}`}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="dropdown">
+              <button
+                className="btn btn-secondary dropdown-toggle filter"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                {`Năm: ${year}`}
+              </button>
+              <ul className="dropdown-menu home-flight-left-filters-airports">
+                {yearArray().map((item, index) => (
+                  <li key={index} onClick={() => setYear(item)}>
+                    {`Năm ${item}`}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <TableRevenueFlight listFlights={listFlights} />
+        </div>
+      ) : (
+        <div>
+          <h4 className="mb-3">
+            Danh sách doanh thu các chuyến bay từng tháng trong năm
+          </h4>
+          <div className="home-flight-left-filters mb-4">
+            <h6 className="mb-0 me-3">Bộ lọc</h6>
+
+            <div className="dropdown">
+              <button
+                className="btn btn-secondary dropdown-toggle filter"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                {`Năm: ${year}`}
+              </button>
+              <ul className="dropdown-menu home-flight-left-filters-airports">
+                {yearArray().map((item, index) => (
+                  <li key={index} onClick={() => setYear(item)}>
+                    {`Năm ${item}`}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <TableRevenueYear listMonth={listMonth} />
+        </div>
+      )}
     </div>
   );
 };
