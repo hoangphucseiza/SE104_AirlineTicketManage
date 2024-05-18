@@ -43,17 +43,17 @@ namespace SE104_AirlineTicketManage.Server.Repository
         }
         public KhachHang GetKhachHangByCCCD(string cccd)
         {
-            return _context.KhachHangs.Where(p => p.CMND == cccd).FirstOrDefault();
+            return _context.KhachHangs.Where(p => p.CMND.Contains(cccd)).FirstOrDefault();
         }
 
         public KhachHang GetKhachHangByMaKH(string maKH)
         {
-            return _context.KhachHangs.Where(p => p.MaKH == maKH).FirstOrDefault();
+            return _context.KhachHangs.Where(p => p.MaKH.Contains(maKH)).FirstOrDefault();
         }
 
         public KhachHang GetKhachHangBySDT(string sdt)
         {
-            return _context.KhachHangs.Where(p => p.SDT == sdt).FirstOrDefault();
+            return _context.KhachHangs.Where(p => p.SDT.Contains(sdt)).FirstOrDefault();
         }
 
         public GetDetailKhachHangDto GetKhachHangDetail(string maKH)

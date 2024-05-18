@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Report from "../../components/Customer/Report";
+import { getDataAPI } from "../../utils/fetchData";
 
 const listCustomer = [
   {
@@ -7,7 +8,6 @@ const listCustomer = [
     name: "Nguyễn Thị Bích Hảo",
     cmnd: "064303000659",
     phone: "0347743943",
-    flight_counts: 3,
   },
 ];
 
@@ -19,13 +19,47 @@ const Customers = () => {
 
   const searchBys = ["maKH", "SDT", "CMND"];
 
-  const formatCMND = (cmnd) => {
-    return cmnd.slice(0, 4) + cmnd.slice(4).replace(/./g, "*");
-  };
+  useEffect(() => {
+    const getCustomers = async () => {
+      let api = "api/KhachHang/GetKhachHangBy";
+
+      switch (searchBy) {
+        case "maKH":
+          api += "MaKH";
+          break;
+        case "SDT":
+          api += "SDT";
+          break;
+        default:
+          api += "CCCD";
+          break;
+      }
+
+      api += `/${searchText.toUpperCase()}`;
+
+      if (searchText === "") api = "api/KhachHang/GetDanhSachKhachHang";
+
+      const res = await getDataAPI(api);
+
+      const data = res.data["$values"].map((item) => ({
+        id: item.maKH,
+        name: item.tenKH,
+        cmnd: item.cmnd,
+        phone: item.sdt,
+      }));
+
+      setCustomers(data);
+    };
+    getCustomers();
+  }, [searchBy, searchText]);
 
   useEffect(() => {
     window.location.hash = `searchBy=${searchBy}`;
   }, [searchBy]);
+
+  const formatCMND = (cmnd) => {
+    return cmnd.slice(0, 4) + cmnd.slice(4).replace(/./g, "*");
+  };
 
   return (
     <div className="box_cus">
@@ -87,7 +121,6 @@ const Customers = () => {
                 <th scope="col">Tên hành khách</th>
                 <th scope="col">Số điện thoại</th>
                 <th scope="col">Chứng minh nhân dân</th>
-                <th scope="col">Số lượng chuyến bay đã đi</th>
               </tr>
             </thead>
             <tbody>
@@ -98,7 +131,6 @@ const Customers = () => {
                   <td>{customer.name}</td>
                   <td>{customer.phone}</td>
                   <td>{formatCMND(customer.cmnd)}</td>
-                  <td>{customer.flight_counts}</td>
                 </tr>
               ))}
             </tbody>
