@@ -27,6 +27,7 @@ import FillInformation from "./pages/booking/fill_information";
 import Setting from "./pages/setting";
 
 import moment from "moment";
+import AddTicket from "./pages/tickets/add_ticket";
 
 moment.updateLocale("en", {
   weekdays: ["Chủ Nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"],
@@ -103,8 +104,9 @@ function App() {
 
                   <Route path="ticket/:id" element={<TicketDetail />} />
                 </Route>
-                <Route path="/tickets" element={<Tickets />}>
-                  <Route path="add" element={<AddAirPort />} />
+                <Route path="/tickets">
+                  <Route index element = {<Tickets />} />
+                  <Route path="add" element={<AddTicket />} />
                   <Route path="update/:id" element={<UpdateAirPort />} />
                 </Route>
                 <Route path="/report" element={<Report />}></Route>
