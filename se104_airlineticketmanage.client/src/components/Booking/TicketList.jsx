@@ -284,7 +284,8 @@ const TicketList = () => {
                 </p>
               </td>
               <td>
-                {ticket.ticket_state === "Chưa Thanh Toán"
+                {ticket.ticket_state === "Chưa Thanh Toán" ||
+                ticket.ticket_state === "Chưa thanh toán"
                   ? "Phiếu đặt chỗ"
                   : ticket.ticket_state === "Đã mua"
                   ? "Vé máy bay"

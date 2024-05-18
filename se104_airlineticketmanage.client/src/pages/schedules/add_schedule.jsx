@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
-import { getDataAPI, putDataAPI } from "../../utils/fetchData";
+import { getDataAPI, postDataAPI } from "../../utils/fetchData";
 import moment from "moment";
 
 const UpdateAirPort = () => {
@@ -52,6 +52,35 @@ const UpdateAirPort = () => {
     getAirports();
   }, []);
 
+  useEffect(() => {
+    const getConstraint = async () => {
+      try {
+        if (!flight.depart_id || !flight.destination_id) return;
+
+        const res1 = await getDataAPI(
+          `api/SoSanBayDung/GetThoiGianBayToiThieu/${flight.depart_id}/${flight.destination_id}`
+        );
+
+        const res2 = await getDataAPI(
+          `api/SoSanBayDung/GetSoSanBayDungMax/${flight.depart_id}/${flight.destination_id}`
+        );
+
+        setConstraint({
+          number_transit_max: res2.data ? res2.data : 2,
+          min_flight_time: res1.data ? res1.data : 30,
+        });
+      } catch (err) {
+        console.log(err);
+        setConstraint({
+          number_transit_max: 2,
+          min_flight_time: 30,
+        });
+      }
+    };
+
+    getConstraint();
+  }, [id, flight.depart_id, flight.destination_id]);
+
   const desAirports = useMemo(() => {
     return airports.filter((airport) => airport.id !== flight.depart_id);
   }, [airports, flight.depart_id]);
@@ -96,29 +125,12 @@ const UpdateAirPort = () => {
     setSearchTicket(value);
 
     try {
-      // const res = await getDataAPI(
-      //   `api/SanBay/GetSanBayBySearch/${value.toUpperCase()}`
-      // );
+      const res = await getDataAPI(`api/HangVe/GetDanhSachHangVe`);
 
-      // const data = res.data["$values"].map((item) => ({
-      //   id: item.maSB,
-      //   name: item.tenSB,
-      // }));
-
-      const data = [
-        {
-          id: "HV01",
-          name: "Hạng vé 1",
-        },
-        {
-          id: "HV02",
-          name: "Hạng vé 2",
-        },
-        {
-          id: "HV03",
-          name: "Hạng vé 3",
-        },
-      ];
+      const data = res.data["$values"].map((item) => ({
+        id: item.maHV,
+        name: item.tenHV,
+      }));
 
       setSearchTicketList(data);
     } catch (error) {
@@ -210,7 +222,7 @@ const UpdateAirPort = () => {
       newError.flight_time = `*Thời gian bay tối thiểu cho chuyến bay từ ${flight.depart_id} đến ${flight.destination_id} là ${constraint.min_flight_time} phút!`;
     }
 
-    if(flight.tickets.length===0){
+    if (flight.tickets.length === 0) {
       newError.tickets = "*Chuyến bay phải có ít nhất một hạng vé!";
     }
 
@@ -236,7 +248,42 @@ const UpdateAirPort = () => {
     if (Object.keys(newError).length > 0) return setError(newError);
     else setError({});
 
-    console.log(flight);
+    const postData = {
+      maSanBayDi: flight.depart_id,
+      maSanBayDen: flight.destination_id,
+      ngayGioBay: moment(flight.depart_date).format("YYYY-MM-DDTHH:mm"),
+      thoiGianBay: flight.flight_time,
+      giaVe: flight.price,
+      sanBayDungs: flight.transit_airports.map((item) => ({
+        maSB: item.id,
+        thoiGianDung: item.transit_time,
+        ghiChu: item.note,
+      })),
+      hangVes: flight.tickets.map((item) => ({
+        maHangVe: item.id,
+        soLuongGhe: item.numbers,
+      })),
+    };
+    try {
+      const res = await postDataAPI(
+        "api/ChuyenBay/CreateLichChuyenBay",
+        postData
+      );
+
+      navigate("/schedules");
+
+      return setAlert({
+        title: "Tạo lịch chuyến bay thành công",
+        data: `Tạo lịch chuyến bay từ ${flight.depart_id} đến ${flight.destination_id} thành công!`,
+        type: "success",
+      });
+    } catch (error) {
+      return setAlert({
+        title: "Tạo lịch chuyến abay thất bại",
+        data: `Tạo lịch chuyến bay không thành công!`,
+        type: "error",
+      });
+    }
   };
 
   return (
@@ -608,9 +655,7 @@ const UpdateAirPort = () => {
                 </td>
               )}
             </tr>
-           
           </tbody>
-          
         </table>
 
         <div className="pb-3 pt-4 text-center">

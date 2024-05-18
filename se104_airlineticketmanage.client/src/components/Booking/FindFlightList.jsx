@@ -74,6 +74,7 @@ const FindFlightList = ({ flights, handleClickFlight, showFilter = true }) => {
         <thead>
           <tr>
             <th scope="col">#</th>
+            <th scope="col">Mã CB</th>
             <th scope="col">Điểm đi - Điểm đến</th>
             <th
               scope="col"
@@ -111,9 +112,18 @@ const FindFlightList = ({ flights, handleClickFlight, showFilter = true }) => {
           </tr>
         </thead>
         <tbody>
+          {flights.length === 0 && (
+            <tr>
+              <td colSpan="8" className="text-center">
+                Không tìm thấy chuyến bay nào
+              </td>
+            </tr>
+          
+          )}
           {flights.map((flight, index) => (
             <tr key={index} onClick={() => handleClickFlight(flight)}>
               <td>{index + 1}</td>
+              <td>{flight.id}</td>
               <td>
                 <FlightBoard flight={flight} />
               </td>

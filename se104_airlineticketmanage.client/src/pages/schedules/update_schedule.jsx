@@ -4,96 +4,101 @@ import { AppContext } from "../../App";
 import { getDataAPI, putDataAPI } from "../../utils/fetchData";
 import moment from "moment";
 
-const fakeData = {
-  id: "SB001",
-  depart_id: "HAN",
-  destination_id: "SGN",
-  depart_date: new Date("5/20/2024 10:00"),
-  flight_time: 120,
-  price: 800000,
-  transit_airports: [
-    {
-      id: "VDH",
-      address: "Quảng Bình",
-      transit_time: 10,
-      transit_min: 10,
-      transit_max: 20,
-      note: "note",
-    },
-  ],
-  tickets: [
-    {
-      id: "HV01",
-      name: "Hạng vé 1",
-      numbers: 100,
-      ticket_sold: 50,
-    },
-    {
-      id: "HV02",
-      name: "Hạng vé 2",
-      numbers: 20,
-      ticket_sold: 10,
-    },
-  ],
-};
-
 const UpdateAirPort = () => {
   const { setAlert } = useContext(AppContext);
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [flight, setFlight] = useState(fakeData);
+  const [flight, setFlight] = useState({});
   const [error, setError] = useState({});
   const [showSearchTicket, setShowSearchTicket] = useState(false);
   const [searchTicket, setSearchTicket] = useState("");
   const [searchTicketList, setSearchTicketList] = useState([]);
-  const [originFlight, setOriginFlight] = useState(fakeData);
+  const [originFlight, setOriginFlight] = useState({});
 
   const [constraint, setConstraint] = useState({
     min_flight_time: 120,
     number_transit_max: 2,
   });
 
-  // useEffect(() => {
-  //   const getAirport = async () => {
-  //     try {
-  //       if (!id) return;
-  //       const res = await getDataAPI(`api/SanBay/GetUpdateSanBay/${id}`);
+  useEffect(() => {
+    const getFlight = async () => {
+      try {
+        if (!id) return;
+        const res = await getDataAPI(
+          `api/ChuyenBay/GetLichChuyenBayByMaCB/${id}`
+        );
 
-  //       console.log(res.data);
+        if (!res.data) return;
 
-  //       if (!res.data) return;
+        const data = {
+          id: res.data.maCB,
+          depart_id: res.data.maSanBayDi,
+          destination_id: res.data.maSanBayDen,
+          depart_date: new Date(res.data.ngayGioBay),
+          flight_time: res.data.thoiGianBay,
+          price: res.data.giaVe,
+          transit_airports: res.data.sanBayDungs["$values"].map((item) => ({
+            id: item.maSB,
+            address: item.viTri,
+            transit_time: item.thoiGiandung,
+            transit_min: item.thoiGianDungMin,
+            transit_max: item.thoiGianDungMax,
+            note: item.ghiChu,
+          })),
+          tickets: res.data.hangVes["$values"].map((item) => ({
+            id: item.maHangVe,
+            name: item.tenHangVe,
+            numbers: item.soLuongGhe,
+            ticket_sold: item.soVeDaBan,
+          })),
+        };
 
-  //       const newAirport = {
-  //         id: res.data.maSanBay,
-  //         name: res.data.tenSanBay,
-  //         address: res.data.viTri,
-  //         transit_max: res.data.thoiGianDungMax,
-  //         transit_min: res.data.thoiGianDungMin,
-  //         destination_airports: res.data.sanBayDens["$values"].map((des) => ({
-  //           destination_id: des.maSanBay,
-  //           destination_name: des.tenSanBay,
-  //           max_transit_airports: des.soSanBayDungToiDa,
-  //           min_flight_time: des.thoiGianBayToiThieu,
-  //         })),
-  //       };
+        setFlight(data);
+        setOriginFlight(data);
+      } catch (err) {
+        return setAlert({
+          title: "Không tìm thấy chuyến bay",
+          data:
+            err.response.data.message ||
+            `Không tìm thấy chuyến bay có mã ${id}!`,
+          type: "error",
+        });
+      }
+    };
 
-  //       setAirport(newAirport);
-  //     } catch (err) {
-  //       return setAlert({
-  //         title: "Không tìm thấy sân bay",
-  //         data:
-  //           err.response.data.message || `Không tìm thấy sân bay có mã ${id}!`,
-  //         type: "error",
-  //       });
-  //     }
-  //   };
+    getFlight();
+  }, [id]);
 
-  //   getAirport();
-  // }, [id]);
+  useEffect(() => {
+    const getMinFlightTime = async () => {
+      try {
+        if (!id) return;
+
+        if (!flight.depart_id || !flight.destination_id) return;
+
+        const res = await getDataAPI(
+          `api/SoSanBayDung/GetThoiGianBayToiThieu/${flight.depart_id}/${flight.destination_id}`
+        );
+
+        setConstraint((pre) => ({
+          ...pre,
+          min_flight_time: res.data ? res.data : 30,
+        }));
+      } catch (err) {
+        console.log(err);
+        setConstraint((pre) => ({
+          ...pre,
+          min_flight_time: 30,
+        }));
+      }
+    };
+
+    getMinFlightTime();
+  }, [id, flight.depart_id, flight.destination_id]);
 
   const isPastFlight = () => {
-    return originFlight?.depart_date.getTime() < new Date().getTime();
+    return originFlight?.depart_date?.getTime() < new Date().getTime();
   };
 
   const handleChangeDate = (date) => {
@@ -129,29 +134,12 @@ const UpdateAirPort = () => {
     setSearchTicket(value);
 
     try {
-      // const res = await getDataAPI(
-      //   `api/SanBay/GetSanBayBySearch/${value.toUpperCase()}`
-      // );
+      const res = await getDataAPI(`api/HangVe/GetDanhSachHangVe`);
 
-      // const data = res.data["$values"].map((item) => ({
-      //   id: item.maSB,
-      //   name: item.tenSB,
-      // }));
-
-      const data = [
-        {
-          id: "HV01",
-          name: "Hạng vé 1",
-        },
-        {
-          id: "HV02",
-          name: "Hạng vé 2",
-        },
-        {
-          id: "HV03",
-          name: "Hạng vé 3",
-        },
-      ];
+      const data = res.data["$values"].map((item) => ({
+        id: item.maHV,
+        name: item.tenHV,
+      }));
 
       setSearchTicketList(data);
     } catch (error) {
@@ -232,7 +220,43 @@ const UpdateAirPort = () => {
     if (Object.keys(newError).length > 0) return setError(newError);
     else setError({});
 
-    console.log(flight);
+    const postData = {
+      maCB: flight.id,
+      maSanBayDi: flight.depart_id,
+      maSanBayDen: flight.destination_id,
+      ngayGioBay: moment(flight.depart_date).format("YYYY-MM-DDTHH:mm"),
+      thoiGianBay: flight.flight_time,
+      giaVe: flight.price,
+      sanBayDungs: flight.transit_airports.map((item) => ({
+        maSB: item.id,
+        thoiGianDung: item.transit_time,
+        ghiChu: item.note,
+      })),
+      hangVes: flight.tickets.map((item) => ({
+        maHangVe: item.id,
+        soLuongGhe: item.numbers,
+      })),
+    };
+    try {
+      const res = await putDataAPI(
+        "api/ChuyenBay/UpdateLichChuyenBay",
+        postData
+      );
+
+      navigate("/schedules");
+
+      return setAlert({
+        title: "Cập nhật lịch chuyến bay thành công",
+        data: `Cập nhật lịch chuyến bay ${flight.id} thành công!`,
+        type: "success",
+      });
+    } catch (error) {
+      return setAlert({
+        title: "Cập nhật chuyến bay thất bại",
+        data: `Cập nhật chuyến bay ${flight.id} không thành công!`,
+        type: "error",
+      });
+    }
   };
 
   return (

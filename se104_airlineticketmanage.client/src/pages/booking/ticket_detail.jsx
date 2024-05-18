@@ -1,58 +1,81 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import formatMoney from "../../utils/FormatMoney";
 
-const fakeData = {
-  ticket_id: "VE001",
-  flight: {
-    id: "CB001",
-    depart: {
-      id: "HAN",
-      address: "Hà Nội",
-    },
-    destination: {
-      id: "VDH",
-      address: "Quảng Bình",
-    },
-    depart_date: new Date("5/17/2024 10:00"),
-    landing_date: new Date("5/17/2024 12:00"),
-    flight_time: 120,
-  },
-  passenger_id: "KH001",
-  passenger_name: "Nguyễn Văn A",
-  passenger_phone: "0123456789",
-  passenger_cmnd: "044203004881",
-  booking_date: "2021-12-01 12:00:00",
-  payment_date: null,
-  ticket_price: 840000,
-  ticket_rank_id: 2,
-  ticket_rank_name: "Thương gia",
-  ticket_state: "Chưa Thanh Toán",
-};
+import { getDataAPI, putDataAPI } from "../../utils/fetchData";
+import { AppContext } from "../../App";
 
 const TicketDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [ticket, setTicket] = useState(fakeData);
+  const { setAlert } = useContext(AppContext);
+  const [ticket, setTicket] = useState({});
+  const [originTicket, setOriginTicket] = useState({});
   const [showCMND, setShowCMND] = useState(false);
 
   const [ticketRanks, setTicketRanks] = useState([]);
 
   useEffect(() => {
-    const getTicketRanks = async () => {
+    const getTicket = async () => {
       try {
-        const fakeData = [
-          { id: 1, name: "Phổ thông" },
-          { id: 2, name: "Thương gia" },
-        ];
+        const res = await getDataAPI(`api/VeMayBay/GetDetailByMaVe${id}`);
 
-        setTicketRanks(fakeData);
+        const data = {
+          ticket_id: res.data.maVe,
+          flight: {
+            id: res.data.maCB,
+            depart: {
+              id: res.data.sanBayDi.maSB,
+              address: res.data.sanBayDi.viTri,
+            },
+            destination: {
+              id: res.data.sanBayDen.maSB,
+              address: res.data.sanBayDen.viTri,
+            },
+            depart_date: new Date(res.data.ngayGioBay),
+            landing_date: new Date(res.data.ngayGioDen),
+            flight_time:
+              (new Date(res.data.ngayGioDen).getTime() -
+                new Date(res.data.ngayGioBay).getTime()) /
+              60000,
+          },
+          passenger_id: res.data.maKH,
+          passenger_name: res.data.tenKH,
+          passenger_phone: res.data.sdt,
+          passenger_cmnd: res.data.cmnd,
+          booking_date: new Date(res.data.ngayDat),
+          payment_date: res.data.ngayMua ? new Date(res.data.ngayMua) : null,
+          ticket_price: res.data.giaTien,
+          ticket_rank_id: res.data.maHV,
+          ticket_rank_name: res.data.tenHV,
+          ticket_state: res.data.trangThai,
+        };
+
+        setTicket(data);
+        setOriginTicket(data);
       } catch (error) {
         console.log(error);
       }
     };
+    getTicket();
+  }, [id]);
 
+  useEffect(() => {
+    const getTicketRanks = async () => {
+      try {
+        const res = await getDataAPI(`api/HangVe/GetDanhSachHangVe`);
+
+        const data = res.data["$values"].map((item) => ({
+          id: item.maHV,
+          name: item.tenHV,
+        }));
+
+        setTicketRanks(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getTicketRanks();
   }, []);
 
@@ -61,10 +84,15 @@ const TicketDetail = () => {
     return index !== -1 ? "rank_" + index : "";
   };
 
+  const isPastFlight = () => {
+    return originTicket.flight?.depart_date?.getTime() < new Date().getTime();
+  };
+
   const handleCancelTicket = () => {
     setTicket({
       ...ticket,
       ticket_state: "Đã hủy",
+      payment_date: null,
     });
   };
 
@@ -82,7 +110,34 @@ const TicketDetail = () => {
     return `${hours} tiếng ${mins} phút`;
   };
 
-  const handleUpdateState = () => {};
+  const handleUpdateState = async () => {
+    const api = `api/VeMayBay/CapNhatTrangThaiVe?maVe=${
+      ticket.ticket_id
+    }&TrangThai=${ticket.ticket_state}&NgayMua=${
+      ticket.payment_date
+        ? moment(ticket.payment_date).format("YYYY-MM-DD HH:mm:ss")
+        : moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
+    }`;
+    try {
+      const res = await putDataAPI(api);
+
+      navigate(-1);
+
+      return setAlert({
+        title: "Cập nhật vé máy bay thành công",
+        data: `Cập nhật trạng thái vé máy bay ${ticket.ticket_id} thành công!`,
+        type: "success",
+      });
+    } catch (error) {
+      return setAlert({
+        title: "Cập nhật vé máy bay thất bại",
+        data: `Cập nhật trạng thái vé máy bay ${ticket.ticket_id} không thành công!`,
+        type: "error",
+      });
+    }
+  };
+
+  if (Object.keys(ticket).length === 0) return null;
 
   return (
     <div className="ticket_detail">
@@ -107,22 +162,46 @@ const TicketDetail = () => {
         </div>
 
         <div>
-          <button
-            className="btn btn_normal btn_except me-3"
-            type="button"
-            onClick={() => navigate(-1)}
-          >
-            <i className="fa-solid fa-xmark" />
-            Hủy bỏ
-          </button>
-          <button
-            className="btn btn_normal btn_accept"
-            type="submit"
-            onClick={handleUpdateState}
-          >
-            <i className="fa-solid fa-check" />
-            Xác nhận
-          </button>
+          {originTicket.ticket_state === "Đã hủy" ? (
+            <button
+              className="btn btn_normal btn_except"
+              type="button"
+              style={{ maxWidth: "unset" }}
+            >
+              <i className="fa-solid fa-ban" />
+              Vé đã bị hủy
+            </button>
+          ) : isPastFlight() ? (
+            <button
+              className="btn btn_normal btn_success"
+              type="button"
+              style={{ maxWidth: "unset" }}
+            >
+              <i className="fa-solid fa-check" />
+              Chuyến bay đã khởi hành
+            </button>
+          ) : (
+            originTicket.ticket_state !== "Đã mua" && (
+              <>
+                <button
+                  className="btn btn_normal btn_except me-3"
+                  type="button"
+                  onClick={() => navigate(-1)}
+                >
+                  <i className="fa-solid fa-xmark" />
+                  Hủy bỏ
+                </button>
+                <button
+                  className="btn btn_normal btn_accept"
+                  type="submit"
+                  onClick={handleUpdateState}
+                >
+                  <i className="fa-solid fa-check" />
+                  Xác nhận
+                </button>
+              </>
+            )
+          )}
         </div>
       </header>
       <body className="ticket_detail_wrapper">
@@ -135,32 +214,36 @@ const TicketDetail = () => {
             <div className="d-flex justify-content-between align-items-center mb-4">
               <h5 className="">Thông tin đặt vé</h5>
               <div>
-                {ticket.ticket_state === "Chưa Thanh Toán" && (
-                  <button
-                    className={`btn btn_outline btn_outline_danger ms-4`}
-                    style={{
-                      padding: "0.5rem 1rem",
-                      fontSize: "16px",
-                    }}
-                    onClick={handleCancelTicket}
-                  >
-                    HỦY PHIẾU ĐẶT CHỖ
-                    <i
-                      className="fa-solid fa-ban ms-2"
+                {!isPastFlight() &&
+                  originTicket.ticket_state.includes("Chưa") && (
+                    <button
+                      className={`btn btn_outline btn_outline_danger ms-4`}
                       style={{
+                        padding: "0.5rem 1rem",
                         fontSize: "16px",
+                        cursor: "pointer",
                       }}
-                    />
-                  </button>
-                )}
-                {ticket.ticket_state === "Chưa Thanh Toán" &&
-                  !ticket.payment_date && (
+                      onClick={handleCancelTicket}
+                    >
+                      HỦY PHIẾU ĐẶT CHỖ
+                      <i
+                        className="fa-solid fa-ban ms-2"
+                        style={{
+                          fontSize: "16px",
+                        }}
+                      />
+                    </button>
+                  )}
+                {!isPastFlight() &&
+                  originTicket.ticket_state.includes("Chưa") &&
+                  !originTicket.payment_date && (
                     <button
                       className={`btn btn_outline btn_outline_success ms-4`}
                       style={{
                         padding: "0.5rem 1rem",
                         fontSize: "16px",
                       }}
+                      cursor="pointer"
                       onClick={handleConfirmPayment}
                     >
                       XÁC NHẬN THANH TOÁN

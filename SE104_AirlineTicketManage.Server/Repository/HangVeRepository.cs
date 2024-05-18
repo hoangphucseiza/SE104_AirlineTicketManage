@@ -22,11 +22,6 @@ namespace SE104_AirlineTicketManage.Server.Repository
             return (float)_context.HangVes.Where(p => p.MaHV == maHV).Select(p => p.TiLe_Gia).FirstOrDefault();
         }
 
-        public bool HangVeExists(string maHV)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Save()
         {
             var saved = _context.SaveChanges();

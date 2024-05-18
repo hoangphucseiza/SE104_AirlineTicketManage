@@ -41,7 +41,7 @@ function Alert() {
                 alert.type === "success" ? "text-success" : "text-danger"
               }`}
               style={{
-                fontSize: "1rem",
+                fontSize: "18px",
               }}
             >
               {alert.title}
@@ -54,7 +54,15 @@ function Alert() {
               onClick={handleClose}
             ></button>
           </div>
-          <div className="toast-body">{alert.data && alert.data}</div>
+          <div
+            className="toast-body"
+            style={{
+              fontSize: "16px",
+              color: "var(--text-color-bold)",
+            }}
+          >
+            {alert.data && alert.data}
+          </div>
         </div>
       )}
     </>

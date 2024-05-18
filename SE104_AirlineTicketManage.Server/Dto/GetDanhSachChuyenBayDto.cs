@@ -12,5 +12,7 @@ namespace SE104_AirlineTicketManage.Server.Dto
         public DateTime NgayGioDen { get; set; }
         public int TongSoVe { get; set; }
         public int SoVeMua { get; set; }
+
+        public decimal GiaVe { get; set; }
     }
 }

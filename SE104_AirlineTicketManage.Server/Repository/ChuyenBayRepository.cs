@@ -255,6 +255,7 @@ namespace SE104_AirlineTicketManage.Server.Repository
                     SanBayDi = sanBayDi,
                     NgayGioBay = chuyenBay.NgayGio,
                     NgayGioDen = chuyenBay.NgayGio.AddMinutes(chuyenBay.ThoiGianBay),
+                    GiaVe = chuyenBay.GiaVe,
                     TongSoVe = tongSoVe,
                     SoVeMua = soVeMua,
                 };

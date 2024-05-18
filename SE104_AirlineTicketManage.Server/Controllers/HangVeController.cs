@@ -48,7 +48,7 @@ namespace SE104_AirlineTicketManage.Server.Controllers
                 return BadRequest(ModelState);
 
             var hangve = _hangVeRepository.GetDanhSachHangVe()
-                .Where(s => s.TenHV.Trim().ToUpper() == hangVeCreate.TenHV.TrimEnd().ToUpper())
+                .Where(s => s.TenHV.Trim().ToUpper() == hangVeCreate.TenHV.TrimEnd().ToUpper() || s.MaHV == hangVeCreate.MaHV)
                 .FirstOrDefault();
 
             if (hangve != null)
@@ -84,8 +84,6 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             if (maHV != hangVeUpdate.MaHV)
                 return BadRequest(ModelState);
 
-            if (!_hangVeRepository.HangVeExists(maHV))
-                return NotFound();
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

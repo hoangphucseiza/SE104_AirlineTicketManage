@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import FilterBar from "../../components/Customer/FilterBar";
 import FindFlightList from "../../components/Booking/FindFlightList";
 import ExportCSV from "../../components/ExportCSV";
+import { getDataAPI } from "../../utils/fetchData";
 
 import { AppContext } from "../../App";
 import moment from "moment";
@@ -67,6 +68,60 @@ const Schedules = () => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
+    const getFlight = async () => {
+      try {
+        let api = "api/ChuyenBay/TimKiemChuyenBay?";
+
+        if (filters.destination.id) {
+          api += `maSBDi=${filters.destination.id}&`;
+        }
+        if (filters.depart.id) {
+          api += `maSBDen=${filters.depart.id}&`;
+        }
+        if (filters.departDate) {
+          api += `NgayKhoiHanh=${moment(filters.departDate).format(
+            "YYYY-MM-DDTHH:mm:ss"
+          )}&`;
+        }
+
+        api += `phantrang=${page}&searchMaCB=${searchText.toUpperCase()}`;
+
+        console.log(api);
+
+        const res = await getDataAPI(api);
+
+        res.data &&
+          setFlights(
+            res.data["$values"].map((flight) => ({
+              id: flight.maCB,
+              depart: {
+                id: flight.sanBayDi.maSB,
+                address: flight.sanBayDi.viTri,
+              },
+              destination: {
+                id: flight.sanBayDen.maSB,
+                address: flight.sanBayDen.viTri,
+              },
+              depart_date: new Date(flight.ngayGioBay),
+              landing_date: new Date(flight.ngayGioDen),
+              flight_time:
+                (new Date(flight.ngayGioDen).getTime() -
+                  new Date(flight.ngayGioBay).getTime()) /
+                60000,
+              price: flight.giaVe,
+              capacity: flight.tongSoVe,
+              ticket_sold: flight.soVeMua,
+            }))
+          );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getFlight();
+  }, [filters, page, searchText]);
+
+  useEffect(() => {
     let hash = "";
     if (filters.depart.id) {
       hash += `depart=${filters.depart.id}`;
@@ -76,6 +131,13 @@ const Schedules = () => {
         filters.destination.id
       }`;
     }
+
+    if (filters.departDate) {
+      hash += `${hash.length > 0 ? "&" : ""}departDate=${moment(
+        filters.departDate
+      ).format("YYYY-MM-DD")}`;
+    }
+
     hash += `${hash.length > 0 ? "&" : ""}page=${page}`;
     window.location.hash = hash;
   }, [page, filters]);

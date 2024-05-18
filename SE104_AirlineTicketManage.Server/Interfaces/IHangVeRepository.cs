@@ -9,7 +9,6 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
 
         HangVe GetDanhSachHangVe(string MaHV);
         ICollection<HangVe> GetDanhSachHangVe();
-        bool HangVeExists(string maHV);
         bool CreateHangVe(HangVe hangVe);
 
         bool UpdateHangVe(HangVe hangVe);
