@@ -178,7 +178,9 @@ const UpdateAirPort = () => {
     } catch (err) {
       return setAlert({
         title: "Cập nhật sân bay thất bại",
-        data: `Cập nhật sân bay ${airport.id} - ${airport.name} không thành công!`,
+        data: err.response.data[""].errors["$values"]
+          ? err.response.data[""].errors["$values"][0].errorMessage
+          : `Cập nhật sân bay ${airport.id} - ${airport.name} không thành công!`,
         type: "error",
       });
     }

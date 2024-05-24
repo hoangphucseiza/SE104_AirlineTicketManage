@@ -27,6 +27,8 @@ import FillInformation from "./pages/booking/fill_information";
 import Setting from "./pages/setting";
 
 import moment from "moment";
+import AddTicket from "./pages/tickets/add_ticket";
+import UpdateTicket from "./pages/tickets/update_ticket";
 
 moment.updateLocale("en", {
   weekdays: ["Chủ Nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"],
@@ -56,7 +58,11 @@ function App() {
     const autoCancelTicket = async () => {
       try {
         const res = await putDataAPI("api/VeMayBay/CapNhatVeMayBayMoiNgay");
-        console.log(res.data);
+        return setAlert({
+          title: "Hủy đặt vé tự động",
+          data: `Hệ thống hủy đặt vé tự động thành công!`,
+          type: "success",
+        });
       } catch (error) {
         console.log(error);
       }
@@ -94,7 +100,7 @@ function App() {
                 <Route path="/schedules">
                   <Route index element={<Schedules />} />
                   <Route path="add" element={<AddSchedule />} />
-                  <Route path="update" element={<UpdateSchedule />} />
+                  <Route path="update/:id" element={<UpdateSchedule />} />
                 </Route>
                 <Route path="/booking">
                   <Route index element={<Booking />} />
@@ -103,9 +109,10 @@ function App() {
 
                   <Route path="ticket/:id" element={<TicketDetail />} />
                 </Route>
-                <Route path="/tickets" element={<Tickets />}>
-                  <Route path="add" element={<AddAirPort />} />
-                  <Route path="update/:id" element={<UpdateAirPort />} />
+                <Route path="/tickets">
+                  <Route index element = {<Tickets />} />
+                  <Route path="add" element={<AddTicket />} />
+                  <Route path="update/:id" element={<UpdateTicket />} />
                 </Route>
                 <Route path="/report" element={<Report />}></Route>
                 <Route path="/customers">

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import DatePicker from "../DatePicker";
 import { getDataAPI } from "../../utils/fetchData";
 
 const fakeData = [
@@ -285,7 +284,8 @@ const TicketList = () => {
                 </p>
               </td>
               <td>
-                {ticket.ticket_state === "Chưa Thanh Toán"
+                {ticket.ticket_state === "Chưa Thanh Toán" ||
+                ticket.ticket_state === "Chưa thanh toán"
                   ? "Phiếu đặt chỗ"
                   : ticket.ticket_state === "Đã mua"
                   ? "Vé máy bay"

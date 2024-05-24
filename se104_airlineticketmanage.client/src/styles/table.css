@@ -50,26 +50,26 @@
   cursor: pointer;
 }
 
-.table .btn_table {
+.btn_table {
   color: #fff;
   font-weight: 500;
   padding: 8px 12px;
 }
 
-.table .btn_table i {
+.btn_table i {
   font-size: 18px;
   margin-right: 6px;
 }
 
-.table .btn_table.btn_add {
+.btn_table.btn_add {
   background-color: var(--primary-color);
 }
-.table .btn_table.btn_edit {
-  background-color: #E6B441;
+.btn_table.btn_edit {
+  background-color: #e6b441;
 }
-.table .btn_table.btn_delete {
+.btn_table.btn_delete {
   background-color: var(--danger-color);
 }
-.table .btn_table.btn_detail {
+.btn_table.btn_detail {
   background-color: #3e627a;
 }

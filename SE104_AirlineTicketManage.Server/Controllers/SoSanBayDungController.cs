@@ -39,5 +39,15 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             return Ok("Thay đổi thành công");
         }
 
+        [HttpGet("GetThoiGianBayToiThieu/{MaSB1}/{MaSB2}")]
+        [ProducesResponseType(200, Type = typeof(int))]
+        [ProducesResponseType(404)]
+        public IActionResult GetThoiGianBayToiThieu(string MaSB1, string MaSB2)
+        {
+
+            int x = _soSanBayDungRepository.GetThoiGianBayToiThieu(MaSB1, MaSB2);
+            return Ok(x);
+        }
+
     }
 }

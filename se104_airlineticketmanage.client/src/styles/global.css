@@ -31,6 +31,10 @@
 /* --------- TICKET DETAILS-----------*/
 @import url("./ticket_details.css");
 
+
+/* --------- REPORT -----------*/
+@import url("./report.css");
+
 :root {
   --primary-color: #1779c4;
   --primary-color-80: rgba(23, 121, 196, 0.8);
@@ -280,11 +284,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.add-schedule-btn:hover {
-  background-color: #3777afa8;
-  color: var(--primary-color);
-}
-
 .input-container {
   position: relative;
 }
@@ -322,20 +321,4 @@ body {
   font-size: 20px;
 }
 
-.report-container {
-  padding: 20px;
-}
 
-.chart-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.chart-wrapper {
-  width: calc(50% - 10px);
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-  padding: 20px;
-}

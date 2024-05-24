@@ -1,124 +1,145 @@
-import React, { useState } from "react";
-import SearchBar from "../../components/Customer/SearchBar";
-import FilterBar from "../../components/Customer/FilterBar";
+import React, { useState, useEffect } from "react";
 import Report from "../../components/Customer/Report";
-import CusTable from "../../components/Customer/CusTable";
-import Members from "../../components/Home/Members";
-import Weather from "../../components/Home/Weather";
+import { getDataAPI } from "../../utils/fetchData";
+
+const listCustomer = [
+  {
+    id: "KH01",
+    name: "Nguyễn Thị Bích Hảo",
+    cmnd: "064303000659",
+    phone: "0347743943",
+  },
+];
 
 const Customers = () => {
   const [searchText, setSearchText] = useState("");
-  const handleTextSearchChange = (event) => {
-    setSearchText(event.target.value);
+  const [searchBy, setSearchBy] = useState("maKH");
+
+  const [customer, setCustomers] = useState(listCustomer);
+
+  const searchBys = ["maKH", "SDT", "CMND"];
+
+  useEffect(() => {
+    const getCustomers = async () => {
+      let api = "api/KhachHang/GetKhachHangBy";
+
+      switch (searchBy) {
+        case "maKH":
+          api += "MaKH";
+          break;
+        case "SDT":
+          api += "SDT";
+          break;
+        default:
+          api += "CCCD";
+          break;
+      }
+
+      api += `/${searchText.toUpperCase()}`;
+
+      if (searchText === "") api = "api/KhachHang/GetDanhSachKhachHang";
+
+      const res = await getDataAPI(api);
+
+      const data = res.data["$values"].map((item) => ({
+        id: item.maKH,
+        name: item.tenKH,
+        cmnd: item.cmnd,
+        phone: item.sdt,
+      }));
+
+      setCustomers(data);
+    };
+    getCustomers();
+  }, [searchBy, searchText]);
+
+  useEffect(() => {
+    window.location.hash = `searchBy=${searchBy}`;
+  }, [searchBy]);
+
+  const formatCMND = (cmnd) => {
+    return cmnd.slice(0, 4) + cmnd.slice(4).replace(/./g, "*");
   };
-
-  const [textFilter, setTextFilter] = useState("");
-  const handleTextFilterChange = (newValue) => {
-    setTextFilter(newValue);
-  };
-  const filterOptions = [
-    {
-      label: "Mã KH",
-      values: ["1", "2", "3"]
-    },
-    {
-      label: "Tên KH",
-      values: ["1", "2", "3"]
-    },
-    {
-      label: "Số CCCD",
-      values: ["1", "2", "3"]
-    },
-    {
-      label: "SĐT",
-      values: ["1", "2", "3"]
-    }, 
-    {
-      label: "Vị trí SB",
-      values: ["1", "2", "3"]
-    }
-
-  ];
-
-  const result = {
-    totalCus: 100,
-    totalRevenue: "150 000 000",
-  };
-
-  const listCustomer = [
-    {
-      maKH: "KH01",
-      tenKH: "Nguyễn Thị Bích Hảo",
-      cccd: "064303000659",
-      sdt: "0347743943", 
-      maCB: "CB001", 
-      ngayBay: new Date("12/4/2024 10:00"),
-      vitri: "Gia Lai"
-    },
-    {
-      maKH: "KH01",
-      tenKH: "Nguyễn Thị Bích Hảo",
-      cccd: "064303000659",
-      sdt: "0347743943", 
-      maCB: "CB001", 
-      ngayBay: new Date("12/4/2024 10:00"),
-      vitri: "Gia Lai"
-    },
-    {
-      maKH: "KH01",
-      tenKH: "Nguyễn Thị Bích Hảo",
-      cccd: "064303000659",
-      sdt: "0347743943", 
-      maCB: "CB001", 
-      ngayBay: new Date("12/4/2024 10:00"),
-      vitri: "Gia Lai"
-    } 
-  ]
 
   return (
-    <div class="box_cus">
+    <div className="box_cus">
       <div className="home-cards mt-5">
-        <div className="home-cards-header">
-          <h5>DANH SÁCH KHÁCH HÀNG</h5>
-          <span>Lịch sử khách hàng</span>
-        </div>
-        <div class= "container-bar">
-             <SearchBar 
-        text_search={"Thông tin khách hàng..."} 
-        onTextSearchChange={handleTextSearchChange} 
-        />
+        <div className="mx-4 mb-4">
+          <h5 className="mb-3">Tra cứu Vé máy bay</h5>
+          <div className="d-flex w-100 gap-3 mb-4">
+            <div
+              className="home-flights-left-search mb-2"
+              style={{
+                flex: 1,
+              }}
+            >
+              <i className="fa-solid fa-magnifying-glass me-2" />
+              <input
+                placeholder="Tìm kiếm..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+            </div>
+            <div className="dropdown">
+              <button
+                className="btn btn-secondary dropdown-toggle filter"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                {`Tìm kiếm theo:  ${
+                  searchBy === "maKH"
+                    ? "Mã khách hàng"
+                    : searchBy === "SDT"
+                    ? "Số điện thoại"
+                    : "CMND"
+                }`}
+              </button>
+              <ul
+                className="dropdown-menu home-flight-left-filters-airports"
+                style={{
+                  width: "100%",
+                }}
+              >
+                {searchBys.map((search, index) => (
+                  <li key={index} onClick={() => setSearchBy(search)}>
+                    {search === "maKH"
+                      ? "Mã khách hàng"
+                      : search === "SDT"
+                      ? "Số điện thoại"
+                      : "CMND"}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
-             <FilterBar  
-        filterOptions={filterOptions} 
-        onTextSearchChange={handleTextFilterChange}/>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mã hành khách</th>
+                <th scope="col">Tên hành khách</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Chứng minh nhân dân</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customer.map((customer, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{customer.id}</td>
+                  <td>{customer.name}</td>
+                  <td>{customer.phone}</td>
+                  <td>{formatCMND(customer.cmnd)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-
-        <div className="line"></div>
-          
-        <div className="home-flights mt-5">
-        <div className="home-flights-wrapper">
-          <CusTable listCus={listCustomer} />
-          <Report result={result} />
-        </div>
-      </div>
-
-      <div className="mt-5 home_members_weather">
-        <div className="home_members">
-          <Members />
-        </div>
-        <div className="home_weather">
-          <Weather />
-        </div>
-      </div>
-        
-      </div>
-
-      <div className="home-flights mt-5">
-       
-        
+        <Report cusNumbers={customer.length} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Customers
+export default Customers;

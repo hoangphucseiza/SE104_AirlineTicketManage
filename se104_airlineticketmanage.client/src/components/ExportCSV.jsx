@@ -20,7 +20,7 @@ const ExportCSV = ({ csvData, filename }) => {
 
   return (
     <button
-      className="btn"
+      className="btn btn_table"
       style={{
         backgroundColor: "#0E733A",
         color: "#fff",

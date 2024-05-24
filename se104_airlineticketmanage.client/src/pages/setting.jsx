@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
-import { getDataAPI } from "../utils/fetchData";
+import { useState, useEffect, useContext } from "react";
+import { getDataAPI, putDataAPI } from "../utils/fetchData";
+
+import {AppContext} from "../App";
 
 const Setting = () => {
+  const { setAlert } = useContext(AppContext);
+
   const [regulation, setRegulation] = useState({
     min_booking_time: 0,
     cancel_time: 0,
@@ -30,17 +34,45 @@ const Setting = () => {
 
   const handleChangeBookingTime = (value) => {
     if (value < 1) return;
-    setRegulation({ ...regulation, min_booking_time: value });
+    setRegulation({ ...regulation, min_booking_time: parseInt(value) });
   };
 
   const handleChangeCancelTime = (value) => {
     if (value < 0) return;
-    setRegulation({ ...regulation, cancel_time: value });
+    setRegulation({ ...regulation, cancel_time: parseInt(value) });
   };
 
-  const handleUpdateBookingTime = () => {};
+  const handleUpdateBookingTime = async () => {
+    try {
+      const res = await putDataAPI(
+        `api/QuyDinhChung/UpdateChamNhatDatVe/${regulation.min_booking_time}`
+      );
 
-  const handleUpdateCancelTime = () => {};
+      return setAlert({
+        title: "Cập nhật thành công",
+        data: `Thay đổi thời gian chậm nhất đặt vé thành công!`,
+        type: "success",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUpdateCancelTime =async () => {
+    try {
+      const res = await putDataAPI(
+        `api/QuyDinhChung/UpdateHuyDatVe/${regulation.cancel_time}`
+      );
+
+      return setAlert({
+        title: "Cập nhật thành công",
+        data: `Thay đổi thời gian hủy đặt vé thành công!`,
+        type: "success",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>

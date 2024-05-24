@@ -7,7 +7,11 @@ namespace SE104_AirlineTicketManage.Server.Interfaces
         ICollection<HangVe> GetHangVes();
         float GetTiLeHangVe(string maHV);
 
-        bool HangVeExists(string maHV);
+        HangVe GetDanhSachHangVe(string MaHV);
+        ICollection<HangVe> GetDanhSachHangVe();
+        bool CreateHangVe(HangVe hangVe);
+
+        bool UpdateHangVe(HangVe hangVe);
 
         bool Save();
     }

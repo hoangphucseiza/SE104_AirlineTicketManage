@@ -154,7 +154,9 @@
 }
 
 .home-flight-left-filters-airports {
-  max-height: 600px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 999;
 }
 
 .home-flight-left-filters-airports > li {

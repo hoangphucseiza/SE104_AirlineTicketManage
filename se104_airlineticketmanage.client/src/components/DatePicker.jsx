@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback } from "react";
 
-const DatePicker = ({ date, onChangeDate }) => {
+const DatePicker = ({ date, onChangeDate, acceptPastDate = false }) => {
   const [monthYear, setMonthYear] = useState({
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
@@ -28,17 +28,19 @@ const DatePicker = ({ date, onChangeDate }) => {
 
   const isDayInPast = useCallback(
     (day) => {
+      if (acceptPastDate) return false;
       return (
         month === new Date().getMonth() &&
         year === new Date().getFullYear() &&
         day < new Date().getDate()
       );
     },
-    [month, year]
+    [month, year, acceptPastDate]
   );
 
   const changeMonth = (newMonth) => {
     if (
+      acceptPastDate === false &&
       newMonth + 1 === new Date().getMonth() &&
       year === new Date().getFullYear()
     ) {
@@ -87,6 +89,7 @@ const DatePicker = ({ date, onChangeDate }) => {
           }}
           style={{
             opacity:
+              acceptPastDate === false &&
               month === new Date().getMonth() &&
               year === new Date().getFullYear()
                 ? 0.3

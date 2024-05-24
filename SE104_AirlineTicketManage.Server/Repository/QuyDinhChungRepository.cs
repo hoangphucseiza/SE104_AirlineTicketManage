@@ -28,5 +28,25 @@ namespace SE104_AirlineTicketManage.Server.Repository
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public bool QuyDinhChungExists(int id)
+        {
+            return _context.QuyDinhChungs.Any(p => p.ID == id);
+        }
+
+
+        public bool UpdateThoiGianChamNhatDatVe(int tgChamNhatDatVe)
+        {
+            var quyDinhChung = _context.QuyDinhChungs.Where(p => p.ID == 1).FirstOrDefault();
+            quyDinhChung.ThoiGianChamNhatDatVe = tgChamNhatDatVe;
+            return Save();
+        }
+
+        public bool UpdateThoiGianHuytDatVe(int tgHuyDatVe)
+        {
+            var quyDinhChung = _context.QuyDinhChungs.Where(p => p.ID == 1).FirstOrDefault();
+            quyDinhChung.ThoiGianHuyDatVe = tgHuyDatVe;
+            return Save();
+        }
     }
 }

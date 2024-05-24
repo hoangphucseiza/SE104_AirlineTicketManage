@@ -154,7 +154,9 @@ const AddAirPort = () => {
     } catch (err) {
       return setAlert({
         title: "Thêm sân bay thất bại",
-        data: `Mã sân bay ${airport.id} đã tồn tại!`,
+        data: err.response.data[""].errors["$values"]
+          ? err.response.data[""].errors["$values"][0].errorMessage
+          : `Mã sân bay ${airport.id} đã tồn tại!`,
         type: "error",
       });
     }

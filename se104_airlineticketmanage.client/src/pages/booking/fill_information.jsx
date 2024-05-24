@@ -1,50 +1,14 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import FormatMoney from "../../utils/FormatMoney";
-import { getDataAPI } from "../../utils/fetchData";
-
-const fakeFlight = {
-  id: "CB001",
-  depart: {
-    id: "HAN",
-    address: "Hà Nội",
-  },
-  destination: {
-    id: "VDH",
-    address: "Quảng Bình",
-  },
-  depart_date: new Date("5/17/2024 10:00"),
-  landing_date: new Date("5/17/2024 12:00"),
-  flight_time: 120,
-  price: 800000,
-  capacities: [
-    {
-      ticket_rank_id: 1,
-      ticket_rank_name: "Phổ thông",
-      price_rate: 1,
-      capacity: 120,
-      ticket_sold: 100,
-    },
-    {
-      ticket_rank_id: 2,
-      ticket_rank_name: "Thương gia",
-      price_rate: 1.05,
-      capacity: 20,
-      ticket_sold: 19,
-    },
-  ],
-  transit_airports: [
-    {
-      id: "HAN",
-      address: "Hà Nội",
-    },
-  ],
-};
+import { getDataAPI, postDataAPI } from "../../utils/fetchData";
+import { AppContext } from "../../App";
 
 const FillInformartion = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { setAlert } = useContext(AppContext);
 
   const [ticket, setTicket] = useState({
     flight_id: id,
@@ -57,9 +21,7 @@ const FillInformartion = () => {
     booking_date: null,
     payment_date: null,
   });
-  const [flight, setFlight] = useState({
-    ...fakeFlight,
-  });
+  const [flight, setFlight] = useState({});
   const [error, setError] = useState({});
 
   const [regulation, setRegulation] = useState({
@@ -67,7 +29,6 @@ const FillInformartion = () => {
     cancel_time: 0,
   });
 
-  
   useEffect(() => {
     const getRegulation = async () => {
       try {
@@ -88,6 +49,53 @@ const FillInformartion = () => {
 
     getRegulation();
   }, []);
+
+  useEffect(() => {
+    const getFlight = async () => {
+      try {
+        const res = await getDataAPI(
+          `api/ChuyenBay/GetThongTinChiTietChuyenBay/${id}`
+        );
+
+        const data = {
+          id: res.data.maChuyenBay,
+          depart: {
+            id: res.data.sanBayDi.maSB,
+            address: res.data.sanBayDi.viTri,
+          },
+          destination: {
+            id: res.data.sanBayDen.maSB,
+            address: res.data.sanBayDen.viTri,
+          },
+          depart_date: new Date(res.data.ngayGioBay),
+          landing_date: new Date(res.data.ngayGioDen),
+          flight_time: res.data.thoiGianBay,
+          price: res.data.giaVe,
+          capacities: res.data.danhSachThongTinHangVe["$values"].map(
+            (item) => ({
+              ticket_rank_id: item.maHangVe,
+              ticket_rank_name: item.tenHangVe,
+              price_rate: item.tiLeGia,
+              capacity: item.tongSoVe,
+              ticket_sold: item.soVeBanDuoc,
+            })
+          ),
+          transit_airports: res.data.danhSachSanBayDung["$values"].map(
+            (item) => ({
+              id: item.maSB,
+              address: item.viTri,
+            })
+          ),
+        };
+
+        setFlight(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getFlight();
+  }, [id]);
 
   const handleChangeTicket = (e) => {
     const { name, value } = e.target;
@@ -126,7 +134,7 @@ const FillInformartion = () => {
 
     if (
       bookingDate.getTime() >
-      flight.depart_date.getTime() -
+      flight.depart_date?.getTime() -
         regulation.min_booking_time * 24 * 60 * 60 * 1000
     ) {
       return false;
@@ -136,11 +144,11 @@ const FillInformartion = () => {
 
   useEffect(() => {
     if (!checkOverBookingTime()) {
-      setTicket({ ...ticket, ticket_type: 1 });
+      setTicket((pre) => ({ ...pre, ticket_type: 1 }));
     }
-  }, [checkOverBookingTime, ticket]);
+  }, [checkOverBookingTime]);
 
-  const handleBuyTicket = (e) => {
+  const handleBuyTicket = async (e) => {
     e.preventDefault();
 
     const newError = {};
@@ -176,15 +184,42 @@ const FillInformartion = () => {
     if (Object.keys(newError).length > 0) return setError(newError);
     else setError({});
 
-    const ticketData = {
-      ...ticket,
-      booking_date: new Date(),
-      ticket_rank: ticket.ticket_rank.ticket_rank_id,
-      payment_date: ticket.ticket_type === 1 ? new Date() : null,
+    const postData = {
+      maCB: ticket.flight_id,
+      tenKhachHang: ticket.passenger_name,
+      sdt: ticket.passenger_phone,
+      cmnd: ticket.passenger_cmnd,
+      ngayDat: moment(new Date()).format("YYYY-MM-DDTHH:mm:ss"),
+      ngayMua:
+        ticket.ticket_type === 1
+          ? moment(new Date()).format("YYYY-MM-DDTHH:mm:ss")
+          : null,
+      giaTien: ticket.ticket_price,
+      maHangVe: ticket.ticket_rank.ticket_rank_id,
+      trangThaiVe: ticket.ticket_type,
     };
 
-    console.log(ticketData);
+    try {
+      const res = await postDataAPI("api/VeMayBay/ThemPhieuDatCho", postData);
+      navigate(-1);
+      return setAlert({
+        title: "Mua vé thành công",
+        data: `Bạn đã mua vé thành công cho chuyến bay ${flight.id} từ ${flight.depart.id} đến ${flight.destination.id}!`,
+        type: "success",
+      });
+    } catch (err) {
+      console.log(err.response);
+      return setAlert({
+        title: "Mua vé thấy bại",
+        data: err.response.data[""].errors["$values"]
+          ? err.response.data[""].errors["$values"][0].errorMessage
+          : `Mua vé cho chuyến bay ${flight.id} từ ${flight.depart.id} đến ${flight.destination.id} không thành công!`,
+        type: "error",
+      });
+    }
   };
+
+  if (Object.keys(flight).length === 0) return null;
 
   return (
     <div className="find_tickets">
@@ -405,14 +440,14 @@ const FillInformartion = () => {
                   color: "var(--primary-color)",
                 }}
               />
-              <span>{flight.depart.id}</span>
+              <span>{flight?.depart?.id}</span>
               <i
                 className="fa-solid fa-arrow-right-long mx-2"
                 style={{
                   color: "var(--primary-color)",
                 }}
               />
-              <span>{flight.destination.id}</span>
+              <span>{flight?.destination?.id}</span>
             </div>
             <div
               style={{
@@ -430,17 +465,17 @@ const FillInformartion = () => {
 
               <span>
                 {" "}
-                {moment(flight.depart_date).format("hh:mm, D MMMM YYYY")}
+                {moment(flight?.depart_date).format("hh:mm, D MMMM YYYY")}
               </span>
             </div>
             <div>
               <div>
                 <span className="fw-medium">
-                  {`${flight.depart.address} (${flight.depart.id})`}{" "}
+                  {`${flight?.depart?.address} (${flight?.depart?.id})`}{" "}
                 </span>
                 <i className="fa-solid fa-plane mx-4" />
                 <span className="fw-medium">
-                  {`${flight.destination.address} (${flight.destination.id})`}{" "}
+                  {`${flight?.destination?.address} (${flight?.destination?.id})`}{" "}
                 </span>
               </div>
               <p
@@ -452,11 +487,11 @@ const FillInformartion = () => {
                 {" "}
                 Thời gian bay: {convertMinutesToHours(flight.flight_time)}
                 {" / "}
-                {flight.transit_airports.length === 0
+                {flight.transit_airports?.length === 0
                   ? "Bay thẳng"
-                  : flight.transit_airports.length + " điểm dừng"}
+                  : flight.transit_airports?.length + " điểm dừng"}
               </p>
-              {flight.transit_airports.map((transit, index) => (
+              {flight.transit_airports?.map((transit, index) => (
                 <p
                   key={index}
                   style={{

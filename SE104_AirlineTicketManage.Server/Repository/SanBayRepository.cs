@@ -26,6 +26,7 @@ namespace SE104_AirlineTicketManage.Server.Repository
 
         public bool CreateSanBay(SanBay sanBay)
         {
+
             _context.Add(sanBay);
 
             return Save();
