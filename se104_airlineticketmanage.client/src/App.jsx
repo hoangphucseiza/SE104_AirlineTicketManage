@@ -58,7 +58,11 @@ function App() {
     const autoCancelTicket = async () => {
       try {
         const res = await putDataAPI("api/VeMayBay/CapNhatVeMayBayMoiNgay");
-        console.log(res.data);
+        return setAlert({
+          title: "Hủy đặt vé tự động",
+          data: `Hệ thống hủy đặt vé tự động thành công!`,
+          type: "success",
+        });
       } catch (error) {
         console.log(error);
       }

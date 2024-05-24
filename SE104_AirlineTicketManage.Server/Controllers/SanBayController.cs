@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using SE104_AirlineTicketManage.Server.Data;
 using SE104_AirlineTicketManage.Server.Dto;
 using SE104_AirlineTicketManage.Server.Interfaces;
 using SE104_AirlineTicketManage.Server.Models;
@@ -15,11 +16,13 @@ namespace SE104_AirlineTicketManage.Server.Controllers
     {
         private readonly ISanBayRepository _sanBayRepository;
         private readonly IMapper _mapper;
+        private readonly DataContext _context;
 
-        public SanBayController(ISanBayRepository sanBayRepository, IMapper mapper)
+        public SanBayController(ISanBayRepository sanBayRepository, IMapper mapper, DataContext context)
         {
             _sanBayRepository = sanBayRepository;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpGet("GetDanhSachSanBay{phantrang}")]
@@ -111,6 +114,15 @@ namespace SE104_AirlineTicketManage.Server.Controllers
         public IActionResult CreateSanBay([FromBody] UpdateSanBayDto sanbaymoi)
         {
             string maSB = sanbaymoi.MaSanBay;
+            string tenSB = sanbaymoi.TenSanBay;
+
+            var kiemtratontaitenSB = _context.SanBays.Where(p => p.TenSB.ToLower() == tenSB.TrimStart().TrimEnd().ToLower()).FirstOrDefault();
+
+            if (kiemtratontaitenSB != null)
+            {
+                ModelState.AddModelError("", $"Tên sân bay {tenSB} đã tồn tại");
+                return StatusCode(404, ModelState);
+            }
 
             var kiemTraTonTai = _sanBayRepository.GetSanBayByMaSB(maSB);
             
@@ -137,8 +149,18 @@ namespace SE104_AirlineTicketManage.Server.Controllers
         [ProducesResponseType(404)]
         public IActionResult UpdateSanBay([FromBody] UpdateSanBayDto sanbaymoi)
         {
+            string tenSB = sanbaymoi.TenSanBay;
+            var kiemtratontaitenSB = _context.SanBays.Where(p => p.TenSB.ToLower() == tenSB.TrimStart().TrimEnd().ToLower()).FirstOrDefault();
+
+            if (kiemtratontaitenSB != null)
+            {
+                ModelState.AddModelError("", $"Tên sân bay {tenSB} đã tồn tại");
+                return StatusCode(404, ModelState);
+            }
 
             bool capNhatSanBay = _sanBayRepository.UpdateSanBay(sanbaymoi);
+
+
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

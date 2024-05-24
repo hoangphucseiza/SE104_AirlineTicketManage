@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import Chart_Up from "../../images/chart-up.svg";
 import Chart_Down from "../../images/chart-down.svg";
-import FormatMonet from "../../utils/FormatMoney";
+import FormatMoney from "../../utils/FormatMoney";
 
 const Card = ({ value }) => {
   return (
@@ -24,7 +24,7 @@ const Card = ({ value }) => {
             fontSize: value.is_money ? "24px" : "32px",
           }}
         >
-          {value.is_money ? FormatMonet(value.value) + " VNĐ" : value.value}
+          {value.is_money ? FormatMoney(value.value) + " VNĐ" : value.value}
         </h5>
         <div
           className={`home-cards-item-chart ${
@@ -34,7 +34,7 @@ const Card = ({ value }) => {
           <img src={value.increase < 0 ? Chart_Down : Chart_Up} alt="chart" />
           <span className="ms-1">
             {" "}
-            {`${value.increase > 0 ? "+" : ""}${value.increase}`}
+            {`${value.increase > 0 ? "+" : ""}${value.increase.toFixed(2)}`}
           </span>
         </div>
       </div>

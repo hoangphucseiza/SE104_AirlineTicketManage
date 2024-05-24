@@ -312,7 +312,7 @@ namespace SE104_AirlineTicketManage.Server.Repository
             foreach (var veMayBay in veMayBays)
             {
                 var soNgayTruoc = (DateTime.Today - veMayBay.NgayDat).Days;
-                if (soNgayTruoc < thoiGianHuyVe)
+                if (soNgayTruoc <= thoiGianHuyVe)
                 {
                     veMayBay.TrangThai = "Đã hủy";
                 }
