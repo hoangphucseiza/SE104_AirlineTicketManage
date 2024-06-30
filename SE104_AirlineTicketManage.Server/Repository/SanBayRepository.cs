@@ -149,13 +149,21 @@ namespace SE104_AirlineTicketManage.Server.Repository
         public bool UpdateSanBay(UpdateSanBayDto updateSanBay)
         {
             // Cập nhật giá trị sân bay đến
-            var sanBay = new SanBay();
-            sanBay.MaSB = updateSanBay.MaSanBay;
-            sanBay.TenSB = updateSanBay.TenSanBay;
-            sanBay.TGDungMin = updateSanBay.ThoiGianDungMin;
-            sanBay.TGDungMax = updateSanBay.ThoiGianDungMax;
-            sanBay.ViTri = updateSanBay.ViTri;
-            _context.SanBays.Update(sanBay);
+            //var sanBay = new SanBay();
+            var sanbaySua = _context.SanBays.Where(p => p.MaSB == updateSanBay.MaSanBay).FirstOrDefault();
+            //sanBay.MaSB = updateSanBay.MaSanBay;
+            //sanBay.TenSB = updateSanBay.TenSanBay;
+            //sanBay.TGDungMin = updateSanBay.ThoiGianDungMin;
+            //sanBay.TGDungMax = updateSanBay.ThoiGianDungMax;
+            //sanBay.ViTri = updateSanBay.ViTri;
+            //_context.SanBays.Update(sanBay);
+
+            //sanbaySua.MaSB = updateSanBay.MaSanBay;
+            sanbaySua.TenSB = updateSanBay.TenSanBay;
+            sanbaySua.TGDungMin = updateSanBay.ThoiGianDungMin;
+            sanbaySua.TGDungMax = updateSanBay.ThoiGianDungMax;
+            sanbaySua.ViTri = updateSanBay.ViTri;
+            _context.SanBays.Update(sanbaySua);
             _context.SaveChanges();
 
             // Lấy danh sách sân bay dừng và cập nhật thêm xóa sửa

@@ -199,7 +199,7 @@ const UpdateAirPort = () => {
     }
 
     flight.tickets.forEach((ticket) => {
-      if (ticket.numbers <= ticket.ticket_sold) {
+      if (ticket.numbers < ticket.ticket_sold) {
         newError[
           `ticket${ticket.id}`
         ] = `*Số lượng vé hạng vé ${ticket.id} thay đổi phải lớn hơn số vé đã được bán!`;

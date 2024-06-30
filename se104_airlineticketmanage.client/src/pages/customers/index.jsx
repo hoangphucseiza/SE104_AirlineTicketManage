@@ -40,13 +40,23 @@ const Customers = () => {
       if (searchText === "") api = "api/KhachHang/GetDanhSachKhachHang";
 
       const res = await getDataAPI(api);
+      console.log(res);
 
-      const data = res.data["$values"].map((item) => ({
-        id: item.maKH,
-        name: item.tenKH,
-        cmnd: item.cmnd,
-        phone: item.sdt,
-      }));
+      const data = res.data["$values"]
+        ? res.data["$values"].map((item) => ({
+            id: item.maKH,
+            name: item.tenKH,
+            cmnd: item.cmnd,
+            phone: item.sdt,
+          }))
+        : [
+            {
+              id: res.data.maKH,
+              name: res.data.tenKH,
+              cmnd: res.data.cmnd,
+              phone: res.data.sdt,
+            },
+          ];
 
       setCustomers(data);
     };

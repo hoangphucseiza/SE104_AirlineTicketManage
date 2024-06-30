@@ -152,11 +152,11 @@ namespace SE104_AirlineTicketManage.Server.Controllers
             string tenSB = sanbaymoi.TenSanBay;
             var kiemtratontaitenSB = _context.SanBays.Where(p => p.TenSB.ToLower() == tenSB.TrimStart().TrimEnd().ToLower()).FirstOrDefault();
 
-            if (kiemtratontaitenSB != null)
-            {
-                ModelState.AddModelError("", $"Tên sân bay {tenSB} đã tồn tại");
-                return StatusCode(404, ModelState);
-            }
+            //if (kiemtratontaitenSB != null)
+            //{
+            //    ModelState.AddModelError("", $"Tên sân bay {tenSB} đã tồn tại");
+            //    return StatusCode(404, ModelState);
+            //}
 
             bool capNhatSanBay = _sanBayRepository.UpdateSanBay(sanbaymoi);
 
